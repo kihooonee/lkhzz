@@ -1,0 +1,1625 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>이기훈 | AI 게임 메이커 포트폴리오</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --bg:#0b1020; --panel:#121a2d; --muted:#aab5cc; --line:#33415d; --accent:#9be7c4; --text:#f4f7fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(circle at 80% 0%, #20304a 0, var(--bg) 42%); color:var(--text); font:16px/1.65 "Segoe UI", "Malgun Gothic", sans-serif; }
+    main { width:min(1280px, 94vw); margin:0 auto; padding:48px 0 80px; }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.16em; font-size:12px; font-weight:700; }
+    h1 { font-size:clamp(32px,6vw,54px); line-height:1.15; margin:12px 0; }
+    .intro { color:var(--muted); max-width:650px; margin:0 0 42px; }
+    .note { display:inline-block; border:1px solid #52617d; border-radius:99px; padding:4px 12px; color:#d8e2f1; font-size:12px; margin-bottom:16px; }
+    .timeline { position:relative; padding-left:30px; }
+    .timeline::before { content:""; position:absolute; left:7px; top:8px; bottom:12px; width:2px; background:linear-gradient(var(--accent),var(--line)); }
+    article { position:relative; background:rgba(18,26,45,.9); border:1px solid #293651; border-radius:16px; padding:20px 22px; margin:0 0 18px; box-shadow:0 14px 36px #0003; }
+    article::before { content:""; position:absolute; left:-29px; top:26px; width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 5px #9be7c426; }
+    .meta { color:var(--accent); font-size:12px; font-weight:700; letter-spacing:.08em; }
+    h2 { margin:4px 0 8px; font-size:22px; }
+    p { margin:0; color:var(--muted); }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .tag { border:1px solid #40506c; border-radius:99px; padding:3px 10px; font-size:12px; color:#dce5f3; }
+    footer { color:#7e8aa3; font-size:12px; margin:30px 0 0 30px; }
+    .topbar { position:sticky; top:0; z-index:5; background:#0b1020eF; border-bottom:1px solid #293651; backdrop-filter:blur(12px); }
+    .nav { width:min(920px,92vw); margin:0 auto; display:flex; align-items:center; justify-content:center; gap:4px; min-height:56px; overflow-x:auto; }
+    .nav button { color:#bec9db; background:transparent; border:0; border-radius:9px; padding:7px 11px; font:inherit; font-size:14px; cursor:pointer; white-space:nowrap; }
+    .nav button:hover,.nav button.active { background:#22314a; color:var(--text); }
+    [hidden] { display:none !important; }
+    .placeholder { min-height:320px; display:grid; align-content:center; padding:32px; border:1px solid #293651; border-radius:18px; background:rgba(18,26,45,.9); }
+    .placeholder h2 { font-size:28px; }
+    .portfolio-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:28px; }
+    .work-card { min-height:260px; display:flex; flex-direction:column; padding:24px; border:1px solid #34435f; border-radius:18px; background:linear-gradient(145deg,#172239,#10182a); box-shadow:0 16px 36px #0003; color:var(--text); text-decoration:none; transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease; }
+    .work-card.guild-card { background-image:linear-gradient(90deg,rgba(11,16,32,.94) 0%,rgba(11,16,32,.78) 54%,rgba(11,16,32,.42) 100%),url("assets/guild_distribution_bg.png"); background-size:cover; background-position:center; }
+    .work-card.bounty-card { background-image:linear-gradient(90deg,rgba(11,16,32,.94) 0%,rgba(11,16,32,.78) 54%,rgba(11,16,32,.42) 100%),url("assets/bounty_system_bg.png"); background-size:cover; background-position:center; }
+    .work-card.alchemy-card { background-image:linear-gradient(90deg,rgba(11,16,32,.94) 0%,rgba(11,16,32,.7) 54%,rgba(11,16,32,.2) 100%),url("assets/alchemy_analysis_bg.jpg"); background-size:cover; background-position:right center; }
+    .work-card:hover { transform:translateY(-3px); border-color:var(--accent); box-shadow:0 20px 42px #0005; }
+    .work-card:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    .work-card::before { display:none; }
+    .work-card .doc-type { color:var(--accent); font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .work-card h2 { margin:12px 0 8px; font-size:24px; }
+    .work-card p { color:var(--muted); }
+    .work-card .open-link { display:inline-block; margin-top:auto; padding-top:24px; color:var(--accent); font-weight:700; }
+    @media (max-width:700px) { .portfolio-grid { grid-template-columns:1fr; } }
+    .summary { display:flex; gap:12px; flex-wrap:wrap; margin:24px 0; }
+    .summary-item { flex:1; min-width:200px; background:#152a30; border:1px solid #365b59; border-radius:14px; padding:16px 20px; }
+    .summary-item strong { display:block; color:var(--accent); font-size:20px; }
+    .summary-item span { color:#c1d4d5; font-size:13px; }
+    .chart-scroll { overflow-x:auto; border:1px solid #33415d; border-radius:16px; background:#10182a; }
+    .chart-scroll { scrollbar-width:none; }
+    .chart-scroll::-webkit-scrollbar { display:none; }
+    .chart { min-width:940px; position:relative; }
+    .chart-row { display:grid; grid-template-columns:215px 1fr; min-height:72px; }
+    .chart-row:last-child { border-bottom:0; }
+    .row-label { position:sticky; left:0; z-index:3; background:#121d30; padding:15px 12px; border-right:1px solid #33415d; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+    .row-label strong { display:block; font-size:14px; white-space:nowrap; }
+    .row-label small { color:var(--muted); font-size:12px; }
+    .chart-row.current .row-label { background:#173136; }
+    .track { position:relative; min-height:72px; }
+    .track { margin-right:48px; }
+    .gridline { position:absolute; top:0; bottom:0; border-left:1px solid #ffffff0c; pointer-events:none; }
+    .axis { min-height:62px; background:#10182a; }
+    .axis .track { min-height:62px; }
+    .axis-label { position:absolute; top:44px; transform:translate(10px, -50%); color:#c8d5e8; font-size:11px; white-space:nowrap; text-align:left; }
+    .axis-dot { position:absolute; top:40px; width:7px; height:7px; border-radius:50%; background:#b8cbe3; transform:translateX(-50%); z-index:2; }
+    .axis .gridline { top:44px; }
+    .now-label { position:absolute; top:36px; transform:translateX(-100%); color:var(--accent); font-size:10px; white-space:nowrap; padding-right:5px; }
+    .play-bar { position:absolute; top:21px; height:30px; min-width:8px; background:var(--bar); border:1px solid #ffffff4d; border-radius:7px; cursor:pointer; padding:0; z-index:2; }
+    .play-bar:hover { filter:brightness(1.12); outline:none; }
+    .play-bar:focus-visible { filter:brightness(1.12); outline:2px solid #0e8fb0; outline-offset:2px; }
+    .play-bar.live { box-shadow:0 0 16px #9be7c433; border-color:#d5fff0; }
+    .play-bar { color:#102134; font-size:11px; font-weight:700; overflow:hidden; white-space:nowrap; }
+    .play-bar.connected-left { border-top-left-radius:0; border-bottom-left-radius:0; border-left:0; }
+    .play-bar.connected-right { border-top-right-radius:0; border-bottom-right-radius:0; border-right:0; }
+    .lane-name { position:absolute; left:8px; color:#91a5c2; font-size:10px; }
+    .legend { display:flex; gap:18px; margin:0; color:#bec9db; font-size:13px; }
+    .legend i { display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; }
+    .chart-help { font-size:16px; font-weight:800; color:#ffdf5d; margin:0; text-align:center; }
+    .chart-controls { position:relative; min-height:44px; margin:16px 0; display:flex; align-items:center; }
+    .chart-controls .chart-help { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:max-content; max-width:calc(100% - 180px); }
+    .selection { margin-top:16px; padding:18px 22px; border:1px solid #40506c; border-radius:12px; min-height:102px; background:#172238; font-size:15px; }
+    .selection strong { display:block; margin-bottom:4px; }
+    .activity-story { display:grid; grid-template-columns:minmax(240px, 44%) 1fr; gap:28px; align-items:center; margin-top:20px; }
+    .activity-story img { display:block; width:100%; height:auto; border-radius:10px; }
+    .activity-story figure { margin:0; }
+    .activity-story figcaption { margin-top:8px; color:var(--muted); font-size:12px; }
+    .activity-story p { color:#e1e8f2; font-size:15px; line-height:1.9; }
+    .odin-story { grid-template-columns:minmax(0, 360px) minmax(0, 1fr); }
+    .trade-story { grid-template-columns:minmax(0, 60%) minmax(0, 1fr); }
+    .vampir-story { grid-template-columns:minmax(0, 540px) minmax(0, 1fr); }
+    .activity-gallery { display:flex; align-items:flex-start; gap:24px; flex-wrap:wrap; margin-top:20px; }
+    .activity-gallery figure { margin:0; max-width:100%; }
+    .activity-gallery img { display:block; max-width:100%; height:auto; border-radius:8px; }
+    .activity-gallery .activity-photo { width:516px; }
+    .activity-gallery .ranking-photo { width:192px; }
+    .activity-gallery a { display:block; }
+    .activity-gallery figcaption { margin-top:8px; color:var(--muted); font-size:12px; }
+    .zeus-gallery { display:flex; flex-wrap:wrap; align-items:flex-start; gap:24px; margin-top:20px; }
+    .zeus-gallery img { display:block; width:100%; height:auto; border-radius:10px; }
+    .zeus-gallery figure { margin:0; max-width:100%; }
+    .zeus-gallery figcaption, .character-figure figcaption { margin-top:8px; color:var(--muted); font-size:12px; }
+    .character-figure { margin:20px 0 0; max-width:345px; }
+    .zeus-gallery .zeus-character { max-width:240px; }
+    .zeus-gallery .zeus-chat { max-width:205px; }
+    .guild-detail { display:grid; grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); gap:28px; align-items:center; margin-top:20px; }
+    .guild-detail .activity-gallery { margin-top:0; flex-wrap:nowrap; gap:16px; }
+    .guild-detail .activity-photo { flex:1; min-width:0; }
+    .guild-detail .ranking-photo { width:120px; flex-shrink:0; }
+    .guild-detail .ranking-photo img { width:76px; margin-left:12px; }
+    .activity-gallery .ranking-photo figcaption { white-space:nowrap; width:max-content; text-align:center; position:relative; left:50px; transform:translateX(-50%); }
+    .selection figcaption { text-align:center; }
+    .trade-story figure { max-width:700px; }
+    .guild-story p { color:#e1e8f2; font-size:15px; line-height:1.9; }
+    .guild-story p + p { margin-top:18px; }
+    @media (min-width:851px) {
+      .selection:has(> .activity-story), .selection:has(> .guild-detail) { display:grid; grid-template-columns:minmax(240px, 44%) minmax(0, 1fr); column-gap:28px; }
+      .selection:has(> .trade-story) { grid-template-columns:minmax(0, 60%) minmax(0, 1fr); }
+      .selection:has(> .odin-story) { grid-template-columns:minmax(0, 360px) minmax(0, 1fr); }
+      .selection:has(> .vampir-story) { grid-template-columns:minmax(0, 540px) minmax(0, 1fr); }
+      .selection:has(> .guild-detail) { grid-template-columns:minmax(0, 1.5fr) minmax(0, 1fr); }
+      .selection:has(> .activity-story) > strong, .selection:has(> .activity-story) > p,
+      .selection:has(> .guild-detail) > strong, .selection:has(> .guild-detail) > p { grid-column:1; }
+      .selection > .activity-story, .selection > .guild-detail { display:contents; }
+      .selection > .activity-story > figure, .selection > .activity-story > img,
+      .selection > .guild-detail > .activity-gallery { grid-column:1; grid-row:3; margin-top:20px; }
+      .selection > .activity-story > p, .selection > .guild-detail > .guild-story { grid-column:2; grid-row:1 / 4; align-self:center; }
+    }
+    @media (max-width:850px) { .guild-detail { grid-template-columns:1fr; } }
+    @media (max-width:650px) { .activity-story { grid-template-columns:1fr; gap:18px; } }
+    @media (max-width:600px) { .nav { gap:2px; } .nav button { padding:7px 9px; font-size:13px; } main { padding-top:40px; } }
+    :root { color-scheme:light; --bg:#f6f7f5; --panel:#fff; --muted:#5b6470; --line:#e3e8ee; --accent:#0e8fb0; --text:#111418; }
+    body { background:linear-gradient(180deg,#f1f6f5 0,#f7f8f6 300px,#f5f6f4 100%); color:var(--text); }
+    .topbar { background:rgba(255,255,255,.94); border-bottom-color:#e3e8ee; box-shadow:0 2px 12px #1114180a; }
+    .nav button { color:#4a525c; border:1px solid transparent; border-radius:8px; }
+    .nav button:hover,.nav button.active { background:#e6f6fb; color:#0e8fb0; border-color:#cfe9f1; }
+    .eyebrow { color:#0e8fb0; }
+    h1,h2 { color:#111418; text-shadow:none; }
+    .intro { color:#5b6470; }
+    .note { border-color:#e3e8ee; color:#5b6470; background:#fff; border-radius:99px; box-shadow:none; }
+    .timeline::before { background:linear-gradient(#0e8fb0,#e3e8ee); }
+    article { background:#fff; border-color:#e3e8ee; border-radius:14px; box-shadow:0 8px 24px #1114180b; }
+    article::before { background:#0e8fb0; box-shadow:0 0 0 5px #0e8fb018; }
+    .meta { color:#0e8fb0; }
+    .tag { border-color:#e3e8ee; color:#4a525c; background:#f4f7fa; border-radius:99px; }
+    footer { color:#74818a; }
+    .summary-item { background:#fff; border-color:#e3e8ee; border-radius:12px; box-shadow:0 5px 16px #11141808; }
+    .summary-item strong { color:#0e8fb0; }
+    .summary-item span { color:#5b6470; }
+    .chart-scroll { border:2px solid #7e998c; background:#e5eee9; border-radius:12px; box-shadow:0 12px 28px #11141820; }
+    .chart-row { border-bottom:1px solid #eef2f6; }
+    .row-label { background:#f4f7fa; border-right-color:#e3e8ee; color:#111418; }
+    .row-label small { color:#667681; }
+    .chart-row.current .row-label { background:#e6f6fb; }
+    .gridline { border-left-color:#42596b18; }
+    .axis { background:#f4f6f4; }
+    .axis-label { color:#465b69; font-weight:700; }
+    .axis-dot { background:#a17a3f; }
+    .now-label { color:#8b682f; font-weight:700; }
+    .lane-name { color:#5d6d78; font-weight:700; }
+    .legend { color:#405462; font-weight:700; }
+    .legend i { border:1px solid #75838b; }
+    .chart-help { padding:6px 14px; border:1px solid #ead177; border-radius:99px; background:#fff7d8; color:#745700; box-shadow:0 3px 10px #9a741b16; text-shadow:none; }
+    .selection { background:#e5eee9; border:2px solid #7e998c; color:#000; font-family:inherit; border-radius:12px; box-shadow:0 12px 28px #11141820; }
+    .selection * { color:#000 !important; font-family:inherit; }
+    .activity-story p,.guild-story p { color:#000; }
+    .activity-story figcaption,.activity-gallery figcaption,.zeus-gallery figcaption,.character-figure figcaption { color:#000; }
+    .profile-layout { display:block; }
+    .intro-top { display:grid; grid-template-columns:minmax(270px,.8fr) minmax(0,1.45fr); gap:24px; align-items:stretch; }
+    .profile-card { padding:22px; border:1px solid #e3e8ee; border-radius:16px; background:#fff; box-shadow:0 10px 30px #1114180b; }
+    .portrait-space { width:66.666%; margin:0 auto; overflow:hidden; border:1px solid #e3e8ee; border-radius:10px; background:#f4f7fa; }
+    .portrait-space img { display:block; width:100%; height:auto; object-fit:contain; object-position:center; }
+    .profile-card h1 { margin:20px 0 4px; font-size:28px; color:#111418; }
+    .profile-subtitle { margin:0 0 18px; color:#0e8fb0; font-size:13px; }
+    .profile-details { display:grid; gap:0; margin:0; }
+    .profile-details div { display:grid; grid-template-columns:58px minmax(0,1fr); gap:10px; padding:10px 0; border-top:1px solid #eef2f6; }
+    .profile-details dt { color:#74818a; font-size:13px; }
+    .profile-details dd { margin:0; color:#111418; font-size:14px; font-weight:600; overflow-wrap:anywhere; }
+    .profile-details .email-row dd { white-space:nowrap; overflow-wrap:normal; font-size:13px; }
+    .profile-main { padding:clamp(24px,5vw,48px); border:1px solid #e3e8ee; border-radius:18px; background:linear-gradient(145deg,#fff,#f2f7f4); box-shadow:0 10px 30px #1114180a; }
+    .profile-main h2 { margin:10px 0 14px; font-size:clamp(16px,2.3vw,28px); line-height:1.45; color:#111418; }
+    .profile-main h2 span { display:block; white-space:nowrap; }
+    .profile-main > p { color:#5b6470; line-height:1.9; }
+    .interest-list { display:flex; flex-wrap:wrap; gap:9px; margin-top:24px; }
+    .interest-list span { padding:7px 12px; border:1px solid #d6e4dd; border-radius:99px; background:#edf5f0; color:#0e8fb0; font-size:13px; box-shadow:none; }
+    .experience-highlight { display:grid; grid-template-columns:minmax(250px,.82fr) minmax(0,1.18fr); gap:32px; align-items:center; margin-top:24px; padding:clamp(24px,4vw,42px); border:1px solid #e3e8ee; border-radius:18px; background:#fff; box-shadow:0 10px 30px #1114180a; }
+    .experience-highlight h2 { margin:10px 0 14px; font-size:clamp(22px,3vw,30px); line-height:1.45; }
+    .experience-highlight p { color:#5b6470; line-height:1.9; }
+    .guild-levels { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .guild-level { min-height:104px; display:flex; flex-direction:column; justify-content:center; padding:16px 18px; border:1px solid #dce8e1; border-radius:12px; background:#f5f8f5; }
+    .guild-level span { color:#7d8b85; font-size:11px; font-weight:700; letter-spacing:.12em; }
+    .guild-level strong { margin-top:5px; color:#0e8fb0; font-size:16px; }
+    .economy-highlight { margin-top:20px; }
+    .economy-data { display:grid; gap:20px; }
+    .economy-group h3 { margin:0 0 10px; color:#0e8fb0; font-size:15px; }
+    .monthly-amounts { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+    .economy-amount { min-width:0; padding:11px 8px; border:1px solid #d2e0d8; border-radius:10px; background:#edf4f0; text-align:center; }
+    .economy-amount span { display:block; color:#61756a; font-size:11px; }
+    .economy-amount strong { display:block; margin-top:4px; color:#203b30; font-size:13px; white-space:nowrap; }
+    .trade-amounts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    @media (max-width:760px) { .economy-highlight { grid-template-columns:1fr; gap:22px; } }
+    @media (max-width:520px) { .monthly-amounts { grid-template-columns:repeat(3,minmax(0,1fr)); } .trade-amounts { grid-template-columns:1fr; } }
+    @media (max-width:760px) { .intro-top { grid-template-columns:1fr; } }
+    @media (max-width:760px) { .experience-highlight { grid-template-columns:1fr; gap:22px; } }
+    @media (max-width:460px) { .guild-levels { grid-template-columns:1fr; } .guild-level { min-height:78px; } }
+    @media (max-width:600px) { .profile-main h2 { font-size:clamp(13px,3.6vw,18px); } }
+    .work-card { border-color:#e3e8ee; border-radius:16px; box-shadow:0 10px 30px #11141814; background-color:#253b3e; }
+    .work-card.guild-card { background-image:linear-gradient(90deg,rgba(25,42,45,.86) 0%,rgba(25,42,45,.67) 54%,rgba(25,42,45,.34) 100%),url("assets/guild_distribution_bg.png"); }
+    .work-card.bounty-card { background-image:linear-gradient(90deg,rgba(25,42,45,.86) 0%,rgba(25,42,45,.67) 54%,rgba(25,42,45,.34) 100%),url("assets/bounty_system_bg.png"); }
+    .work-card.alchemy-card { background-image:linear-gradient(90deg,rgba(25,42,45,.86) 0%,rgba(25,42,45,.6) 54%,rgba(25,42,45,.2) 100%),url("assets/alchemy_analysis_bg.jpg"); }
+    .work-card h2 { color:#fff; text-shadow:none; }
+    .work-card p { color:#eef3f2; }
+    .work-card .open-link,.work-card .doc-type { color:#aee3d1; }
+    @media (max-width:600px) { .hero-banner { min-height:260px; padding:24px; background-position:center; } }
+    /* Passion-led introduction */
+    body { background:#f4f7fa; }
+    .passion-masthead { display:flex; justify-content:space-between; gap:16px; color:#82847e; font-size:11px; font-weight:700; letter-spacing:.12em; padding-bottom:32px; }
+    .passion-hero { display:grid; grid-template-columns:1.1fr 1fr; align-items:center; gap:24px; min-height:600px; padding:12px 0 60px; }
+    .passion-kicker { font-size:14px; color:#686c64; margin-bottom:24px; }
+    .passion-copy h1 { margin:0; font-size:clamp(42px,4.8vw,68px); line-height:1.22; letter-spacing:-.065em; font-weight:900; color:#111418; }
+    .passion-copy h1 em { font-style:normal; color:#0e8fb0; }
+    .passion-copy h1 > span { font-size:.76em; }
+    .passion-copy > p { margin-top:30px; font-size:18px; line-height:1.85; color:#5b6470; }
+    .passion-copy > p strong { color:#111418; }
+    .passion-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+    .passion-actions button { padding:13px 18px; border:1px solid #cfd6de; background:transparent; color:#111418; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }
+    .passion-actions button:first-child { background:#111418; border-color:#111418; color:#fff; }
+    .passion-actions button span { margin-left:20px; }
+    .passion-actions button:hover { transform:translateY(-2px); }
+    .passion-actions button:focus-visible { outline:3px solid #0e8fb0; outline-offset:4px; }
+    .passion-visual { position:relative; height:490px; min-width:0; }
+    .game-print { position:absolute; background:#fff; padding:10px 10px 12px; box-shadow:0 14px 36px #25271c22; width:80%; }
+    .game-print img { width:100%; height:200px; object-fit:cover; object-position:center; display:block; }
+    .game-print span { display:block; margin-top:9px; color:#596055; font-size:10px; letter-spacing:.05em; }
+    .print-back { top:10px; right:0; transform:rotate(7deg); }
+    .print-front { top:188px; left:0; transform:rotate(-6deg); }
+    .passion-portrait { position:absolute; right:0; bottom:0; width:29%; background:#e7e7df; border:7px solid #fff; box-shadow:0 8px 22px #25271c22; transform:rotate(4deg); }
+    .passion-portrait img { display:block; width:100%; height:170px; object-fit:cover; object-position:top; }
+    .visual-caption { position:absolute; left:16px; bottom:0; font-size:10px; letter-spacing:.15em; font-weight:700; color:#878b7c; }
+    .passion-info { display:grid; grid-template-columns:1.1fr 1fr 1fr; border-top:1px solid #e3e8ee; border-bottom:1px solid #e3e8ee; margin:0 0 54px; padding:30px 0; }
+    .passion-info > section { padding:0 25px; border-left:1px solid #e3e8ee; min-width:0; }
+    .passion-info > section:first-child { border-left:0; padding-left:0; }
+    .passion-info > section:last-child { padding-right:0; }
+    .passion-info h2 { font-size:10px; letter-spacing:.1em; color:#838976; margin:0 0 20px; }
+    .passion-info h3 { font-size:16px; line-height:1.6; color:#111418; margin:0 0 10px; }
+    .passion-info p { font-size:13px; line-height:1.9; color:#73796d; }
+    .passion-info .profile-details div { grid-template-columns:58px minmax(0,1fr); padding:5px 0; border:0; }
+    .passion-info .profile-details dd,.passion-info .profile-details dt { font-size:12px; }
+    .passion-info .profile-details a { color:inherit; text-decoration:none; }
+    .design-topics { display:flex; flex-wrap:wrap; gap:6px; margin-top:15px; }
+    .design-topics span { font-size:10px; border:1px solid #e3e8ee; padding:3px 9px; border-radius:20px; color:#5b6470; }
+    @media(max-width:1000px) { .passion-info { grid-template-columns:1fr 1fr; } .passion-info > section:last-child { grid-column:1 / -1; border:0; border-top:1px solid #e3e8ee; margin-top:24px; padding:24px 0 0; } .passion-visual { height:430px; } .game-print img { height:170px; } .print-front { top:160px; } }
+    @media(max-width:760px) { .passion-hero { grid-template-columns:1fr; padding-top:0; gap:35px; } .passion-copy h1 { font-size:clamp(38px,8vw,60px); } .passion-visual { max-width:530px; width:100%; justify-self:center; height:450px; } .passion-masthead { font-size:9px; } .passion-copy > p { font-size:16px; } }
+    @media(max-width:520px) { .passion-info { grid-template-columns:1fr; } .passion-info > section { border:0; padding:24px 0; border-bottom:1px solid #e3e8ee; } .passion-info > section:first-child { padding-top:0; } .passion-info > section:last-child { margin:0; border:0; padding-bottom:0; } .passion-masthead > span:last-child { display:none; } .passion-visual { height:390px; } .game-print img { height:145px; } .print-front { top:145px; } .passion-portrait img { height:125px; } }
+    .commitment-box { margin-top:32px; padding:36px; background:#f4f7fa; border:1px solid #e3e8ee; border-radius:18px; }
+    .commitment-heading { display:grid; grid-template-columns:1.2fr 1fr; align-items:end; gap:28px; margin-bottom:28px; }
+    .commitment-heading h2 { margin:12px 0 0; font-size:clamp(24px,3vw,36px); line-height:1.4; letter-spacing:-.045em; color:#111418; }
+    .commitment-heading p { font-size:14px; line-height:1.9; color:#5b6470; }
+    .commitment-proof { margin:0; }
+    .commitment-proof a { display:block; border-radius:10px; overflow:hidden; background:#000; }
+    .commitment-proof a:focus-visible { outline:3px solid #0e8fb0; outline-offset:4px; }
+    .commitment-proof img { display:block; width:100%; height:auto; }
+    .commitment-proof figcaption { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-top:13px; color:#5b6470; font-size:11px; }
+    @media(max-width:760px) { .commitment-box { padding:22px; } .commitment-heading { grid-template-columns:1fr; gap:16px; } }
+    .purchase-proofs { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:30px; padding-top:28px; border-top:1px solid #e3e8ee; }
+    .purchase-proofs figure { margin:0; min-width:0; }
+    .purchase-title { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px; }
+    .purchase-title h3 { margin:0; font-size:18px; color:#111418; }
+    .purchase-title strong { color:#0e8fb0; font-size:18px; }
+    .purchase-proofs p { margin:6px 0 14px; font-size:12px; color:#5b6470; }
+    .purchase-proofs a { display:block; background:#fff; border:1px solid #e3e8ee; border-radius:8px; overflow:hidden; }
+    .purchase-proofs img { display:block; width:100%; height:auto; }
+    @media(max-width:900px) { .purchase-proofs { grid-template-columns:1fr; } }
+    .commitment-proof { width:100%; margin:0; }
+    .payment-strip { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; background:transparent; }
+    .payment-record { min-width:0; overflow:hidden; border-radius:5px; }
+    .payment-record svg { display:block; width:100%; height:auto; }
+    @media(max-width:760px) { .commitment-proof { width:100%; overflow-x:auto; } .payment-strip { min-width:750px; } }
+    .purchase-proofs { grid-template-columns:1fr; width:66.6667%; margin:28px auto 0; gap:28px; }
+    .purchase-proofs figure + figure { border-top:1px solid #e3e8ee; padding-top:28px; }
+    @media(max-width:760px) { .purchase-proofs { width:100%; } }
+    .commitment-heading { grid-template-columns:1fr; gap:16px; align-items:start; margin-bottom:32px; }
+    .commitment-heading p { max-width:720px; margin:0; font-size:15px; line-height:1.9; text-wrap:pretty; }
+    .purchase-title h3 { font-family:"Arial Black","Malgun Gothic",sans-serif; font-size:24px; font-weight:900; letter-spacing:-.055em; line-height:1.4; color:#111418; }
+    @media(max-width:520px) { .purchase-title h3 { font-size:21px; } }
+    .payment-description { margin:8px 0 18px; font-size:14px; line-height:1.8; color:#5b6470; }
+    .purchase-proofs .purchase-caption { margin-top:13px; text-align:right; color:#5b6470; font-size:11px; }
+    .reinvestment-box { margin-top:28px; padding:36px; background:#f2f5ef; border:1px solid #e3e8ee; border-radius:18px; }
+    .reinvestment-box > h2 { margin:12px 0 16px; font-size:clamp(24px,3vw,36px); line-height:1.4; letter-spacing:-.045em; color:#111418; }
+    .reinvestment-intro { max-width:740px; font-size:15px; line-height:1.9; color:#5b6470; }
+    .reinvestment-flow { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:24px 0 32px; font-size:12px; font-weight:700; color:#53654b; }
+    .reinvestment-flow span:nth-child(odd) { border-bottom:2px solid #b8c8ac; padding:6px 0; }
+    .yearly-records { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; padding-top:28px; border-top:0; }
+    .yearly-records figure { margin:0; min-width:0; }
+    .yearly-record-heading { display:flex; align-items:baseline; gap:10px; margin-bottom:14px; }
+    .yearly-record-heading h3 { font-family:"Arial Black","Malgun Gothic",sans-serif; font-size:26px; font-weight:900; color:#111418; margin:0; }
+    .yearly-record-heading span { font-size:12px; color:#5b6470; }
+    .yearly-records a { display:block; border:1px solid #dde2d7; border-radius:8px; overflow:hidden; background:#fff; }
+    .yearly-records a:focus-visible { outline:3px solid #0e8fb0; outline-offset:4px; }
+    .yearly-records img { display:block; width:100%; height:auto; }
+    .yearly-records figcaption { margin-top:13px; text-align:right; font-size:11px; color:#5b6470; }
+    @media(max-width:1000px) { .yearly-records { grid-template-columns:1fr; max-width:720px; margin:0 auto; } }
+    @media(max-width:760px) { .reinvestment-box { padding:22px; } .reinvestment-flow { gap:8px; font-size:11px; } }
+    .economy-insight { max-width:840px; margin-top:18px; padding-left:18px; border-left:3px solid #b8c8ac; font-size:14px; line-height:1.95; color:#5b6470; text-wrap:pretty; }
+    .yearly-records-caption { margin:13px 0 0; text-align:right; font-size:11px; color:#5b6470; }
+    .play-timeline-title { font-size:clamp(24px,3.5vw,38px); line-height:1.35; letter-spacing:-.04em; }
+    .other-games { margin-top:56px; padding-top:32px; border-top:1px solid #e3e8ee; }
+    .other-games > h2 { margin:10px 0 24px; font-size:clamp(22px,2.5vw,28px); letter-spacing:-.04em; color:#111418; }
+    .other-games-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:18px; }
+    .other-games-grid figure { margin:0; min-width:0; }
+    .other-game-image { aspect-ratio:4 / 3; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#fff; border:1px solid #dce1d7; border-radius:10px; }
+    .other-game-image.dark { background:#000; }
+    .other-game-image img { display:block; width:100%; height:100%; object-fit:contain; }
+    .other-games-grid figcaption { margin-top:12px; font-size:14px; font-weight:700; color:#111418; }
+    @media(max-width:900px) { .other-games-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media(max-width:520px) { .other-games-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; } .other-games-grid figcaption { font-size:12px; } }
+    .channel-activity { margin-top:28px; padding:36px; border:1px solid #e3e8ee; border-radius:18px; background:#fff; }
+    .channel-activity h2 { margin:12px 0 20px; font-size:clamp(26px,3.4vw,42px); line-height:1.35; letter-spacing:-.045em; color:#111418; }
+    .channel-activity > p { max-width:800px; font-size:16px; line-height:1.9; color:#5b6470; }
+    .channel-activity figure { margin:30px 0 0; }
+    .channel-activity figure a { display:block; border:1px solid #e0e4dc; border-radius:10px; overflow:hidden; }
+    .channel-activity img { display:block; width:100%; height:auto; }
+    .channel-activity figcaption { margin-top:13px; text-align:right; font-size:11px; color:#5b6470; }
+    @media(max-width:760px) { .channel-activity { padding:22px; } }
+    .channel-activity { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); column-gap:36px; align-items:start; }
+    .channel-activity > .eyebrow { grid-column:1; grid-row:1; }
+    .channel-activity > h2 { grid-column:1; grid-row:2; font-size:clamp(24px,2.6vw,34px); margin:12px 0 18px; }
+    .channel-activity > p { grid-column:1; grid-row:3; font-size:14px; }
+    .channel-activity > figure { grid-column:2; grid-row:1 / 5; margin:0; width:100%; max-width:620px; justify-self:center; align-self:center; }
+    .channel-activity figure a { background:#f6f7f3; }
+    .channel-activity img { max-height:350px; object-fit:contain; }
+    .campus-activity img { max-height:320px; }
+    @media(max-width:900px) {
+      .channel-activity { grid-template-columns:1fr; }
+      .channel-activity > .eyebrow,.channel-activity > h2,.channel-activity > p,.channel-activity > figure { grid-column:1; grid-row:auto; }
+      .channel-activity > figure { margin-top:24px; max-width:640px; }
+      .channel-activity img { max-height:340px; }
+    }
+    .experience-highlight:has(#guild-experience-title) { background:#f4f7fa; border:1px solid #e3e8ee; border-radius:18px; box-shadow:none; padding:36px; }
+    .experience-highlight:has(#guild-experience-title) .eyebrow { color:#5b6470; }
+    #guild-experience-title { color:#111418; letter-spacing:-.045em; }
+    .experience-highlight:has(#guild-experience-title) p { color:#5b6470; }
+    .experience-highlight:has(#guild-experience-title) .guild-level { background:#f4f7fa; border:1px solid #e3e8ee; box-shadow:none; }
+    .experience-highlight:has(#guild-experience-title) .guild-level span { color:#838976; }
+    .experience-highlight:has(#guild-experience-title) .guild-level strong { color:#111418; }
+    @media(max-width:760px) { .experience-highlight:has(#guild-experience-title) { padding:22px; } }
+    .experience-highlight:has(#guild-experience-title) .guild-levels { grid-template-columns:1fr; gap:12px; }
+    .experience-highlight:has(#guild-experience-title) .guild-level { min-height:90px; padding:18px 22px; }
+.experience-highlight:has(#guild-experience-title) .guild-master-description { margin:10px 0 16px; font-size:13px; line-height:1.8; }
+.guild-master-images { display:grid; grid-template-columns:minmax(0,1fr) 65px; gap:12px; align-items:start; }
+.guild-master-images a { display:block; min-width:0; border-radius:6px; overflow:hidden; border:1px solid #e3e8ee; background:#f4f7fa; }
+.guild-master-images img { display:block; width:100%; height:190px; object-fit:contain; object-position:top; }
+@media(max-width:520px) { .guild-master-images img { height:150px; } .guild-master-images { grid-template-columns:minmax(0,1fr) 50px; gap:8px; } }
+    .guild-master-images { display:flex; align-items:flex-start; gap:16px; }
+    .guild-master-images a { border:0; border-radius:0; background:transparent; overflow:visible; flex:0 1 auto; }
+    .guild-master-images img { width:auto; max-width:100%; height:190px; object-fit:contain; }
+    @media(max-width:520px) { .guild-master-images { gap:10px; } .guild-master-images img { height:150px; } }
+    .execution-highlight { display:grid; grid-template-columns:1.2fr 1fr; align-items:center; gap:40px; margin-top:28px; padding:36px; border:1px solid #e3e8ee; border-radius:18px; background:#f4f7fa; }
+    .execution-highlight .eyebrow { color:#5b6470; }
+    .execution-highlight h2 { margin:12px 0 18px; font-size:clamp(24px,3vw,36px); line-height:1.4; letter-spacing:-.045em; color:#111418; }
+    .execution-highlight p { max-width:620px; font-size:14px; line-height:1.9; color:#5b6470; }
+    .execution-highlight button { display:inline-flex; align-items:center; gap:24px; margin-top:24px; padding:11px 16px; border:1px solid #111418; background:#111418; color:#fff; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }
+    .execution-highlight button:focus-visible { outline:3px solid #0e8fb0; outline-offset:4px; }
+    .execution-results { display:grid; gap:18px; border-left:1px solid #e3e8ee; padding-left:32px; }
+    .execution-results > div { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 16px; }
+    .execution-results strong { font-size:clamp(24px,2.6vw,34px); font-weight:900; letter-spacing:-.05em; color:#111418; }
+    .execution-results span { font-size:12px; color:#5b6470; }
+    @media(max-width:760px) { .execution-highlight { grid-template-columns:1fr; padding:22px; gap:28px; } .execution-results { border-left:0; border-top:1px solid #e3e8ee; padding:22px 0 0; } }
+    .channel-activity > .channel-status { grid-column:1; grid-row:4; margin-top:14px; font-size:13px; line-height:1.8; color:#5b6470; }
+    @media(max-width:900px) { .channel-activity > .channel-status { grid-row:auto; } }
+    .first-line-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:16px; }
+    .first-line-gallery figure { margin:0; min-width:0; }
+    .first-line-gallery a { display:block; }
+    .first-line-gallery img { display:block; width:100%; height:110px; object-fit:contain; }
+    .first-line-gallery figcaption { margin-top:8px; font-size:11px; font-weight:600; color:#5b6470; }
+    @media(max-width:520px) { .first-line-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; } .first-line-gallery img { height:auto; max-height:190px; object-position:left; } }
+    .first-line-gallery img { width:100%; height:120px; object-fit:cover; object-position:center; }
+    @media(max-width:520px) { .first-line-gallery img { height:180px; max-height:none; object-fit:cover; object-position:center; } }
+    .parallel-game-story { align-items:center; }
+    .parallel-game-story > p { margin:0 !important; align-self:center; }
+    /* Portrait to the left of the game photographs. */
+    .passion-hero { grid-template-columns:1fr 1.2fr; gap:30px; }
+    .passion-visual { display:grid; grid-template-columns:minmax(140px,.805fr) minmax(0,1.195fr); gap:18px 20px; height:auto; align-items:center; padding:12px 0; }
+    .passion-visual .game-print { position:relative; inset:auto; width:100%; margin:0; padding:8px 8px 12px; }
+    .passion-visual .game-print img { height:auto; aspect-ratio:16 / 10; object-fit:cover; }
+    .passion-visual .print-back { grid-column:2; grid-row:1; width:90%; justify-self:end; transform:rotate(3deg); z-index:2; }
+    .passion-visual .print-front { grid-column:2; grid-row:2; width:90%; justify-self:start; transform:rotate(-3deg); margin-top:-34px; z-index:1; }
+    .passion-visual .passion-portrait { position:relative; inset:auto; grid-column:1; grid-row:1 / 3; width:100%; border:7px solid #fff; transform:rotate(-2deg); }
+    .passion-visual .passion-portrait img { height:auto; aspect-ratio:3 / 4; object-fit:cover; object-position:top; }
+    .passion-visual .visual-caption { position:static; grid-column:1 / -1; grid-row:3; margin-top:8px; }
+    @media(max-width:1000px) and (min-width:761px) { .passion-hero { grid-template-columns:1fr; } .passion-visual { width:100%; max-width:650px; justify-self:center; } }
+    @media(max-width:760px) { .passion-hero { grid-template-columns:1fr; } .passion-visual { max-width:650px; height:auto; } }
+    @media(max-width:520px) { .passion-visual { grid-template-columns:minmax(100px,.805fr) minmax(0,1.195fr); gap:16px 12px; height:auto; } .passion-visual .passion-portrait { border-width:5px; } .passion-visual .game-print { padding:5px 5px 8px; } .passion-visual .game-print span { font-size:8px; } }
+    /* Consistent shadows for portfolio images. */
+    img, .payment-record svg { box-shadow:0 5px 14px rgba(37,39,28,.18); }
+    .play-dialog { width:min(1100px,94vw); max-width:none; max-height:90dvh; padding:0 22px 22px; border:1px solid #c8d3ca; border-radius:16px; background:#f4f7fa; color:#111418; box-shadow:0 24px 80px #0005; overflow:auto; }
+    .play-dialog::backdrop { background:rgba(20,28,23,.6); }
+    .play-dialog-toolbar { position:sticky; top:0; z-index:10; display:flex; justify-content:flex-end; padding:10px 0; background:#f4f7fa; }
+    .play-dialog-close { display:grid; place-items:center; width:40px; height:40px; padding:0; border:1px solid #c8d3ca; border-radius:50%; background:#fff; color:#111418; font:30px/1 sans-serif; cursor:pointer; }
+    .play-dialog-close:focus-visible { outline:3px solid #0e8fb0; outline-offset:2px; }
+    .play-dialog .selection { margin-top:0; }
+    html:has(.play-dialog[open]) { overflow:hidden; }
+    @media(max-width:520px) { .play-dialog { padding:0 12px 12px; } }
+    /* AI 게임 제작 탭 */
+    .aig-hero { display:grid; grid-template-columns:1.15fr 1fr; gap:36px; align-items:center; padding:12px 0 40px; }
+    .work-card.game-card { grid-column:1 / -1; min-height:220px; background:linear-gradient(120deg,#111418 0%,#3d5040 60%,#5a4a32 100%); }
+    .work-card.game-card .doc-type { color:#f3c9a8; }
+    .aig-hero .aig-title, .aig-hero h1 { margin:14px 0 18px; font-size:clamp(30px,3.6vw,48px); line-height:1.3; letter-spacing:-.055em; font-weight:900; color:#111418; }
+    .aig-hero .aig-title em, .aig-hero h1 em { font-style:normal; color:#0e8fb0; }
+    .aig-hero > div > p { font-size:16px; line-height:1.9; color:#5b6470; }
+    .aig-hero > div > p strong { color:#111418; }
+    .aig-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .aig-stat { padding:20px 22px; background:#f4f7fa; border:1px solid #e3e8ee; border-radius:14px; }
+    .aig-stat strong { display:block; font-size:clamp(24px,2.6vw,32px); font-weight:900; letter-spacing:-.05em; color:#111418; }
+    .aig-stat span { font-size:12px; color:#5b6470; }
+    .aig-box { margin-top:28px; padding:36px; background:#fff; border:1px solid #e3e8ee; border-radius:18px; }
+    .aig-box.tint { background:#f4f7fa; }
+    .aig-box > h2 { margin:12px 0 16px; font-size:clamp(22px,2.8vw,32px); line-height:1.4; letter-spacing:-.045em; color:#111418; }
+    .aig-box > p { max-width:820px; font-size:15px; line-height:1.9; color:#5b6470; }
+    .aig-problems { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:22px; }
+    .aig-problems div { padding:16px; background:#f4f7fa; border:1px solid #e3e8ee; border-radius:12px; font-size:13px; line-height:1.75; color:#5b6470; }
+    .aig-problems b { display:block; margin-bottom:6px; font-size:14px; color:#111418; }
+    .aig-quote { margin:22px 0 0; padding:14px 18px; border-left:3px solid #0e8fb0; background:#f4f7fa; font-size:14px; line-height:1.8; color:#4a525c; }
+    .aig-flow { display:flex; flex-wrap:wrap; align-items:stretch; gap:10px; margin-top:24px; }
+    .aig-flow > div { flex:1 1 160px; padding:16px 18px; background:#f4f7fa; border:1px solid #e3e8ee; border-radius:12px; }
+    .aig-flow > div b { display:block; font-size:15px; color:#111418; }
+    .aig-flow > div small { display:block; margin-top:4px; font-size:12px; line-height:1.7; color:#5b6470; }
+    .aig-flow > div.me { background:#111418; border-color:#111418; }
+    .aig-flow > div.me b, .aig-flow > div.me small { color:#fff; }
+    .aig-flow > span { align-self:center; font-weight:900; color:#0e8fb0; }
+    .aig-note { margin-top:12px; font-size:12px; color:#5b6470; }
+    .aig-shots { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:24px; }
+    .aig-shots figure { margin:0; }
+    .aig-shot { aspect-ratio:16 / 9; overflow:hidden; border-radius:10px; background:#e4e6df; display:grid; place-items:center; color:#8a9182; font-size:12px; }
+    .aig-shot img { width:100%; height:100%; object-fit:cover; display:block; }
+    .aig-shot.empty::after { content:"게임 화면 (추가 예정)"; }
+    .aig-shots figcaption { margin-top:10px; font-size:13px; font-weight:700; color:#111418; }
+    .aig-shots figcaption span { display:block; margin-top:3px; font-size:12px; font-weight:400; color:#5b6470; }
+    .aig-steps { margin:22px 0 0; padding:0; list-style:none; counter-reset:step; display:grid; gap:10px; }
+    .aig-steps li { counter-increment:step; position:relative; min-height:28px; padding:2px 0 0 46px; font-size:14px; line-height:1.8; color:#4a525c; }
+    .aig-steps li::before { content:counter(step); position:absolute; left:0; top:0; display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:#111418; color:#fff; font-size:12px; font-weight:700; }
+    .aig-skills { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:24px; }
+    .aig-skill { padding:22px; background:#fff; border:1px solid #e3e8ee; border-radius:14px; }
+    .aig-skill .eyebrow { color:#0e8fb0; }
+    .aig-skill h3 { margin:8px 0 12px; font-size:18px; line-height:1.5; color:#111418; }
+    .aig-skill ul { margin:0; padding-left:18px; font-size:13px; line-height:1.85; color:#5b6470; }
+    .aig-split { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px; }
+    .aig-split > div { padding:22px; border-radius:14px; border:1px solid #e3e8ee; background:#f4f7fa; }
+    .aig-split > div.mine { background:#fff; border:2px solid #111418; }
+    .aig-split h3 { margin:0 0 12px; font-size:16px; color:#111418; }
+    .aig-split ul { margin:0; padding-left:18px; font-size:13px; line-height:1.9; color:#5b6470; }
+    .aig-cases { display:grid; gap:14px; margin-top:24px; }
+    .aig-case { display:grid; grid-template-columns:180px 1fr; gap:20px; padding:20px 22px; background:#f4f7fa; border:1px solid #e3e8ee; border-radius:14px; }
+    .aig-case > div:first-child b { display:block; font-size:16px; line-height:1.5; color:#111418; }
+    .aig-case > div:first-child span { display:inline-block; margin-top:8px; padding:2px 9px; border:1px solid #cfd6de; border-radius:99px; font-size:11px; color:#5b6470; }
+    .aig-case dl { margin:0; display:grid; grid-template-columns:64px 1fr; gap:6px 12px; font-size:13px; line-height:1.75; }
+    .aig-case dt { font-weight:700; color:#0e8fb0; }
+    .aig-case dd { margin:0; color:#4a525c; }
+    @media(max-width:900px) { .aig-hero { grid-template-columns:1fr; } .aig-problems { grid-template-columns:1fr 1fr; } .aig-skills { grid-template-columns:1fr; } .aig-shots { grid-template-columns:1fr 1fr; } }
+    @media(max-width:620px) { .aig-box { padding:22px; } .aig-split { grid-template-columns:1fr; } .aig-case { grid-template-columns:1fr; gap:10px; } .aig-shots { grid-template-columns:1fr; } .aig-problems { grid-template-columns:1fr; } .aig-flow > span { display:none; } }
+    .aig-steps li b { color:#0e8fb0; }
+    .aig-subtitle { margin:30px 0 4px; font-size:17px; color:#111418; }
+    .aig-decisions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:14px; }
+    .aig-decisions > div { padding:16px 18px; background:#f4f7fa; border:1px solid #e3e8ee; border-radius:12px; }
+    .aig-decisions b { display:inline-block; padding:2px 10px; border-radius:99px; background:#111418; color:#fff; font-size:11px; }
+    .aig-decisions p { margin:10px 0 0; font-size:13px; line-height:1.8; color:#4a525c; }
+    .aig-decisions strong { color:#111418; }
+    .aig-skills + .aig-flow { margin-top:20px; }
+    @media(max-width:900px) { .aig-decisions { grid-template-columns:1fr 1fr; } }
+    @media(max-width:620px) { .aig-decisions { grid-template-columns:1fr; } }
+    .aig-clips { display:grid; gap:22px; margin-top:24px; }
+    .aig-clip { margin:0; }
+    .aig-clip video { display:block; width:100%; aspect-ratio:1622 / 826; object-fit:cover; border-radius:12px; background:#1c2420; }
+    .aig-clip figcaption { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; margin-top:10px; font-size:13px; color:#5b6470; }
+    .aig-clip figcaption b { font-size:15px; color:#111418; }
+    .aig-full { margin:0; text-align:right; font-size:13px; }
+    .aig-full a { color:#0e8fb0; font-weight:700; text-decoration:none; }
+    .aig-clip figcaption a { color:#0e8fb0; font-weight:700; text-decoration:none; }
+    .aig-clip figcaption a:hover { text-decoration:underline; }
+
+    /* AI 게임 제작 탭: 밝고 깔끔한 분위기 (하늘색 강조 밑줄 하나, 굵은 제목, 짧은 정보 줄) */
+    [data-view="aigame"] { --ag-ink:#111418; --ag-sub:#5b6470; --ag-line:#e3e8ee; --ag-soft:#f4f7fa; --ag-key:#2bc4e6; --ag-key-ink:#0e8fb0; }
+    [data-view="aigame"] { word-break:keep-all; }
+    [data-view="aigame"] .eyebrow { color:var(--ag-key-ink); letter-spacing:.12em; }
+    [data-view="aigame"] .aig-title em, [data-view="aigame"] .aig-box > h2 em { font-style:normal; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+    [data-view="aigame"] .aig-hero { position:relative; grid-template-columns:1.25fr 1fr; gap:44px; margin:0 0 8px; padding:56px 48px 52px; border-radius:28px; background:linear-gradient(180deg,#eef2f6 0%,#f8fafc 100%); border:1px solid var(--ag-line); overflow:hidden; }
+    [data-view="aigame"] .aig-hero::after { content:""; position:absolute; right:-120px; top:-120px; width:360px; height:360px; border-radius:50%; background:radial-gradient(circle,#2bc4e61f 0%,#2bc4e600 70%); pointer-events:none; }
+    [data-view="aigame"] .aig-hero .aig-title { margin:16px 0 20px; font-size:clamp(32px,4vw,54px); line-height:1.28; letter-spacing:-.06em; color:var(--ag-ink); }
+    [data-view="aigame"] .aig-title em, [data-view="aigame"] .aig-box > h2 em { color:inherit; background:linear-gradient(transparent 72%, var(--ag-key) 72%, var(--ag-key) 92%, transparent 92%); padding:0 4px; }
+    [data-view="aigame"] .aig-hero > div > p { color:var(--ag-sub); }
+    [data-view="aigame"] .aig-hero > div > p strong { color:var(--ag-ink); }
+    .aig-meta { display:flex; flex-wrap:wrap; gap:8px 22px; margin:22px 0 0; padding:16px 0 0; border-top:1px solid var(--ag-line); font-size:13px; }
+    .aig-meta div { display:flex; gap:8px; }
+    .aig-meta dt { color:#8a939e; }
+    .aig-meta dd { margin:0; font-weight:700; color:var(--ag-ink); }
+    .aig-cta { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+    .aig-cta a { display:inline-flex; align-items:center; gap:6px; padding:13px 22px; border-radius:12px; font-size:14px; font-weight:700; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease; }
+    .aig-cta a.primary { background:var(--ag-ink); color:#fff; box-shadow:0 8px 20px #11141826; }
+    .aig-cta a.ghost { background:#fff; color:var(--ag-ink); border:1px solid #cfd6de; }
+    .aig-cta a:hover { transform:translateY(-1px); box-shadow:0 10px 24px #1114181f; }
+    [data-view="aigame"] .aig-stats { gap:14px; }
+    [data-view="aigame"] .aig-stat { padding:22px 22px 20px; background:#fff; border:1px solid var(--ag-line); border-radius:18px; box-shadow:0 6px 18px #1d2b3a0d; }
+    [data-view="aigame"] .aig-stat strong { color:var(--ag-ink); font-size:clamp(26px,2.8vw,36px); }
+    [data-view="aigame"] .aig-stat span { color:var(--ag-sub); }
+    [data-view="aigame"] .aig-stat:first-child strong { color:var(--ag-key-ink); }
+    [data-view="aigame"] .aig-box { margin-top:24px; padding:44px 48px; border:1px solid var(--ag-line); border-radius:24px; background:#fff; }
+    [data-view="aigame"] .aig-box.tint { background:var(--ag-soft); }
+    [data-view="aigame"] .aig-box > h2 { color:var(--ag-ink); letter-spacing:-.055em; }
+    [data-view="aigame"] .aig-box > p { color:var(--ag-sub); }
+    [data-view="aigame"] .aig-steps li::before, [data-view="aigame"] .aig-decisions b { background:var(--ag-ink); }
+    [data-view="aigame"] .aig-steps li b, [data-view="aigame"] .aig-case dt, [data-view="aigame"] .aig-skill .eyebrow, [data-view="aigame"] .aig-flow > span, [data-view="aigame"] .aig-full a, [data-view="aigame"] .aig-clip figcaption a { color:var(--ag-key-ink); }
+    [data-view="aigame"] .aig-quote { border-left-color:var(--ag-key); background:#fff; }
+    [data-view="aigame"] .aig-problems div, [data-view="aigame"] .aig-flow > div, [data-view="aigame"] .aig-decisions > div, [data-view="aigame"] .aig-case, [data-view="aigame"] .aig-split > div { background:#fff; border-color:var(--ag-line); border-radius:16px; }
+    [data-view="aigame"] .aig-box:not(.tint) .aig-problems div, [data-view="aigame"] .aig-box:not(.tint) .aig-flow > div, [data-view="aigame"] .aig-box:not(.tint) .aig-decisions > div, [data-view="aigame"] .aig-box:not(.tint) .aig-case { background:var(--ag-soft); }
+    [data-view="aigame"] .aig-flow > div.me { background:var(--ag-ink); border-color:var(--ag-ink); }
+    [data-view="aigame"] .aig-split > div.mine { border:2px solid var(--ag-ink); background:#fff; }
+    [data-view="aigame"] .aig-skill { border-color:var(--ag-line); border-radius:18px; box-shadow:0 6px 18px #1d2b3a0d; }
+    [data-view="aigame"] .aig-clip video { border-radius:16px; box-shadow:0 14px 34px #11141824; }
+    [data-view="aigame"] .aig-clip figcaption b { color:var(--ag-ink); }
+    @media(max-width:900px) { [data-view="aigame"] .aig-hero { grid-template-columns:1fr; padding:40px 28px; } }
+    @media(max-width:620px) { [data-view="aigame"] .aig-hero { padding:32px 20px; border-radius:20px; } [data-view="aigame"] .aig-box { padding:26px 20px; border-radius:18px; } }
+
+    /* 전체 탭 공통 분위기 (AI 게임 제작 탭과 같은 결) */
+    body { background:linear-gradient(180deg,#eef2f6 0,#f6f8fb 420px,#f7f9fb 100%); color:#111418; word-break:keep-all; }
+    .topbar { background:rgba(255,255,255,.9); backdrop-filter:blur(10px); border-bottom-color:#e3e8ee; box-shadow:0 2px 14px #1d2b3a0d; }
+    .nav button { font-weight:600; }
+    .eyebrow, .passion-masthead, .visual-caption { color:#0e8fb0; letter-spacing:.12em; }
+    .passion-kicker { color:#5b6470; }
+    .passion-copy h1 { color:#111418; letter-spacing:-.06em; }
+    .passion-copy h1 em { color:inherit; background:linear-gradient(transparent 70%, #2bc4e6 70%, #2bc4e6 90%, transparent 90%); padding:0 6px; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+    .passion-copy > p { color:#5b6470; }
+    .passion-copy > p strong { color:#111418; }
+    .passion-actions button { border-radius:12px; background:#fff; transition:transform .15s ease, box-shadow .15s ease; }
+    .passion-actions button:first-child { box-shadow:0 8px 20px #11141826; }
+    .passion-actions button:hover { box-shadow:0 10px 24px #1114181f; }
+    .passion-portrait, .game-print { border-radius:16px; }
+    h1, h2 { color:#111418; letter-spacing:-.045em; }
+    article, .summary-item, .profile-card, .experience-highlight { border-radius:20px; border-color:#e3e8ee; box-shadow:0 8px 24px #1d2b3a0d; }
+    article::before { background:#2bc4e6; box-shadow:0 0 0 5px #2bc4e622; }
+    .timeline::before { background:linear-gradient(#2bc4e6,#e3e8ee); }
+    .meta, .summary-item strong { color:#0e8fb0; }
+    .tag { border-radius:99px; background:#f4f7fa; border-color:#e3e8ee; color:#4a525c; }
+    .selection { background:#f4f7fa; border:1px solid #e3e8ee; border-radius:20px; box-shadow:0 12px 30px #1d2b3a14; }
+    .chart-scroll { background:#f4f7fa; border:1px solid #e3e8ee; border-radius:20px; box-shadow:0 12px 30px #1d2b3a14; }
+    a { color:#0e8fb0; }
+    .build-highlight { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:36px; align-items:center; margin-top:24px; padding:clamp(26px,4vw,44px); border-radius:24px; background:#111418; color:#fff; box-shadow:0 18px 40px #11141833; position:relative; overflow:hidden; }
+    .build-highlight::after { content:""; position:absolute; left:-140px; bottom:-160px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,#2bc4e62e 0%,#2bc4e600 70%); pointer-events:none; }
+    .build-highlight .eyebrow { color:#5fd6f0; }
+    .build-highlight h2 { margin:12px 0 16px; font-size:clamp(24px,2.8vw,34px); line-height:1.4; color:#fff; letter-spacing:-.05em; }
+    .build-highlight h2 em { font-style:normal; background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 92%, transparent 92%); padding:0 4px; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+    .build-highlight p { margin:0; font-size:15px; line-height:1.9; color:#c5ccd4; }
+    .build-tools { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0; padding:0; list-style:none; }
+    .build-tools li { padding:10px 14px; border:1px solid #ffffff24; border-radius:12px; background:#ffffff0d; }
+    .build-tools b { display:block; font-size:14px; color:#fff; }
+    .build-tools span { font-size:12px; color:#9aa4ae; }
+    .build-go { margin-top:24px; padding:13px 20px; border:0; border-radius:12px; background:#2bc4e6; color:#0b1418; font:inherit; font-size:14px; font-weight:800; cursor:pointer; transition:transform .15s ease; position:relative; z-index:1; }
+    .build-go span { margin-left:14px; }
+    .build-go:hover { transform:translateY(-2px); }
+    .build-visual { margin:0; position:relative; z-index:1; }
+    .build-visual video { display:block; width:100%; aspect-ratio:1622 / 826; object-fit:cover; border-radius:16px; box-shadow:0 14px 34px #00000055; }
+    .build-visual figcaption { margin-top:10px; font-size:12px; color:#9aa4ae; }
+    @media (max-width:860px) { .build-highlight { grid-template-columns:1fr; } }
+    /* 탭마다 핵심 박스 하나는 검은 바탕 + 하늘색 강조 (소개의 '직접 만드는 게임' 박스와 같은 결) */
+    [data-view="aigame"] .aig-hero, .channel-activity:not(.volunteer-activity) { background:#111418; border-color:#111418; color:#fff; box-shadow:0 18px 40px #11141833; position:relative; overflow:hidden; }
+    [data-view="aigame"] .aig-hero::after { left:-140px; right:auto; top:auto; bottom:-160px; width:420px; height:420px; background:radial-gradient(circle,#2bc4e62e 0%,#2bc4e600 70%); }
+    .channel-activity:not(.volunteer-activity)::after { content:""; position:absolute; left:-140px; bottom:-160px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,#2bc4e62e 0%,#2bc4e600 70%); pointer-events:none; }
+    [data-view="aigame"] .aig-hero .eyebrow, .channel-activity:not(.volunteer-activity) .eyebrow { color:#5fd6f0; }
+    [data-view="aigame"] .aig-hero .aig-title, .channel-activity:not(.volunteer-activity) h2 { color:#fff; }
+    [data-view="aigame"] .aig-hero .aig-title em { background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 92%, transparent 92%); }
+    [data-view="aigame"] .aig-hero > div > p, .channel-activity:not(.volunteer-activity) > p { color:#c5ccd4; }
+    [data-view="aigame"] .aig-hero > div > p strong { color:#fff; }
+    [data-view="aigame"] .aig-hero .aig-meta { border-top-color:#ffffff24; }
+    [data-view="aigame"] .aig-hero .aig-meta dt { color:#9aa4ae; }
+    [data-view="aigame"] .aig-hero .aig-meta dd { color:#fff; }
+    [data-view="aigame"] .aig-hero .aig-cta a.primary { background:#2bc4e6; color:#0b1418; box-shadow:none; }
+    [data-view="aigame"] .aig-hero .aig-cta a.ghost { background:#ffffff0d; color:#fff; border-color:#ffffff33; }
+    [data-view="aigame"] .aig-hero .aig-stat { background:#ffffff0d; border-color:#ffffff24; box-shadow:none; position:relative; z-index:1; }
+    [data-view="aigame"] .aig-hero .aig-stat strong { color:#fff; }
+    [data-view="aigame"] .aig-hero .aig-stat:first-child strong { color:#5fd6f0; }
+    [data-view="aigame"] .aig-hero .aig-stat span { color:#9aa4ae; }
+    .channel-activity:not(.volunteer-activity) figure { position:relative; z-index:1; }
+    .channel-activity:not(.volunteer-activity) figure a { border-color:#ffffff24; border-radius:14px; box-shadow:0 14px 34px #00000055; }
+    .channel-activity:not(.volunteer-activity) figcaption { color:#9aa4ae !important; }
+    .work-card.game-card { background:#111418; box-shadow:0 18px 40px #11141833; position:relative; overflow:hidden; }
+    .work-card.game-card > * { position:relative; z-index:1; }
+    .work-card.game-card::after { content:""; position:absolute; right:-120px; top:-140px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle,#2bc4e633 0%,#2bc4e600 70%); pointer-events:none; }
+    .work-card.game-card .doc-type { color:#5fd6f0; }
+    /* 소개 탭 통일: 박스 모양·작은 제목·큰 제목·버튼·강조선을 한 규칙으로 */
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title), [data-view="intro"] .commitment-box, [data-view="intro"] .reinvestment-box, [data-view="intro"] .execution-highlight { margin-top:24px; padding:clamp(26px,4vw,44px); background:#fff; border:1px solid #e3e8ee; border-radius:24px; box-shadow:0 8px 24px #1d2b3a0d; }
+    [data-view="intro"] .build-highlight { margin-top:0; }
+    [data-view="intro"] section:not(.build-highlight) .eyebrow { color:#0e8fb0 !important; letter-spacing:.12em; }
+    [data-view="intro"] .experience-highlight h2, [data-view="intro"] .commitment-heading h2, [data-view="intro"] .reinvestment-box > h2, [data-view="intro"] .execution-highlight h2 { margin:12px 0 16px; font-size:clamp(26px,3vw,36px); line-height:1.4; letter-spacing:-.055em; color:#111418; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) { align-items:start; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div:first-child { position:sticky; top:96px; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) .guild-level, [data-view="intro"] .experience-highlight article { background:#f4f7fa; border-color:#e3e8ee; border-radius:16px; box-shadow:none; }
+    .economy-insight { border-left-color:#2bc4e6; }
+    .reinvestment-flow { color:#4a525c; }
+    .reinvestment-flow span:nth-child(odd) { border-bottom-color:#2bc4e6; }
+    .yearly-records a, .commitment-proof a { border-color:#e3e8ee; border-radius:12px; }
+    .execution-highlight button { border-radius:12px; padding:13px 20px; box-shadow:0 8px 20px #11141826; transition:transform .15s ease; }
+    .execution-highlight button:hover { transform:translateY(-2px); }
+    .execution-results strong { color:#111418; }
+    .execution-results > div:first-child strong { color:#0e8fb0; }
+    .passion-info { margin:0 0 32px; }
+    .passion-info h2 { color:#0e8fb0; font-size:11px; letter-spacing:.12em; }
+    .passion-info p { color:#5b6470; }
+    /* 소개 탭 큰 칸도 '직접 만드는 게임' 박스처럼 검은 바탕 + 하늘색 강조 */
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title), [data-view="intro"] .commitment-box, [data-view="intro"] .reinvestment-box, [data-view="intro"] .execution-highlight { background:#111418; border-color:#111418; color:#c5ccd4; box-shadow:0 18px 40px #11141833; position:relative; overflow:clip; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title)::after, [data-view="intro"] .commitment-box::after, [data-view="intro"] .reinvestment-box::after, [data-view="intro"] .execution-highlight::after { content:""; position:absolute; left:-140px; bottom:-160px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,#2bc4e62e 0%,#2bc4e600 70%); pointer-events:none; }
+    [data-view="intro"] :is(.experience-highlight,.commitment-box,.reinvestment-box,.execution-highlight) .eyebrow { color:#5fd6f0 !important; }
+    [data-view="intro"] :is(.experience-highlight,.commitment-box,.reinvestment-box,.execution-highlight) :is(h2,h3,h4,strong,b,dd) { color:#fff !important; }
+    [data-view="intro"] :is(.experience-highlight,.commitment-box,.reinvestment-box,.execution-highlight) :is(p,li,span,small,figcaption,dt) { color:#aeb7c1 !important; }
+    [data-view="intro"] .execution-results > div:first-child strong { color:#5fd6f0 !important; }
+    [data-view="intro"] :is(.experience-highlight,.commitment-box,.reinvestment-box,.execution-highlight) :is(article,.guild-level) { background:#ffffff0d !important; border-color:#ffffff24 !important; box-shadow:none !important; }
+    [data-view="intro"] :is(.experience-highlight,.commitment-box,.reinvestment-box,.execution-highlight) :is(h2,h3) em { font-style:normal; background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 92%, transparent 92%); }
+    [data-view="intro"] :is(.commitment-box,.reinvestment-box) :is(hr,.commitment-item,section) { border-color:#ffffff1f !important; }
+    [data-view="intro"] .execution-results { border-left-color:#ffffff24; }
+    [data-view="intro"] .execution-highlight button { background:#2bc4e6; border-color:#2bc4e6; color:#0b1418; box-shadow:none; }
+    [data-view="intro"] .execution-highlight button * { color:#0b1418 !important; }
+    [data-view="intro"] .reinvestment-flow span:nth-child(odd) { border-bottom-color:#2bc4e6; }
+    [data-view="intro"] :is(.yearly-records a,.commitment-proof a,.experience-highlight img) { border-color:#ffffff24; box-shadow:0 10px 26px #00000055; }
+    /* 전체 배경 어둡게: 배경 위 글자는 밝게, 흰 카드는 그대로 카드로 */
+    body { background:radial-gradient(1200px 600px at 15% -10%,#1f3a46 0%,#1f3a4600 60%),linear-gradient(180deg,#1a1f26 0,#161a20 600px,#14181d 100%); background-attachment:fixed; color:#e8ecf0; }
+    .topbar { background:rgba(20,24,29,.85); border-bottom-color:#ffffff14; box-shadow:0 2px 16px #00000040; }
+    .nav button { color:#aeb7c1; }
+    .nav button:hover, .nav button.active { background:#2bc4e61f; color:#5fd6f0; border-color:#2bc4e640; }
+    /* 위쪽 메뉴: 떠 있는 둥근 흰 바 + 지금 탭은 검은 버튼 (11-11) */
+    .topbar { background:transparent !important; border-bottom:0 !important; box-shadow:none !important; backdrop-filter:none !important; padding:14px 0 0; pointer-events:none; }
+    .nav { width:fit-content; max-width:calc(100vw - 32px); min-height:0; gap:2px; padding:7px; border-radius:18px; background:rgba(255,255,255,.92); backdrop-filter:blur(12px); box-shadow:0 10px 30px #00000059, 0 0 0 1px #ffffff33; pointer-events:auto; }
+    .nav button { color:#3d4550 !important; background:transparent !important; border:0 !important; border-radius:12px !important; padding:10px 15px !important; font-size:14px; font-weight:700; }
+    .nav button:hover { color:#111418 !important; background:#11141810 !important; }
+    .nav button.active { color:#fff !important; background:#111418 !important; }
+    @media (max-width:600px) { .nav button { padding:8px 10px !important; font-size:13px; } }
+    .passion-masthead, .visual-caption, [data-view] > .eyebrow { color:#5fd6f0 !important; }
+    .passion-copy h1, .passion-copy h1 span, [data-view] > h1, [data-view] > h2 { color:#fff !important; }
+    .passion-copy h1 em { background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 90%, transparent 90%) !important; }
+    .passion-kicker, .passion-copy > p, [data-view] > .intro, [data-view] > p { color:#aeb7c1 !important; }
+    .passion-copy > p strong { color:#fff !important; }
+    .passion-actions button { background:#ffffff0d; border-color:#ffffff33; color:#fff; }
+    .passion-actions button:first-child { background:#2bc4e6; border-color:#2bc4e6; color:#0b1418; box-shadow:0 8px 22px #2bc4e633; }
+    .passion-info { border-color:#ffffff1f !important; }
+    .passion-info > section { border-color:#ffffff1f !important; }
+    .passion-info h2 { color:#5fd6f0 !important; }
+    .passion-info h3, .passion-info dd, .passion-info a { color:#fff !important; }
+    .passion-info p, .passion-info dt { color:#aeb7c1 !important; }
+    .passion-info .tag, .passion-info span { background:#ffffff0d; border-color:#ffffff24; color:#c5ccd4; }
+    .game-print, .passion-portrait { box-shadow:0 18px 40px #00000066; }
+    .build-highlight, [data-view="intro"] .experience-highlight, [data-view="intro"] .commitment-box, [data-view="intro"] .reinvestment-box, [data-view="intro"] .execution-highlight, .work-card.game-card { border:1px solid #ffffff1a !important; box-shadow:0 18px 40px #00000059 !important; }
+    footer { color:#7d8792; }
+    .legend, .lane-name { color:#c5ccd4; }
+    /* 길드 경험 사진: 영상 박스처럼 둥근 모서리 + 부드러운 그림자 */
+    [data-view="intro"] .experience-highlight :is(img, a, figure > a) { border-radius:14px !important; }
+    [data-view="intro"] .experience-highlight img { display:block; overflow:hidden; box-shadow:0 12px 28px #00000066; border:0 !important; }
+    [data-view="intro"] .experience-highlight a:has(img) { display:block; overflow:hidden; border:0 !important; background:transparent !important; box-shadow:none !important; }
+    [data-view="intro"] .experience-highlight figcaption { margin-top:10px; }
+    /* 길드 경험 칸 줄이기: 위에 제목 한 줄, 아래 카드 3개 가로 배치 */
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) { grid-template-columns:1fr; gap:28px; align-items:stretch; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div:first-child { position:static; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:12px 40px; align-items:end; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div:first-child .eyebrow { grid-column:1 / -1; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div:first-child h2 { margin:0; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div:first-child p { margin:0; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) .guild-levels { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; align-items:stretch; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) .guild-level { justify-content:flex-start; padding:22px 20px 20px; min-height:0; transition:transform .2s ease, box-shadow .2s ease; }
+    [data-view="intro"] .guild-level > strong { font-size:18px; }
+    [data-view="intro"] .guild-level .guild-master-description { flex:0 0 auto; margin:10px 0 18px !important; font-size:13px; line-height:1.75; }
+    [data-view="intro"] .guild-level .first-line-gallery, [data-view="intro"] .guild-level .guild-master-images { margin-top:auto; }
+    [data-view="intro"] .guild-level .first-line-gallery { gap:10px; }
+    [data-view="intro"] .guild-level .first-line-gallery img { height:84px; }
+    [data-view="intro"] .guild-level .first-line-gallery figcaption { margin-top:6px; font-size:11px; }
+    [data-view="intro"] .rebellion-card .guild-master-images a { width:100%; }
+    [data-view="intro"] .rebellion-card .guild-master-images img { width:100%; height:206px; object-fit:cover; }
+    [data-view="intro"] .guild-master-card .guild-master-images { gap:10px; }
+    [data-view="intro"] .guild-master-card .guild-master-images a:first-child { flex:1 1 auto; min-width:0; }
+    [data-view="intro"] .guild-master-card .guild-master-images a:first-child img { width:100%; height:206px; object-fit:cover; }
+    [data-view="intro"] .guild-master-card .guild-master-images a:first-child { width:100%; }
+    @media (max-width:1000px) { [data-view="intro"] .experience-highlight:has(#guild-experience-title) .guild-levels { grid-template-columns:1fr; } [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div:first-child { grid-template-columns:1fr; } }
+    /* 플레이 경험 탭: 소개 탭과 같은 결 (검은 카드 + 하늘색 강조) */
+    [data-view="games"] .chart-scroll { background:#111418; border:1px solid #ffffff1a; border-radius:24px; box-shadow:0 18px 40px #00000059; }
+    [data-view="games"] .chart-row { border-bottom:0; }
+    [data-view="games"] .row-label { background:#161b21; border-right-color:#ffffff14; color:#fff; }
+    [data-view="games"] .row-label small { color:#8f99a4; }
+    [data-view="games"] .chart-row.current .row-label { background:#161b21; }
+    [data-view="games"] .chart-row.current .row-label strong::before { content:""; display:inline-block; width:7px; height:7px; margin:0 8px 2px 0; border-radius:50%; background:#2bc4e6; box-shadow:0 0 0 3px #2bc4e622; vertical-align:middle; }
+    [data-view="games"] .chart-row:hover .row-label { background:#1b2a31; }
+    [data-view="games"] .gridline { border-left-color:#ffffff10; }
+    [data-view="games"] .axis { background:#161b21; }
+    [data-view="games"] .axis-label { color:#c5ccd4; }
+    [data-view="games"] .axis-dot { background:#2bc4e6; box-shadow:0 0 0 4px #2bc4e622; }
+    [data-view="games"] .axis-label.axis-now { color:#5fd6f0; font-weight:800; }
+    [data-view="games"] .now-label { color:#5fd6f0; }
+    [data-view="games"] .lane-name { color:#8f99a4; }
+    [data-view="games"] .legend { color:#c5ccd4; }
+    [data-view="games"] .legend i { border-color:#ffffff33; }
+    [data-view="games"] .chart-help { background:#2bc4e61a; border-color:#2bc4e655; color:#5fd6f0; box-shadow:none; }
+    [data-view="games"] .play-timeline-title { color:#fff; }
+    [data-view="games"] .other-games { border-top-color:#ffffff1a; }
+    [data-view="games"] .other-games > h2, [data-view="games"] .other-games-grid figcaption { color:#fff; }
+    [data-view="games"] .other-games-grid img { border-radius:14px; box-shadow:0 12px 28px #00000066; }
+    .play-dialog { background:#111418; border-color:#ffffff1f; color:#e8ecf0; box-shadow:0 30px 70px #000000aa; }
+    .play-dialog::backdrop { background:rgba(8,10,13,.72); backdrop-filter:blur(3px); }
+    .play-dialog-toolbar { background:#111418; }
+    .play-dialog-close { background:#ffffff0d; border-color:#ffffff33; color:#fff; }
+    .play-dialog .selection { background:#161b21; border:1px solid #ffffff14; box-shadow:none; }
+    .play-dialog .selection * { color:#c5ccd4 !important; }
+    .play-dialog .selection :is(strong,b,h3) { color:#fff !important; }
+    .play-dialog .selection img { border-radius:12px; box-shadow:0 12px 28px #00000066; }
+    /* 지금도 하고 있는 게임: 막대를 표 오른쪽 끝까지 붙이고 끝을 흐리게 */
+    [data-view="games"] .play-bar.live { border-top-right-radius:0 !important; border-bottom-right-radius:0 !important; border-right:0 !important; }
+    /* 길드 경험 → 플레이 경험 바로가기 */
+    .guild-jump { grid-column:1 / -1; display:flex; align-items:center; gap:28px; width:100%; margin-top:4px; padding:20px 24px; border:1px solid #2bc4e640; border-radius:18px; background:linear-gradient(90deg,#2bc4e614,#2bc4e605); color:#fff; font:inherit; text-align:left; cursor:pointer; position:relative; z-index:1; transition:transform .2s ease, border-color .2s ease, background .2s ease; }
+    .guild-jump:hover { transform:translateY(-2px); border-color:#2bc4e6aa; background:linear-gradient(90deg,#2bc4e626,#2bc4e60a); }
+    .guild-jump:focus-visible { outline:3px solid #2bc4e6; outline-offset:3px; }
+    .guild-jump-copy { display:flex; flex-direction:column; gap:4px; min-width:0; }
+    .guild-jump-copy small { color:#5fd6f0; font-size:11px; font-weight:700; letter-spacing:.12em; }
+    .guild-jump-copy b { color:#fff; font-size:17px; }
+    .guild-jump-copy em { font-style:normal; color:#aeb7c1; font-size:13px; }
+    .guild-jump-bars { flex:1; display:grid; grid-template-columns:1.3fr 1.6fr .6fr 1fr; gap:4px; max-width:340px; margin-left:auto; }
+    .guild-jump-bars i { height:10px; border-radius:99px; }
+    .guild-jump-bars .l { background:#e3ad58; } .guild-jump-bars .n { background:#68c3a1; }
+    .guild-jump-bars .s { opacity:.8; } .guild-jump-bars .m { border-radius:99px 0 0 99px; -webkit-mask-image:linear-gradient(90deg,#000 60%,#0000); mask-image:linear-gradient(90deg,#000 60%,#0000); }
+    .guild-jump-go { flex:0 0 auto; padding:11px 18px; border-radius:12px; background:#2bc4e6; color:#0b1418; font-size:14px; font-weight:800; }
+    .guild-jump-go span { margin-left:10px; display:inline-block; transition:transform .2s ease; }
+    .guild-jump:hover .guild-jump-go span { transform:translateX(4px); }
+    @media (max-width:760px) { .guild-jump { flex-wrap:wrap; gap:14px; } .guild-jump-bars { display:none; } .guild-jump-go { margin-left:auto; } }
+    [data-view="intro"] .guild-jump .guild-jump-go, [data-view="intro"] .guild-jump .guild-jump-go span { color:#0b1418 !important; }
+    [data-view="intro"] .guild-jump .guild-jump-copy small { color:#5fd6f0 !important; }
+    /* 소개 첫 화면 다시 디자인: 글자 크기 줄이고, 사진은 어두운 카드로 */
+    .passion-masthead { padding-bottom:20px; }
+    .passion-hero { min-height:0; padding:28px 0 64px; gap:56px; align-items:center; }
+    .passion-kicker { display:inline-flex; align-items:center; gap:10px; margin-bottom:26px; padding:7px 14px 7px 12px; border:1px solid #2bc4e640; border-radius:99px; background:#2bc4e612; font-size:13px; color:#c5ccd4 !important; }
+    .passion-kicker::before { content:""; width:7px; height:7px; border-radius:50%; background:#2bc4e6; box-shadow:0 0 0 4px #2bc4e633; }
+    .passion-copy h1 { font-size:clamp(34px,3.7vw,54px); line-height:1.28; letter-spacing:-.055em; font-weight:800; }
+    .passion-copy h1 em { padding:0 4px !important; background:linear-gradient(transparent 74%, #2bc4e699 74%, #2bc4e699 90%, transparent 90%) !important; }
+    .passion-copy h1 > span { display:inline-block; margin-top:6px; font-size:.62em; font-weight:700; color:#c5ccd4 !important; letter-spacing:-.04em; }
+    .passion-copy > p { margin-top:24px; font-size:16px; line-height:1.85; }
+    .passion-actions { gap:8px; margin-top:30px; }
+    .passion-actions button { padding:11px 15px; font-size:13px; border-radius:11px; }
+    .passion-actions button span { margin-left:10px; opacity:.8; }
+    .passion-visual { position:relative; gap:16px 18px; }
+    .passion-visual::before { content:""; position:absolute; inset:8% 6% 4% 10%; border-radius:50%; background:radial-gradient(closest-side,#2bc4e62a,#2bc4e600); filter:blur(10px); pointer-events:none; }
+    .passion-visual .passion-portrait { border:1px solid #ffffff24 !important; border-radius:22px; overflow:hidden; background:#111418; padding:0; transform:none; box-shadow:0 24px 50px #00000080 !important; }
+    .passion-visual .passion-portrait img { border-radius:0; }
+    .passion-visual .game-print { padding:8px 8px 10px !important; background:#111418; border:1px solid #ffffff1f; border-radius:18px; box-shadow:0 22px 46px #00000080 !important; }
+    .passion-visual .game-print img { border-radius:12px; }
+    .passion-visual .game-print span { margin:9px 4px 0; color:#aeb7c1; font-size:11px; letter-spacing:0; display:block; text-align:center; }
+    .passion-visual .print-back { transform:rotate(2deg); }
+    .passion-visual .print-front { transform:rotate(-2deg); margin-top:-22px; }
+    .passion-visual .visual-caption { margin-top:14px; font-size:10px; opacity:.85; }
+    @media(max-width:760px) { .passion-copy h1 { font-size:clamp(32px,8vw,44px); } }
+    @media(min-width:1001px) { .passion-hero { grid-template-columns:1.08fr 1fr; gap:48px; } .passion-actions { flex-wrap:nowrap; } }
+    .passion-actions button { padding:10px 13px; white-space:nowrap; }
+    .passion-actions button span { margin-left:8px; }
+    .passion-copy h1 em { background:none !important; padding:0 !important; }
+    @media(min-width:761px) { .passion-visual { width:86%; max-width:600px; justify-self:center; } }
+    .first-line-gallery figcaption { text-align:center; }
+    [data-view="intro"] .guild-level > span, [data-view="intro"] .guild-level > strong, [data-view="intro"] .guild-level > .guild-master-description { text-align:center !important; align-self:center; }
+    /* 소개 탭 '플레이 경험' 박스 (직접 만드는 게임 박스와 같은 모양, 11-11) */
+    .play-highlight { margin-top:28px; }
+    .mini-timeline { padding:20px 20px 14px; border:1px solid #ffffff14; border-radius:16px; background:#161b21; box-shadow:0 14px 34px #00000055; }
+    .mini-row { display:grid; grid-template-columns:84px 1fr; align-items:center; gap:14px; height:32px; }
+    .mini-row b { overflow:hidden; color:#c5ccd4; font-size:12px; font-weight:600; white-space:nowrap; text-overflow:ellipsis; }
+    .mini-track { position:relative; height:10px; border-radius:99px; background:#ffffff0a; }
+    .mini-track i { position:absolute; top:0; height:100%; border-radius:99px; }
+    .mini-axis { display:flex; justify-content:space-between; margin:10px 0 0 98px; color:#8f99a4; font-size:10px; }
+    .mini-axis .now { color:#5fd6f0; font-weight:800; }
+    .mini-key { display:inline-block; width:10px; height:10px; margin:0 5px 1px 0; border-radius:3px; vertical-align:middle; }
+    .mini-key.l { background:#e3ad58; } .mini-key.n { margin-left:8px; background:#68c3a1; }
+    /* 플레이 경험 머리말을 길드 경험 박스 위쪽으로 합침 (11-11) */
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div.play-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:36px; align-items:center; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div.play-head h2 { margin:12px 0 16px; font-size:clamp(24px,2.8vw,34px); line-height:1.4; color:#fff; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div.play-head h2 em { font-style:normal; background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 92%, transparent 92%); padding:0 4px; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div.play-head p { margin:0; font-size:15px; line-height:1.9; color:#c5ccd4; }
+    [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div.play-head .eyebrow { color:#5fd6f0 !important; }
+    [data-view="intro"] .play-head .build-go, [data-view="intro"] .play-head .build-go span { color:#0b1418 !important; }
+    .play-visual .mini-timeline { padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; }
+    @media (max-width:860px) { [data-view="intro"] .experience-highlight:has(#guild-experience-title) > div.play-head { grid-template-columns:1fr; } }
+    /* 결제·구매·거래 칸 정리 (11-11) */
+    .purchase-group { margin-top:30px; padding-top:28px; border-top:1px solid #ffffff1f; }
+    .purchase-group .purchase-lead { margin:8px 0 18px; font-size:14px; line-height:1.8; }
+    .purchase-list { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .purchase-list figure { margin:0; min-width:0; }
+    .purchase-item { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    [data-view="intro"] .purchase-item span.purchase-tag { flex:0 0 auto; padding:3px 10px; border:1px solid #2bc4e655; border-radius:99px; background:#2bc4e61a; color:#5fd6f0 !important; font-size:11px; font-weight:800; }
+    .purchase-item b { font-size:14px; }
+    .purchase-list a { display:block; overflow:hidden; border-radius:12px; background:#fff; box-shadow:0 12px 28px #00000059; }
+    .purchase-list img { display:block; width:100%; height:auto; aspect-ratio:1226 / 211; object-fit:contain; object-position:center; background:#fff; }
+    .purchase-group .purchase-note { margin:12px 0 0; text-align:right; font-size:11px; }
+    .economy-flow { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:26px 0 0; padding:0; list-style:none; counter-reset:none; }
+    .economy-flow li { position:relative; padding:20px 20px 18px; border:1px solid #ffffff1f; border-radius:16px; background:#ffffff0a; }
+    .economy-flow li + li::before { content:none; }
+    [data-view="intro"] .economy-flow li > span { display:block; color:#5fd6f0 !important; font-size:12px; font-weight:800; letter-spacing:.08em; }
+    .economy-flow b { display:block; margin:6px 0 6px; font-size:17px; }
+    .economy-flow p { margin:0; font-size:13px; line-height:1.75; }
+    .reinvestment-box .economy-insight { margin-top:22px; }
+    @media(max-width:860px) { .purchase-list, .economy-flow { grid-template-columns:1fr; } }
+    /* 채널 박스: 왼쪽 글·숫자, 오른쪽 채널 분석 캡처 (11-11) */
+    [data-view="intro"] .execution-highlight { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:36px; }
+    .exec-copy .execution-results { grid-template-columns:repeat(3,auto); justify-content:start; gap:28px; margin-top:22px; padding:18px 0 0; border-left:0; border-top:1px solid #ffffff24; }
+    .exec-copy .execution-results > div { flex-direction:column; align-items:flex-start; gap:4px; }
+    .exec-copy .execution-results strong { font-size:clamp(20px,2vw,26px); }
+    .exec-visual { margin:0; }
+    .exec-visual a { display:block; overflow:hidden; border-radius:16px; background:#fff; box-shadow:0 14px 34px #00000055; }
+    .exec-visual img { display:block; width:100%; height:auto; }
+    [data-view="intro"] .exec-visual figcaption { margin-top:10px; font-size:12px; }
+    @media(max-width:860px) { [data-view="intro"] .execution-highlight { grid-template-columns:1fr; } .exec-copy .execution-results { grid-template-columns:1fr 1fr 1fr; gap:14px; } }
+    /* 기획서 탭: AI와 기획한 방식 (11-11) */
+    .ai-workflow { margin:28px 0 20px; }
+    .ai-split { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0 0; }
+    .ai-split > div { padding:14px 16px; border:1px solid #ffffff1f; border-radius:14px; background:#ffffff0a; }
+    .ai-split > div:last-child { border-color:#2bc4e655; background:#2bc4e614; }
+    .ai-split dt { margin-bottom:6px; color:#5fd6f0; font-size:12px; font-weight:800; letter-spacing:.04em; }
+    .ai-split dd { margin:0; color:#e6ebf0; font-size:13px; line-height:1.7; }
+    .ai-rule { margin:16px 0 0; padding-left:14px; border-left:3px solid #2bc4e6; color:#c5ccd4; font-size:13px; line-height:1.7; }
+    .ai-rule span { display:block; margin-bottom:2px; color:#8f99a4; font-size:11px; }
+    .ai-flow { position:relative; z-index:1; display:grid; gap:10px; margin:0; padding:0; list-style:none; }
+    .ai-flow li { display:flex; align-items:center; gap:14px; padding:14px 16px; border:1px solid #ffffff1a; border-radius:14px; background:#161b21; }
+    .ai-flow li b { flex:0 0 34px; height:34px; display:grid; place-items:center; border-radius:10px; background:#ffffff12; color:#fff; font-size:15px; font-weight:900; }
+    .ai-flow li strong { display:block; color:#fff; font-size:14px; }
+    .ai-flow li span { color:#9aa4ae; font-size:12px; }
+    .ai-flow li.to-game { border-color:#2bc4e666; background:#2bc4e61a; }
+    .ai-flow li.to-game b { background:#2bc4e6; color:#0b1418; }
+    @media(max-width:600px) { .ai-split { grid-template-columns:1fr; } }
+    /* 소개 큰 제목: AI 게임 메이커만 흰색, 나머지 회색 */
+    [data-view="intro"] h1, [data-view="intro"] h1 em, [data-view="intro"] h1 span { color:#aeb7c1 !important; }
+    [data-view="intro"] h1 .h1-key { color:#fff !important; font-weight:inherit; }
+    #build-title + p strong { color:#fff !important; }
+    #guild-experience-title + p strong { color:#fff !important; }
+    .guild-master-description strong { color:#fff !important; }
+    .reinvestment-intro strong { color:#fff !important; }
+    #execution-title + p strong { color:#fff !important; }
+    /* AI 게임 제작 탭: 시스템 선택 카드 */
+    .sys-picker-head { margin:0 0 4px; }
+    .sys-picker-head p { margin:8px 0 0; color:#aeb7c1; font-size:15px; }
+    [data-view="aigame"] .work-card.sys-card.guild-card { background-image:linear-gradient(90deg,rgba(11,16,32,.9) 0%,rgba(11,16,32,.55) 42%,rgba(11,16,32,.1) 100%),url("assets/vault-card.jpg"); background-size:cover; background-position:right center; }
+    .sys-picker { margin:16px 0 28px; }
+    .work-card.boss-card { background-image:linear-gradient(90deg,rgba(11,16,32,.82) 0%,rgba(11,16,32,.45) 45%,rgba(11,16,32,.05) 100%),url("assets/boss-card.png"); background-size:cover; background-position:center 40%; }
+    .sys-card { min-height:150px; width:100%; font:inherit; text-align:left; cursor:pointer; opacity:.62; }
+    .sys-card h2 { margin:10px 0 6px; font-size:22px; }
+    .sys-card p { margin:0; font-size:14px; }
+    .sys-card .open-link { padding-top:14px; }
+    .sys-card.is-active { opacity:1; border:2px solid #2bc4e6 !important; box-shadow:0 0 0 4px #2bc4e622, 0 16px 36px #0006; }
+    .sys-card:not(.is-active):hover { opacity:.9; }
+    .sys-card:focus-visible { outline:3px solid #5fd6f0; outline-offset:3px; }
+    .sys-next-box .sys-doc-link { display:inline-block; margin-top:18px; padding:12px 20px; border-radius:999px; background:#2bc4e6; color:#0b1418; font-weight:800; text-decoration:none; }
+    /* AI 게임 제작 탭: 짧은 영상 3개 조금 작게, 가운데 */
+    .aig-clips { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 18px; }
+    .aig-clips .aig-full { grid-column:1 / -1; }
+    @media(max-width:760px) { .aig-clips { grid-template-columns:1fr; } }
+    /* AI 게임 제작 탭: 소개 탭과 같은 어두운 색감 */
+    [data-view="aigame"] .aig-box, [data-view="aigame"] .aig-box.tint { background:#111418 !important; border:1px solid #ffffff1a !important; box-shadow:0 18px 40px #00000059 !important; color:#c5ccd4; position:relative; overflow:clip; }
+    [data-view="aigame"] .aig-box::after { content:""; position:absolute; left:-140px; bottom:-160px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,#2bc4e62e 0%,#2bc4e600 70%); pointer-events:none; }
+    [data-view="aigame"] .aig-box > * { position:relative; z-index:1; }
+    [data-view="aigame"] .aig-box .eyebrow { color:#5fd6f0 !important; }
+    [data-view="aigame"] .aig-box :is(h2,h3,h4,strong,b,dd) { color:#fff !important; }
+    [data-view="aigame"] .aig-box :is(p,li,span,small,figcaption,dt) { color:#aeb7c1 !important; }
+    [data-view="aigame"] .aig-box :is(h2,h3) em { color:#fff !important; background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 92%, transparent 92%) !important; }
+    [data-view="aigame"] .aig-box :is(.aig-problems > div, .aig-flow > div, .aig-decisions > div, .aig-split > div, .aig-case, .aig-skill, .aig-quote) { background:#ffffff0d !important; border-color:#ffffff24 !important; box-shadow:none !important; }
+    [data-view="aigame"] .aig-box .aig-flow > div.me, [data-view="aigame"] .aig-box .aig-split > div.mine { background:#2bc4e614 !important; border:2px solid #2bc4e6 !important; }
+    [data-view="aigame"] .aig-box .aig-quote { border-left:3px solid #2bc4e6 !important; }
+    [data-view="aigame"] .aig-box .aig-decisions b, [data-view="aigame"] .aig-box .aig-steps li::before { background:#2bc4e6 !important; color:#0b1418 !important; }
+    [data-view="aigame"] .aig-box :is(a:not(.sys-doc-link)) { color:#5fd6f0 !important; }
+    [data-view="aigame"] .aig-box .sys-doc-link, [data-view="aigame"] .aig-box .sys-doc-link * { color:#0b1418 !important; }
+    [data-view="aigame"] .aig-box hr, [data-view="aigame"] .aig-box :is(ul,ol,dl,div) { border-color:#ffffff1f; }
+    /* AI 게임 제작 탭: Tripo 3D 에셋 */
+    .aig-tripo { display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr); gap:20px; align-items:center; margin-top:18px; padding:16px; border:1px solid #ffffff24; border-radius:16px; background:#ffffff0d; }
+    .aig-tripo figure { margin:0; }
+    [data-view="aigame"] .aig-skill li.tight { letter-spacing:-0.02em; }
+    [data-view="aigame"] .aig-flow > div { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+    .aig-tripo img { display:block; width:100%; border-radius:12px; }
+    .aig-tripo figcaption { margin-top:6px; font-size:12px; text-align:center; }
+    .aig-tripo p { margin:0; font-size:14px; line-height:1.8; }
+    @media(max-width:620px) { .aig-tripo { grid-template-columns:1fr; } }
+    /* AI 게임 제작 탭: 검증 칸(문제 사례) 어두운 색감 정리 */
+    [data-view="aigame"] .aig-box .aig-case { grid-template-columns:230px 1fr; gap:28px; padding:24px 26px; align-items:start; }
+    [data-view="aigame"] .aig-box .aig-case > div:first-child b { font-size:17px; line-height:1.5; color:#fff !important; }
+    [data-view="aigame"] .aig-box .aig-case > div:first-child span { margin-top:10px; padding:3px 10px; border:1px solid #2bc4e655; background:#2bc4e614; color:#5fd6f0 !important; font-weight:700; }
+    [data-view="aigame"] .aig-box .aig-case dl { grid-template-columns:44px 1fr; gap:10px 16px; padding-left:24px; border-left:1px solid #ffffff1f; }
+    [data-view="aigame"] .aig-box .aig-case dt { color:#5fd6f0 !important; font-weight:800; }
+    [data-view="aigame"] .aig-box .aig-case dd { color:#aeb7c1 !important; font-weight:400; }
+    [data-view="aigame"] .aig-box .aig-case dd strong { color:#fff !important; font-weight:700; }
+    @media(max-width:620px) { [data-view="aigame"] .aig-box .aig-case { grid-template-columns:1fr; gap:14px; } [data-view="aigame"] .aig-box .aig-case dl { padding-left:0; border-left:0; } }
+    /* AI 게임 제작 탭: 아이디어 칸(문제 4개 + 구체화) 정리 */
+    [data-view="aigame"] .aig-box .aig-problems { counter-reset:prob; gap:14px; margin-top:26px; }
+    [data-view="aigame"] .aig-box .aig-problems > div { counter-increment:prob; padding:20px 20px 18px; color:#aeb7c1 !important; font-size:13px; line-height:1.7; }
+    [data-view="aigame"] .aig-box .aig-problems > div::before { content:counter(prob, decimal-leading-zero); display:block; margin-bottom:10px; color:#5fd6f0; font-size:12px; font-weight:800; letter-spacing:.12em; }
+    [data-view="aigame"] .aig-box .aig-problems > div b { margin-bottom:6px; font-size:15px; color:#fff !important; }
+    [data-view="aigame"] .aig-box p.aig-quote { display:block; max-width:none; margin-top:16px; padding:16px 20px; border:1px solid #2bc4e640 !important; border-left:3px solid #2bc4e6 !important; border-radius:0 12px 12px 0; background:#2bc4e60f !important; color:#aeb7c1 !important; }
+    [data-view="aigame"] .aig-box p.aig-quote .q-label { display:inline-block; margin-right:10px; padding:1px 10px; border-radius:99px; background:#2bc4e6; color:#0b1418 !important; font-size:12px; font-weight:800; }
+    [data-view="aigame"] .aig-box .aig-problems > div { text-align:center; }
+    [data-view="aigame"] .aig-box p.aig-quote { text-align:center; border-left:1px solid #2bc4e640 !important; border-radius:12px; }
+    /* 활동 탭: 소개 탭과 같은 톤앤매너 (모든 칸 어둡게) */
+    [data-view="activities"] .channel-activity { background:#111418 !important; border:1px solid #ffffff1a !important; box-shadow:0 18px 40px #00000059 !important; color:#c5ccd4; position:relative; overflow:hidden; }
+    [data-view="activities"] .channel-activity::after { content:""; position:absolute; left:-140px; bottom:-160px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,#2bc4e62e 0%,#2bc4e600 70%); pointer-events:none; }
+    [data-view="activities"] .channel-activity > * { position:relative; z-index:1; }
+    [data-view="activities"] .channel-activity .eyebrow { color:#5fd6f0 !important; letter-spacing:.12em; }
+    [data-view="activities"] .channel-activity h2 { color:#fff !important; }
+    [data-view="activities"] .channel-activity h2 em { font-style:normal; background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 92%, transparent 92%); }
+    [data-view="activities"] .channel-activity :is(p,li,span,small,figcaption,dd,dt) { color:#aeb7c1 !important; }
+    [data-view="activities"] .channel-activity :is(strong,b) { color:#fff !important; }
+    [data-view="activities"] .channel-activity figure a, [data-view="activities"] .channel-activity figure > img { border:1px solid #ffffff24 !important; border-radius:14px; background:transparent !important; box-shadow:0 14px 34px #00000055; overflow:hidden; }
+    [data-view="activities"] .channel-activity figcaption { color:#9aa4ae !important; }
+    /* 사용하는 도구 */
+    .tool-belt { margin:0 0 24px; padding:clamp(24px,3.5vw,36px) clamp(24px,4vw,44px); border:1px solid #ffffff1a; border-radius:24px; background:#111418; box-shadow:0 18px 40px #00000059; }
+    .tool-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 24px; margin-bottom:22px; }
+    .tool-head .eyebrow { color:#5fd6f0 !important; }
+    .tool-head h2 { margin:0; font-size:clamp(18px,2vw,22px); color:#fff !important; letter-spacing:-.04em; }
+    .tool-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:10px; margin:0; padding:0; list-style:none; }
+    .tool-grid li { position:relative; display:flex; flex-direction:column; align-items:center; gap:6px; padding:18px 8px 16px; border:1px solid #ffffff14; border-radius:16px; background:#ffffff08; text-align:center; transition:transform .2s ease, border-color .2s ease, background .2s ease; }
+    .tool-grid b { margin-top:6px; color:#fff; font-size:13px; }
+    .tool-grid span { color:#9aa4ae; font-size:11px; line-height:1.5; }
+    .tool-grid .soon { border-style:dashed; opacity:.8; }
+    .tool-grid .soon em { position:absolute; top:8px; right:8px; padding:2px 7px; border-radius:99px; background:#2bc4e622; color:#5fd6f0; font-size:10px; font-style:normal; font-weight:700; }
+    .ti { display:grid; place-items:center; width:48px; height:48px; border-radius:13px; font-style:normal; font-weight:900; font-size:22px; color:#fff; box-shadow:0 8px 18px #00000055, inset 0 1px 0 #ffffff33; }
+    .ti-ppt { background:linear-gradient(135deg,#f0714b,#c43e1c); }
+    .ti-xls { background:linear-gradient(135deg,#33c481,#107c41); }
+    .ti-ue { background:#0b0d10; border:2px solid #e8ecf0; border-radius:50%; font-size:20px; }
+    .ti-gpt { background:linear-gradient(135deg,#19c37d,#0f8f5c); }
+    .ti-claude { background:linear-gradient(135deg,#e5876a,#c15f3c); }
+    .ti-git { background:linear-gradient(135deg,#f4664a,#d83a1e); font-size:15px; }
+    .ti-tripo { background:linear-gradient(135deg,#7b6cf6,#4b3ccf); }
+    @media (max-width:1000px) { .tool-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+    @media (max-width:560px) { .tool-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    .ti-capcut { background:#0b0d10; border:1px solid #ffffff40; font-size:20px; }
+    @media (min-width:1001px) { .tool-grid { grid-template-columns:repeat(7,minmax(0,1fr)); } }
+    .ti-img { background:#fff; padding:7px; overflow:hidden; }
+    .ti-img img { width:100%; height:100%; object-fit:contain; display:block; mix-blend-mode:multiply; }
+    .ti-img.tripo { background:#0b0b0b; padding:0; }
+    .ti-img.tripo img { mix-blend-mode:normal; object-fit:cover; }
+    /* 글꼴: 본고딕(Noto Sans KR) */
+    body, button, input, select, textarea { font-family:"Noto Sans KR","Malgun Gothic",sans-serif; }
+    .purchase-title h3, .yearly-record-heading h3 { font-family:"Noto Sans KR","Malgun Gothic",sans-serif; font-weight:900; }
+    .payment-strip { gap:12px; }
+    .payment-record { border-radius:12px; box-shadow:0 10px 24px #00000055; }
+    .payment-record img { display:block; width:100%; height:auto; aspect-ratio:1100 / 495; object-fit:cover; border-radius:12px; box-shadow:none; }
+    .doc-game-link { margin-top:18px; justify-content:space-between; }
+    .doc-game-link .guild-jump-go { margin-left:auto; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="포트폴리오 메뉴">
+      <button class="active" type="button" data-page="intro">소개</button>
+      <button type="button" data-page="aigame">AI 게임 제작</button>
+      <button type="button" data-page="projects">기획서</button>
+      <button type="button" data-page="games">플레이 경험</button>
+      <button type="button" data-page="activities">활동</button>
+    </nav>
+  </header>
+  <main>
+    <section class="profile-layout" data-view="intro">
+      <div class="passion-masthead"><span>PORTFOLIO</span></div>
+      <div class="passion-hero">
+        <div class="passion-copy">
+          <div class="passion-kicker">가장 좋아하는 장르를 가장 깊이 들여다봅니다.</div>
+          <h1>리니지 라이크에<br><em>미친 <strong class="h1-key">AI 게임 메이커</strong></em><br><span>이기훈입니다.</span></h1>
+          <p>라인과 중립을 오가며<br>직접 부딪혀 쌓은 플레이 경험을<br><strong>게임 제작으로 연결합니다.</strong></p>
+          <div class="passion-actions"><button type="button" data-jump="aigame">AI로 만든 게임 보기 <span>↗</span></button><button type="button" data-jump="projects">기획서 보기 <span>↗</span></button><button type="button" data-jump="games">플레이 경험 보기 <span>↗</span></button><button type="button" data-jump="activities">활동 보기 <span>↗</span></button></div>
+        </div>
+        <div class="passion-visual" aria-label="직접 플레이한 게임 기록과 프로필 사진">
+          <div class="game-print print-back"><img src="assets/rowein-line-hq.png" alt="로드나인 라인 플레이 기록"><span>직접 부딪히며 쌓은 경험</span></div>
+          <div class="game-print print-front"><img src="assets/game-clip-poster.jpg" alt="AI와 함께 직접 만든 리니지 라이크 게임의 화염룡 전투 화면"><span>AI로 직접 만든 게임</span></div>
+          <div class="passion-portrait"><img src="assets/profile-photo.png" alt="게임 기획자 이기훈 프로필 사진"></div>
+          <div class="visual-caption">PLAY DEEPLY.<br>DESIGN FROM EXPERIENCE.</div>
+        </div>
+      </div>
+      <div class="passion-info">
+        <section class="personal-info"><h2>PROFILE / 이기훈</h2><dl class="profile-details">
+          <div><dt>Birth</dt><dd>1999.08.07</dd></div>
+          <div><dt>School</dt><dd>한양대학교 ERICA · 미디어학과</dd></div>
+          <div><dt>Phone</dt><dd>010-4166-6136</dd></div>
+          <div class="email-row"><dt>Email</dt><dd><a href="mailto:dlrlgns0807@gmail.com">dlrlgns0807@gmail.com</a></dd></div>
+        </dl></section>
+        <section><h2>PLAY / 장르를 좋아하는 방식</h2><h3>라인과 중립, 양쪽에서 플레이했습니다.</h3><p>리니지 라이크 장르를 플레이하며 라인과 중립 양쪽의 경험을 쌓아왔습니다. 길드의 위치에 따라 달라지는 경쟁과 협력을 직접 경험했습니다.</p></section>
+        <section><h2>DESIGN / 경험을 게임 제작으로</h2><h3>플레이에서 출발해 시스템으로 구체화합니다.</h3><p>플레이에서 느낀 문제를 기획서로 정리하고,<br>AI와 함께 실제 게임으로 만들어 확인합니다.</p><div class="design-topics"><span>현상금 시스템</span><span>길드 분배 시스템</span><span>AI로 직접 구현한 린라 게임</span></div></section>
+      </div>
+      <section class="tool-belt" aria-labelledby="tools-title">
+        <div class="tool-head">
+          <div class="eyebrow">TOOLS / 사용하는 도구</div>
+          <h2 id="tools-title">기획부터 구현까지, 직접 다루는 도구</h2>
+        </div>
+        <ul class="tool-grid">
+          <li><i class="ti ti-img" aria-hidden="true"><img src="assets/tools/unreal.png" alt=""></i><b>Unreal Engine 5</b><span>게임 엔진</span></li>
+          <li><i class="ti ti-img" aria-hidden="true"><img src="assets/tools/claude.png" alt=""></i><b>Claude</b><span>바이브 코딩 · 구현</span></li>
+          <li><i class="ti ti-img" aria-hidden="true"><img src="assets/tools/chatgpt.png" alt=""></i><b>ChatGPT</b><span>기획서 초안</span></li>
+          <li><i class="ti ti-img tripo" aria-hidden="true"><img src="assets/tools/tripo.png" alt=""></i><b>Tripo</b><span>3D 에셋 제작</span></li>
+          <li><i class="ti ti-img" aria-hidden="true"><img src="assets/tools/powerpoint.png" alt=""></i><b>PowerPoint</b><span>기획서 작성</span></li>
+          <li><i class="ti ti-img" aria-hidden="true"><img src="assets/tools/excel.png" alt=""></i><b>Excel</b><span>수치 설계 · 게임 데이터 표</span></li>
+          <li><i class="ti ti-img" aria-hidden="true"><img src="assets/tools/capcut.png" alt=""></i><b>CapCut</b><span>게임 시연 영상 편집</span></li>
+        </ul>
+      </section>
+      <section class="build-highlight" aria-labelledby="build-title">
+        <div class="build-copy">
+          <div class="eyebrow">AI GAME MAKING / 직접 만드는 게임</div>
+          <h2 id="build-title">기획서에서 멈추지 않고,<br><em>직접 플레이할 수 있는 게임</em>으로 만듭니다.</h2>
+          <p><strong>언리얼 엔진 5에서 Claude와 바이브 코딩</strong>으로 리니지 라이크 게임을 직접 만들고 있습니다. 제가 쓴 '공동 금고' 기획서를 4일 만에 실제로 동작하는 시스템으로 구현했고, 무엇을 만들지와 결과 확인은 제가 맡았습니다.</p>
+          <button type="button" class="build-go" data-jump="aigame">AI로 만든 게임 보기 <span>↗</span></button>
+        </div>
+        <figure class="build-visual">
+          <video src="assets/game-clip.mp4" poster="assets/game-clip-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="직접 만든 게임의 화염룡 전투 장면"></video>
+          <figcaption>AI와 함께 직접 만든 게임 · 화염룡 이그니스 전투</figcaption>
+        </figure>
+      </section>
+      <section class="experience-highlight" aria-labelledby="guild-experience-title">
+        <div class="play-head">
+          <div class="build-copy">
+            <div class="eyebrow">GAME EXPERIENCE / 플레이 경험</div>
+            <h2 id="guild-experience-title">2년 넘게 라인과 중립을 오가며,<br><em>직접 부딪혀 본 리니지 라이크</em></h2>
+            <p>2024년 7월부터 지금까지 6개 게임에서 <strong>라인 · 반왕 · 중립을 모두 경험</strong>했습니다.</p>
+            <button type="button" class="build-go" data-jump="games">플레이 경험 보기 <span>↗</span></button>
+          </div>
+          <figure class="build-visual play-visual">
+            <div class="mini-timeline" id="mini-timeline" aria-label="게임별 라인·중립 활동 기간"></div>
+            <figcaption><span class="mini-key l"></span>라인 <span class="mini-key n"></span>중립 · 2024.07 ~ 현재</figcaption>
+          </figure>
+        </div>
+        <div class="guild-levels" aria-label="경험한 길드 유형">
+          <div class="guild-level first-line-card"><span>LINE</span><strong>라인</strong>
+<p class="guild-master-description">2년에 걸쳐 프모 라인 3번, 일반인 라인 1번<br><strong>총 4번의 라인 생활</strong>을 경험하였습니다.</p>
+<div class="first-line-gallery">
+<figure><a><img src="assets/garbana-joker-guild-hq.png" alt="로드나인 조커 길드 플레이 화면" loading="lazy"></a><figcaption>로드나인 · 조커</figcaption></figure>
+<figure><a><img src="assets/first-line-lordnine-leader.png" alt="로드나인 리더 길드 전투 화면" loading="lazy"></a><figcaption>로드나인 · 리더</figcaption></figure>
+<figure><a><img src="assets/first-line-vampir-myth.png" alt="뱀피르 신화 길드 전투 화면" loading="lazy"></a><figcaption>뱀피르 · 신화</figcaption></figure>
+<figure><a><img src="assets/first-line-zeus-leader.png" alt="제우스 리더 길드 플레이 화면" loading="lazy"></a><figcaption>제우스 · 리더</figcaption></figure>
+</div></div>
+          <div class="guild-level rebellion-card"><span>REBELLION</span><strong>반왕</strong>
+<p class="guild-master-description">반왕 길드 '조커'에서 활동하며 한 달 만에 <strong>반왕에 성공</strong>했고<br>이후 라인으로 활동했습니다.</p>
+<div class="guild-master-images"><a><img src="assets/rebellion-success.png" alt="반왕 길드에서 함께 전투하는 플레이 화면" loading="lazy"></a></div></div>
+          <div class="guild-level guild-master-card"><span>GUILD MASTER</span><strong>1등 중립 길드의 길드 마스터</strong>
+<p class="guild-master-description">로드나인 로웨인 10서버의 중립 1등 길드 ‘초식’에서 반년 동안 <strong>길드 마스터로 활동</strong>하였고 분배 관리도 직접 하였습니다.</p>
+<div class="guild-master-images"><a><img src="assets/chosik-master-activity.png" alt="초식 길드원들과 함께한 플레이 화면" loading="lazy"></a></div></div>
+        </div>
+      </section>
+<section class="commitment-box" aria-labelledby="commitment-title">
+        <div class="commitment-heading"><div><div class="eyebrow">PASSION / 플레이에 쏟은 진심</div><h2 id="commitment-title">좋아하는 게임에는,<br>시간도 비용도 아끼지 않았습니다.</h2></div><p>직접 성장하고, 경쟁하고, 더 강해지고 싶었고 플레이에 대한 애정은 꾸준한 투자로도 이어졌습니다.</p></div>
+        <figure class="commitment-proof"><div class="purchase-title"><h3>꾸준한 결제</h3></div><p class="payment-description">라인 품위 전투력을 유지하는 등 다양한 이유로 꾸준히 패키지 상품을 사서 캐릭터에 투자를 하고 있습니다.</p><div class="payment-strip" aria-label="월별 결제 기록, 날짜 오름차순"><div class="payment-record"><img src="assets/payments/2026-06.png" alt="2026년 06월 결제 기록" loading="lazy"></div><div class="payment-record"><img src="assets/payments/2026-07.png" alt="2026년 07월 결제 기록" loading="lazy"></div><div class="payment-record"><img src="assets/payments/2026-08.png" alt="2026년 08월 결제 기록" loading="lazy"></div><div class="payment-record"><img src="assets/payments/2026-09.png" alt="2026년 09월 결제 기록" loading="lazy"></div><div class="payment-record"><img src="assets/payments/2026-10.png" alt="2026년 10월 결제 기록" loading="lazy"></div></div><figcaption style="justify-content:flex-end"><span>kt 콘텐츠 월별 결제 기록</span></figcaption></figure>
+        <div class="purchase-group">
+          <div class="purchase-title"><h3>목표를 위해 모아서 구매</h3></div>
+          <p class="purchase-lead">학생 시절, 갖고 싶은 장비와 전설 아바타를 직접 뽑기에는 부담이 커서 돈을 모아 필요한 것을 골라 구매했습니다.</p>
+          <div class="purchase-list">
+            <figure><div class="purchase-item"><span class="purchase-tag">장비</span><b>전설 무기를 목표로, 장비 한 부위 구매</b></div><a><img src="assets/weapon-purchase-record.png" alt="로드나인 +9 세루스 활 무기 한 부위 구매 완료 기록, 440,000원" loading="lazy"></a></figure>
+            <figure><div class="purchase-item"><span class="purchase-tag">계정</span><b>전설 아바타만 있는 빈 계정 구매</b></div><a><img src="assets/account-purchase-record.png" alt="로드나인 깡통 전설 계정 구매 완료 기록, 627,100원" loading="lazy"></a></figure>
+          </div>
+          <p class="purchase-note">바로템 결제 기록</p>
+        </div>
+      </section>
+      <section class="reinvestment-box" aria-labelledby="reinvestment-title">
+        <div class="eyebrow">GAME ECONOMY / 파밍에서 성장까지</div>
+        <h2 id="reinvestment-title">직접 벌고,<br>효율을 따져 성장했습니다.</h2>
+        <p class="reinvestment-intro">플레이로 얻은 재화를 거래하고, <strong>가성비 좋은 패키지를 사서 캐릭터 성장에 재투자</strong>했습니다.</p><p class="economy-insight">재화를 꾸준히 벌기 위해서는 게임의 성장 구조와 파밍 효율, 아이템의 수요와 시세를 함께 이해해야 합니다. 직접 플레이하고 거래하며 무엇을 파밍하고 언제 거래할지 판단했고, 한정된 재화를 어디에 투자해야 효율적으로 성장할 수 있는지 고민했습니다. 이 경험을 바탕으로 이용자의 선택과 게임 경제의 흐름을 게임 만드는 시선으로 바라봅니다.</p>
+        
+        <div class="yearly-records">
+          <figure><div class="yearly-record-heading"><h3>2024</h3><span>거래 기록</span></div><a><img src="assets/trading-record-2024.png" alt="2024년 거래 내역: 판매 1,480,000원, 구매 145,600원" loading="lazy"></a></figure>
+          <figure><div class="yearly-record-heading"><h3>2025</h3><span>거래 기록</span></div><a><img src="assets/trading-record-2025.png" alt="2025년 거래 내역: 판매 8,860,100원, 구매 2,210,200원" loading="lazy"></a></figure>
+          <figure><div class="yearly-record-heading"><h3>2026</h3><span>거래 기록</span></div><a><img src="assets/trading-record-2026.png" alt="2026년 거래 내역: 판매 5,338,000원, 구매 582,200원" loading="lazy"></a></figure>
+        </div>
+        <p class="yearly-records-caption">바로템 연도별 거래 기록</p>
+      </section>
+      <section class="execution-highlight" aria-labelledby="execution-title">
+        <div class="exec-copy">
+          <div class="eyebrow">RESULT / 다른 분야의 AI 결과물</div>
+          <h2 id="execution-title">다른 분야에서도,<br>AI와 같이 기획을 하고<br>결과를 냈습니다.</h2>
+          <p>일본인 대상 개인 채널에서 <strong>AI를 활용한 영상을 직접 기획하고 주 6편씩 제작</strong>해<br>3개월 만에 누적 조회수 약 3,900만 회를 달성한 경험이 있습니다.</p>
+          <div class="execution-results" aria-label="채널 운영 성과">
+            <div><strong>주 6편</strong><span>직접 기획 · 제작</span></div>
+            <div><strong>+7,100명</strong><span>구독자</span></div>
+            <div><strong>약 3,900만 회</strong><span>누적 조회수</span></div>
+          </div>
+        </div>
+        <figure class="exec-visual"><a><img src="assets/channel-analytics-redacted.png" alt="채널 분석 화면: 지난 365일 조회수 38,915,793회, 구독자 +7.1천, 2026년 3~5월에 조회수가 몰린 그래프" loading="lazy"></a><figcaption>채널 분석 화면 · 예상 수익은 가림</figcaption></figure>
+      </section>
+    </section>
+    <section data-view="aigame" hidden>
+      <div class="sys-picker-head"><div class="eyebrow">SYSTEMS / 만든 시스템</div><p>나만의 리니지 라이크에 기획한 시스템을 하나씩 더해 갑니다. 카드를 누르면 그 시스템의 화면이 아래에 보입니다.</p></div>
+      <div class="portfolio-grid sys-picker" role="tablist" aria-label="시스템 선택">
+        <button type="button" class="work-card guild-card sys-card is-active" data-sys="vault" role="tab" aria-selected="true">
+          <div class="doc-type">System 01</div>
+          <h2>공동 금고 (길드 분배)</h2>
+          <p>제우스 길드 분배 시스템 기획서를 실제로 플레이할 수 있게 만든 첫 시스템입니다.</p>
+          <span class="open-link">보는 중</span>
+        </button>
+        <button type="button" class="work-card boss-card sys-card" data-sys="boss" role="tab" aria-selected="false">
+          <div class="doc-type">System 02</div>
+          <h2>보스 전투</h2>
+          <p>게임으로 구현할 예정인 시스템입니다.</p>
+          <span class="open-link">자세히 보기</span>
+        </button>
+        <button type="button" class="work-card bounty-card sys-card" data-sys="bounty" role="tab" aria-selected="false">
+          <div class="doc-type">System 03</div>
+          <h2>현상금 시스템</h2>
+          <p>기획서를 완성한 다음 시스템입니다.</p>
+          <span class="open-link">자세히 보기</span>
+        </button>
+      </div>
+      <div class="sys-panel" data-sys="vault">
+      <div class="aig-hero">
+        <div>
+          <div class="eyebrow">AI GAME MAKER</div>
+          <h1 class="aig-title">아이디어를<br><em>실제로 플레이할 수 있는 게임</em>으로<br>끝까지 완성했습니다.</h1>
+          <p>라인에서 실제 경험한 것을 바탕으로 <strong>AI와 함께 기획과 개발의 경계를 넘어</strong> 언리얼 엔진 5에서 동작하는 게임으로 만들었습니다. AI는 함께 일하는 동료로 대했고, <strong>무엇을 만들지 정하고 결과를 확인하는 주도권</strong>은 제가 쥐었습니다.</p>
+          <dl class="aig-meta" aria-label="프로젝트 정보">
+            <div><dt>만든 것</dt><dd>리니지 라이크 MMORPG · 공동 금고 시스템</dd></div>
+            <div><dt>기간</dt><dd>2026.11.06 ~ 11.09</dd></div>
+            <div><dt>도구</dt><dd>Unreal Engine 5 · Claude · ChatGPT · Tripo</dd></div>
+          </dl>
+        </div>
+        <div class="aig-stats" aria-label="결과물 요약">
+          <div class="aig-stat"><strong>1~9단계</strong><span>기획서를 9단계로 나누고,<br>단계마다 완료 기준에 따라 실행</span></div>
+          <div class="aig-stat"><strong>55개</strong><span>AI의 작업을 검증하는 자동 테스트</span></div>
+          <div class="aig-stat"><strong>30여 건</strong><span>AI가 멈추고 물었을 때 제가 내린 결정</span></div>
+          <div class="aig-stat"><strong>13건</strong><span>원인을 찾아 고친 문제 해결 기록</span></div>
+        </div>
+      </div>
+
+      <section class="aig-box" aria-labelledby="aig-3min">
+        <div class="eyebrow">IN 3 MINUTES / 3분 요약</div>
+        <h2 id="aig-3min">무엇을 만들었는지보다,<br><em>왜 그렇게 만들었는지</em>부터.</h2>
+        <ol class="aig-steps">
+          <li><b>왜</b> — 연합은 여러 길드가 함께 보스를 잡는데, 게임의 분배는 길드 단위 균등 분배뿐이라 운영진이 창고 계정과 엑셀로 분배하고 있었습니다.</li>
+          <li><b>무엇을</b> — 여러 길드가 하나의 '공동 금고'에서 참여 기록 · 기여도 · 경매 · 분배를 게임 안에서 자동으로 처리하는 시스템을 기획하고, 실제로 플레이할 수 있게 만들었습니다.</li>
+          <li><b>어떻게</b> — AI와 역할을 나눠 일하고, 기획서를 9단계로 나눠 단계마다 완료 기준을 정한 뒤, 직접 플레이와 자동 테스트로 검증했습니다.</li>
+        </ol>
+      </section>
+
+      <section class="aig-box tint" aria-labelledby="aig-why">
+        <div class="eyebrow">IDEA FROM EXPERIENCE / 경험에서 나온 아이디어</div>
+        <h2 id="aig-why">연합은 함께 싸우는데,<br>분배는 엑셀로 하고 있었습니다.</h2>
+        <p>제가 속한 라인의 운영진과 인터뷰를 했습니다. 운영진은 전리품과 다이아를 창고 계정에 모으고, 참여와 기여도를 엑셀로 계산해 차등 분배하고 있었습니다. 이 경험을 아래 네 가지 문제로 정의했습니다.</p>
+        <div class="aig-problems">
+          <div><b>길드 단위 분배</b>연합 단위로 묶어서 관리할 수 없음</div>
+          <div><b>기여도 미반영</b>"나는 2억 썼는데 왜 분배금이 같아!"</div>
+          <div><b>참여자 불일치</b>참여 확인을 운영진이 수작업으로</div>
+          <div><b>보관·판매 문제</b>창고 계정 운영, 여러 번의 수수료</div>
+        </div>
+        <p class="aig-quote"><span class="q-label">구체화</span><b>통합</b>(여러 길드를 하나의 금고에) · <b>자동화</b>(참여 기록 · 기여도 · 정산을 게임 안에서) · <b>선택</b>(균등 분배 / 기여도 분배를 공동체가 선택).<br>기획서는 기획서 탭의 「제우스 길드 분배 시스템」.</p>
+      </section>
+
+      <section class="aig-box" aria-labelledby="aig-what">
+        <div class="eyebrow">RESULT / 결과물</div>
+        <h2 id="aig-what">기획서의 기능과 예외 처리를<br>실제로 플레이할 수 있게 만들었습니다.</h2>
+        <p>다른 길드와 입찰자처럼 서버가 필요한 부분도 빼지 않고 가짜 데이터와 시뮬레이션으로 구현했습니다. 예를 들어 길드 초대는 가짜 길드 5곳으로 <b>수락 · 거절 · 시간 만료 · 레벨 미달 · 이미 다른 금고에 등록</b>까지 기획서의 예외를 전부 직접 확인할 수 있습니다.</p>
+        <ol class="aig-steps">
+          <li>테살리아 성의 금고 관리인 카르덴에게 공동 금고를 만들고 다른 길드를 초대합니다. (수락 · 거절 · 만료 · 조건 미달까지)</li>
+          <li>콘텐츠 현황판(T)에서 보스를 골라 텔레포트하면, 연합원 3명(검 · 활 · 마법)이 합류해 따라옵니다.</li>
+          <li>필드 보스 화염룡 이그니스를 쓰러뜨리면 참여자와 드랍이 판정되어 전리품이 공동 금고에 자동 등록됩니다.</li>
+          <li>운영진은 자유 경매(가짜 입찰자와 경쟁) · 지정가 · 랜덤 분배 · 거래소 판매로 전리품을 처리합니다.</li>
+          <li>모인 다이아를 기여도(성장도 가중치 + 보스 점수 + 콘텐츠 점수)에 따라 분배하고, 연합원은 우편으로 받습니다.</li>
+        </ol>
+        <div class="aig-clips">
+          <p class="aig-full"><a href="https://www.youtube.com/watch?v=eAvAvLRACDo" target="_blank" rel="noopener">전체 시연 영상 보기 (8분 1초) ↗</a></p>
+          <figure class="aig-clip"><video src="assets/game-clip-town.mp4" poster="assets/game-clip-town-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="테살리아 성을 지나 카르덴에게 가는 영상"></video><figcaption><b>① 테살리아 성 · 카르덴</b><span>마을을 지나 금고 관리인 카르덴에게 → 공동 금고 창</span></figcaption></figure>
+          <figure class="aig-clip"><video src="assets/game-clip.mp4" poster="assets/game-clip-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="콘텐츠 현황판으로 이동해 화염룡 이그니스와 싸우는 영상"></video><figcaption><b>② 화염룡 이그니스 전투</b><span>콘텐츠 현황판(T)으로 이동 → 연합원 3명과 전투, 맞으면 내 체력이 줄어듦</span></figcaption></figure>
+          <figure class="aig-clip"><video src="assets/game-clip-auction.mp4" poster="assets/game-clip-auction-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="전리품을 경매에 올려 입찰하고 판매하는 영상"></video><figcaption><b>③ 전리품 경매 · 판매</b><span>보관함 아이템을 자유 경매로 등록 → 입찰 경쟁 → 낙찰 대금이 금고 다이아로 적립(세금 7%) (2배속)</span></figcaption></figure>
+          <figure class="aig-clip"><video src="assets/game-clip-distribute.mp4" poster="assets/game-clip-distribute-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="기여도 분배를 하고 우편으로 다이아를 받는 영상"></video><figcaption><b>④ 기여도 분배 · 우편</b><span>분배 대상 선택 → 기여도 분배 → 연합원이 우편으로 다이아 수령 (2배속)</span></figcaption></figure>
+        </div>      </section>
+
+      <section class="aig-box tint" aria-labelledby="aig-skills">
+        <div class="eyebrow">PROBLEM SOLVING / 문제 해결 역량</div>
+        <h2 id="aig-skills">구조화 능력 · 학습 실행력 · AI 리더십을<br>과정으로 보여 드립니다.</h2>
+        <div class="aig-skills">
+          <div class="aig-skill"><div class="eyebrow">구조화 능력</div><h3>문제를 먼저 정의하고,<br>실행 단위로 나눴습니다.</h3><ul><li>플레이 경험과 인터뷰를 문제 네 가지로 정의한 뒤 기획 의도를 정함</li><li>기획서를 구현 순서 9단계로 나누고, 단계마다 "화면에서 무엇이 보이면 완료인지"를 먼저 정함</li><li>게임이 커질 것에 대비해 금고 안에 섞여 있던 재화 · 우편 · 길드 · 화면 틀을 공용으로 분리</li></ul></div>
+          <div class="aig-skill"><div class="eyebrow">학습 실행력</div><h3>새 도구를 빠르게 익혀<br>바로 적용했습니다.</h3><ul><li class="tight">언리얼 엔진 5 · Unreal MCP · 자동 테스트 · Git을<br>작업하며 익혀, 4일 동안 1~9단계 구현과 구조 정리까지 마침</li><li>막히면 로그와 엔진 코드를 보고 원인을 찾아 방법을 바꿈 (예: 작은 버튼만 안 눌림 → 새 커서의 클릭 위치가 어긋난 것을 찾아 고침)</li><li>Tripo로 3D 모델을 직접 만들어 봄</li></ul></div>
+          <div class="aig-skill"><div class="eyebrow">AI 리더십</div><h3>역할을 나누고 워크플로를 설계해,<br>AI를 동료처럼 이끌었습니다.</h3><ul><li>AI가 일할 수 있는 환경: Claude와 언리얼 에디터를 MCP로 연결</li><li>AI가 매번 읽는 작업 규칙(CLAUDE.md): 재화 중복 지급 금지, 결과 먼저 확정, 모호하면 멈추고 질문</li><li>밤새 대규모 정리를 맡길 때 완료 기준을 먼저 정함: "자동 테스트를 모두 통과한 단계만 저장"</li></ul></div>
+        </div>
+        <div class="aig-flow" aria-label="AI와 사람의 역할로 설계한 워크플로">
+          <div><b>피닝 (ChatGPT)</b><small>기획 문서 작성</small></div><span>→</span>
+          <div><b>레오 (Claude)</b><small>AI가 바로 만들 수 있는 구현 기획서로<br>정리 · 규칙 검토</small></div><span>→</span>
+          <div><b>훈숭이 (Claude)</b><small>언리얼 에디터를 직접 다루며<br>구현 · 테스트 · 보고</small></div><span>→</span>
+          <div class="me"><b>나</b><small>직접 플레이해서 확인 · 수정 지시 · 결정</small></div>
+        </div>
+        <!-- TODO(11-24 제출 전 확인): Tripo 신전을 실제로 언리얼에 배치했는지 확인. 아직이면 아래 문구를 원래 "3D 에셋 제작에는 Tripo AI를 더할 예정입니다."로 되돌리기 -->
+        <div class="aig-tripo">
+          <figure><img src="assets/tripo-temple.png" alt="Tripo AI로 만든 신전 3D 모델" loading="lazy"><figcaption>Tripo AI로 만든 신전 모델</figcaption></figure>
+          <p><b>3D 에셋도 AI로 직접 만듭니다.</b><br>게임 속 신전은 Tripo AI로 3D 모델을 직접 만들어 언리얼에 배치했습니다.</p>
+        </div>
+      </section>
+
+      <section class="aig-box" aria-labelledby="aig-split">
+        <div class="eyebrow">AI와 나의 역할 / 맡긴 일과 판단한 일</div>
+        <h2 id="aig-split">AI에게 맡긴 일과<br>제가 직접 판단한 일을 구분했습니다.</h2>
+        <div class="aig-split">
+          <div><h3>🤖 AI에게 맡긴 일</h3><ul><li>기획서 아이디어 대안 · 문서 구조화 · 검토 (피닝)</li><li>기획서를 구현 단계로 정리 (레오)</li><li>C++ 코드, UI 위젯, 데이터 표 작성 (훈숭이)</li><li>에디터 조작: 맵 배치, 에셋 적용</li><li>로그 분석과 원인 후보 찾기</li><li>자동 테스트 작성과 실행, 작업 기록</li></ul></div>
+          <div class="mine"><h3>🙋 제가 직접 판단한 일</h3><ul><li>기획서의 방향과 정책 확정 (피닝과 기획서를 쓸 때)</li><li>무엇을 만들지, 어떤 순서로 나눌지</li><li>기획서에 없거나 애매한 규칙 결정</li><li>결과를 직접 플레이해서 확인하고 수정 지시</li><li>직접 걸어 보며 레벨 디자인 보완점 결정 (예: 계단 통과 · 떠 있는 땅)</li><li>확인된 단계만 저장 승인</li></ul></div>
+        </div>
+        <h3 class="aig-subtitle">고민한 지점과 그 선택을 한 이유</h3>
+        <div class="aig-decisions">
+          <div><b>범위</b><p>AI가 핵심 기능만 하자고 제안 → <strong>기획서를 거의 전부 구현</strong>하기로. 기획서 전체가 실제로 동작함을 보여 주는 게 목적이라서. 서버가 필요한 부분은 가짜 데이터로.</p></div>
+          <div><b>보스 점수</b><p>나중에 점수를 바꾸면? → <strong>처치한 시점의 점수로 고정</strong>, 바꾼 뒤부터의 처치에만 새 점수. 분배 직전에 점수를 고쳐 특정 길드에 유리하게 만드는 운영진 악용을 막고, 연합원이 "그때 잡은 보스는 그때 점수"로 납득할 수 있게.</p></div>
+          <div><b>인증번호</b><p>콘텐츠 참여 인증번호 동시 발급 → <strong>한 번에 하나만</strong>, 진행 중이면 남은 시간을 안내. 여러 번호가 동시에 살아 있으면 한 콘텐츠에만 참여하고 다른 번호까지 입력해 점수를 두 번 받는 악용이 가능해서. 기획서 예외 표에도 추가.</p></div>
+          <div><b>처리 창</b><p>AI가 팝업으로 만든 처리 창 → <strong>보관함 오른쪽 패널로</strong> 바로잡음. 원본 목업이 기준이라서.</p></div>
+          <div><b>조작감</b><p>공격 중 캐릭터가 미끄러짐 → <strong>클릭 = 선택, F = 공격, 공격 중엔 이동 정지.</strong> 직접 플레이해 보고 리니지류 조작감에 맞춤.</p></div>
+          <div><b>검증</b><p>자는 동안 AI에게 정리를 맡김 → <strong>테스트를 통과한 단계만 저장, 확인할 수 없는 단계는 멈추기.</strong> 확인하지 못한 변경을 저장하지 않으려고.</p></div>
+        </div>
+      </section>
+
+      <section class="aig-box tint" aria-labelledby="aig-cases">
+        <div class="eyebrow">VERIFY / 검증과 문제 해결</div>
+        <h2 id="aig-cases">AI의 결과를 그대로 믿지 않고,<br>원인을 찾아 고쳤습니다.</h2>
+        <div class="aig-cases">
+          <div class="aig-case"><div><b>보스 구역 안인데 "이탈"로 참여 기록에서 빠짐</b><span>구조화 · 원인 추적</span></div><dl><dt>문제</dt><dd>기여도 · 분배에 영향을 주는 핵심 규칙 버그</dd><dt>원인</dt><dd>로그에 "어디서 몇 cm에서 판정됐는지" 찍어 보니, 구역 안 724cm 지점에서 엔진 이벤트가 잘못 오고 있었음</dd><dt>해결</dt><dd>엔진 이벤트에만 의존하지 않고 실제 거리로 다시 판정</dd></dl></div>
+          <div class="aig-case"><div><b>밤새 AI에게 맡긴 대규모 정리, 무엇으로 확인하나</b><span>AI 리더십 · 검증</span></div><dl><dt>문제</dt><dd>화면은 그대로인데 코드 안쪽을 크게 옮기는 작업. 자는 동안이라 플레이로 확인할 사람이 없음</dd><dt>방법</dt><dd>먼저 자동 테스트로 기준 결과를 남기고, "테스트를 모두 통과한 단계만 저장"을 완료 기준으로. 확인할 수 없는 단계는 AI가 스스로 멈춤</dd><dt>결과</dt><dd>0~5단계 자동 완료, 6단계는 아침에 함께. 작업 중 다른 경매에 맡긴 다이아까지 같이 빠져 <b>쓸 수 있는 다이아가 실제보다 많아 보이는(재화 복사로 이어질 수 있는) 문제</b>를 발견해 막음</dd></dl></div>
+          <div class="aig-case"><div><b>작은 ▲▼ 버튼만 눌리지 않음</b><span>학습 실행력 · 원인 추적</span></div><dl><dt>문제</dt><dd>큰 버튼은 되는데 작은 버튼만 반응 없음</dd><dt>원인</dt><dd>"방금 무엇을 바꿨나"부터 거꾸로 추적 → 엔진 코드를 찾아보니 새 게임 커서가 그림 가운데를 클릭 위치로 써서 15px 어긋남</dd><dt>해결</dt><dd>커서 그림을 키워 화살표 끝을 정가운데로</dd></dl></div>
+        </div>
+      </section>
+      </div>
+      <div class="sys-panel" data-sys="bounty" hidden>
+        <section class="aig-box sys-next-box" aria-labelledby="sys-bounty-title">
+          <div class="eyebrow">SYSTEM 03</div>
+          <h2 id="sys-bounty-title">현상금 시스템은<br>기획서를 완성했고, 다음으로 만듭니다.</h2>
+          <p>공동 금고와 같은 흐름(기획서 → 구현 기획서 → 구현 → 검증)으로, 기획서를 단계로 나누고 단계마다 완료 기준을 확인하며 이 게임 안에 이어서 만들 예정입니다.</p>
+        </section>
+      </div>
+      <div class="sys-panel" data-sys="boss" hidden>
+        <section class="aig-box sys-next-box" aria-labelledby="sys-boss-title">
+          <div class="eyebrow">SYSTEM 02</div>
+          <h2 id="sys-boss-title">보스 전투도<br>게임으로 구현할 예정입니다.</h2>
+          <p>공동 금고와 같은 흐름(기획서 → 구현 기획서 → 구현 → 검증)으로, 기획서를 단계로 나누고 단계마다 완료 기준을 확인하며 이 게임 안에 이어서 만들 예정입니다.</p>
+          <div class="aig-clips">
+            <figure class="aig-clip aig-full"><video src="assets/game-clip-boss-breath.mp4" poster="assets/game-clip-boss-breath-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="화산 보스가 바닥에 범위를 보여 준 뒤 그 범위만큼 불을 뿜고, 직선 불줄기로 대지를 한 바퀴 쓰는 영상"></video><figcaption><b>화산 보스 화염 브레스 · 360도 브레스</b><span>바닥에 빨간 범위가 차오른 뒤 그 범위만큼 불을 뿜음 → 직선 불줄기가 대지를 한 바퀴 쓸고 지나감 (제작 중 화면)</span></figcaption></figure>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section data-view="games" hidden>
+    <div class="eyebrow">Game Experience</div>
+    <h1 class="play-timeline-title">리니지 라이크 플레이 경험 타임라인</h1>
+    <div class="chart-controls">
+      <div class="legend"><span><i style="background:#55b494"></i>중립</span><span><i style="background:#d99a3c"></i>라인</span></div>
+      <p class="chart-help">막대를 누르면 자세한 활동을 볼 수 있습니다.</p>
+    </div>
+    <div class="chart-scroll" role="region" aria-label="가로로 스크롤할 수 있는 게임 플레이 기간 차트" tabindex="0"><div class="chart" id="play-chart"></div></div>
+    <dialog id="play-dialog" class="play-dialog" aria-label="플레이 경험 상세">
+      <div class="play-dialog-toolbar"><button type="button" class="play-dialog-close" aria-label="상세 팝업 닫기" autofocus>×</button></div>
+      <div class="selection" id="play-selection"></div>
+    </dialog>
+      <section class="other-games" aria-labelledby="other-games-title">
+        <div class="eyebrow">OTHER GAMES</div>
+        <h2 id="other-games-title">리니지라이크 외 플레이한 게임들</h2>
+        <div class="other-games-grid">
+        </div>
+      </section>
+    </section>
+    <section data-view="activities" hidden>
+      <div class="eyebrow">ACTIVITIES</div>
+      <h1>활동</h1>
+      <div class="channel-activity">
+        <div class="eyebrow">AI CONTENT / 일본인 대상 채널 운영</div>
+        <h2>주 6편의 영상으로,<br>3개월 만에 약 3,900만 조회수</h2>
+        <p>개인 채널을 개설해 일본인 시청자를 대상으로 AI를 활용하여 영상들을 직접 기획하여 주 6편 제작했습니다. 채널 운영 3개월 만에 누적 조회수 약 3,900만 회를 달성했습니다.</p>
+
+        <figure><a href="assets/channel-analytics-redacted.png" target="_blank" rel="noopener" aria-label="수익을 가린 채널 분석 이미지 크게 보기"><img src="assets/channel-analytics-redacted.png" alt="채널 분석 화면: 조회수 약 3,891만 회, 시청 시간 20.8만 시간, 구독자 증가 7.1천 명. 수익 금액은 모자이크 처리됨." loading="lazy"></a><figcaption>채널 분석 기록 · 예상 수익 비공개</figcaption></figure>
+      </div>
+      <div class="channel-activity volunteer-activity">
+        <div class="eyebrow">VOLUNTEERING / 애니멀메이트 연합 동아리</div>
+        <h2>유기견을 돌보는<br>정기 봉사 활동</h2>
+        <p>유기견 봉사 연합 동아리 애니멀메이트에서 정기적으로 보호소를 방문했습니다. 배변으로 더러워진 케이지를 청소하고, 먹이를 주고 산책을 돕는 등 유기견을 돌보는 활동에 참여했습니다.</p>
+        <figure><a href="assets/animalmate-volunteering.png" target="_blank" rel="noopener" aria-label="애니멀메이트 유기견 봉사 활동 사진 크게 보기"><img src="assets/animalmate-volunteering.png" alt="보호소의 유기견들과 야외에서 강아지를 돌보는 봉사 활동 사진" loading="lazy"></a><figcaption>애니멀메이트 · 유기견 보호소 봉사 활동</figcaption></figure>
+      </div>
+          <div class="channel-activity campus-activity">
+        <div class="eyebrow">CAMPUS APP / 교내 앱 제작 프로젝트</div>
+        <h2>학생들의 편의를 위한<br>앱 기능 기획 및 실현</h2>
+        <p>교내 앱 제작 프로젝트에 참여해 학생들의 편의를 위한 기능 기획을 담당했습니다.</p>
+        <figure><a href="assets/campus-app-project.png" target="_blank" rel="noopener" aria-label="교내 앱 프로젝트 기획 자료와 화면 크게 보기"><img src="assets/campus-app-project.png" alt="교내 앱 제작 프로젝트 기획 자료와 앱 화면: 셔틀버스 시간표 및 노선 지도 등" loading="lazy"></a><figcaption>교내 앱 제작 프로젝트 · 기획 자료 및 앱 화면</figcaption></figure>
+      </div>
+      <div class="channel-activity capstone-activity">
+        <div class="eyebrow">CAPSTONE DESIGN / 자살 예방 캠페인</div>
+        <h2>자살 예방 캠페인,<br>기획부터 발표까지</h2>
+        <p>캡스톤 디자인 프로젝트에서 자살 예방 캠페인의 기획을 담당했습니다. 캠페인의 메시지와 구성을 기획하고, 최종 발표까지 마무리했습니다.</p>
+        <figure><a href="assets/capstone-prevention-campaign.png" target="_blank" rel="noopener" aria-label="캡스톤 디자인 캠페인 기획 자료 크게 보기"><img src="assets/capstone-prevention-campaign.png" alt="자살 예방 캠페인 캡스톤 디자인 회의록과 캠페인 화면 구성 자료" loading="lazy"></a><figcaption>캡스톤 디자인 · 회의록 및 캠페인 기획 자료</figcaption></figure>
+      </div>
+</section>
+    <section data-view="projects" hidden>
+      <div class="eyebrow">Planning Docs</div>
+      <h1>기획서</h1>
+      <p class="intro">직접 작성한 창작 시스템 기획서와 시스템 분석서입니다. 기획서 카드를 누르면 PDF가 새 탭에서 열립니다.</p>
+      <div class="portfolio-grid">
+<a class="work-card bounty-card" href="pdfs/01_창작_리니지라이크_시스템_현상금.pdf" target="_blank" rel="noopener">
+          <div class="doc-type">System Design · Original</div>
+          <h2>리니지라이크 현상금 시스템</h2>
+          <p>현상금 시스템을 주제로 작성한 창작 기획서입니다.</p>
+          <span class="open-link">PDF 기획서 열기 ↗</span>
+        </a>
+        <a class="work-card guild-card" href="pdfs/02_창작_제우스_시스템_길드분배.pdf" target="_blank" rel="noopener">
+          <div class="doc-type">System Design · Original</div>
+          <h2>제우스 길드 분배 시스템</h2>
+          <p>길드 분배 시스템을 주제로 작성한 창작 기획서입니다.</p>
+          <span class="open-link">PDF 기획서 열기 ↗</span>
+        </a>
+        <a class="work-card alchemy-card" href="pdfs/03_분석_로드나인_시스템_연금술.pdf" target="_blank" rel="noopener">
+          <div class="doc-type">System Analysis · Lordnine</div>
+          <h2>로드나인 연금술 시스템 분석서</h2>
+          <p>로드나인은 왜 '연금술'을 도입했는가를 분석한 시스템 분석서입니다.</p>
+          <span class="open-link">PDF 분석서 열기 ↗</span>
+        </a>
+      </div>
+      <section class="build-highlight ai-workflow" aria-labelledby="ai-workflow-title">
+        <div class="build-copy">
+          <div class="eyebrow">AI WORKFLOW / AI와 기획한 방식</div>
+          <h2 id="ai-workflow-title">AI 기획 팀을 직접 설계하고,<br><em>결정은 제가 했습니다.</em></h2>
+          <p>ChatGPT를 역할별로 나눈 4개의 AI 기획 팀을 만들고, 완성한 기획서를 Claude에 전달해 실제 게임으로 제작했습니다.</p>
+          <dl class="ai-split">
+            <div><dt>AI에 맡긴 일</dt><dd>아이디어 대안과 장단점, 문서 구조화, 화면 설계, 전체 검토</dd></div>
+            <div><dt>제가 정한 일</dt><dd>기획 방향, 정책 확정, 단계별 승인</dd></div>
+          </dl>
+          <blockquote class="ai-rule"><span>실제 지침 중</span>“사용자와 논의하지 않은 수치나 정책을 임의로 확정하지 않는다.”</blockquote>
+        </div>
+        <ol class="ai-flow" aria-label="AI 기획 팀 흐름">
+          <li><b>A</b><div><strong>브레인스토밍</strong><span>아이디어 대안 · 장단점 비교</span></div></li>
+          <li><b>B</b><div><strong>기획서 작성</strong><span>입력 조건 · 처리 과정 · 결과로 구조화</span></div></li>
+          <li><b>C</b><div><strong>UI/UX 설계</strong><span>화면 설계 · 이미지</span></div></li>
+          <li><b>D</b><div><strong>기획서 검토</strong><span>전체 피드백</span></div></li>
+          <li class="to-game"><b>→</b><div><strong>Claude에 전달</strong><span>기획서를 실제 게임으로 제작</span></div></li>
+        </ol>
+      </section>
+    </section>
+    <section data-view="contact" hidden>
+      <div class="eyebrow">Contact</div>
+      <h1>연락처</h1>
+      <div class="placeholder"><h2>연락 정보를 추가할 수 있어요</h2><p>이메일이나 링크는 실제로 공개할 정보를 정한 뒤 입력합니다.</p></div>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll('[data-jump]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelector('[data-page="' + button.dataset.jump + '"]').click();
+        window.scrollTo({top:0, behavior:'smooth'});
+      });
+    });
+    document.querySelectorAll('[data-goto]').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        document.querySelector('[data-page="' + link.dataset.goto + '"]').click();
+      });
+    });
+    const asOf = new Date().toISOString().slice(0, 10);
+    // Approximate role transitions are for drawing only; descriptions retain the user's precision.
+    const experiences = [
+      ['로드나인', '로웨인', '2024-07-12', '2025-02-01', "라인 '리더'길드 (스트리머 팡이요 연합)", 'line', 0, '2024.07.12 ~ 2025년 1월'],
+      ['로드나인', '로웨인', '2025-02-01', '2025-10-03', "중립 '초식' 길드 (중립 1등 길드) + 길드 마스터", 'neutral', 0, '2025년 2월 ~ 2025.10.03'],
+      ['로드나인', '가르바나', '2025-10-04', '2025-11-01', "중립 '저승사자' 길드", 'neutral', 1, '2025.10.04 ~ 2025년 11월 초'],
+      ['로드나인', '가르바나', '2025-11-01', '2026-04-28', "반왕 '조커' 길드 (일반인 길드) → 반왕 성공 후 라인", 'line', 1, '2025년 11월 초 ~ 2026년 4월'],
+      ['로드나인', '가르바나', '2026-04-28', null, '다시 중립으로 활동', 'neutral', 1, '2026.04.27 이후 ~ 현재'],
+      ['오딘', '뇨도르', '2025-06-25', '2025-08-25', "중립 '다시 모여' 길드", 'neutral', 0, '2025.06.25 ~ 2025.08.25'],
+      ['뱀피르', '다미르', '2025-08-26', '2025-11-26', "라인 '신화' 길드 (스트리머 알트 연합)", 'line', 0, '2025.08.26 ~ 2025년 11월'],
+      ['솔: 인챈트', '린델', '2026-06-18', null, '중립', 'neutral', 0, '2026.06.18 ~ 현재'],
+      ['제우스', '아테나', '2026-08-26', null, "라인 '리더'길드 (스트리머 팡이요 연합)", 'line', 0, '2026.08.26 ~ 현재'],
+      ['이클립스', '헤스카리온', '2026-09-10', null, '중립', 'neutral', 0, '2026.09.10 ~ 현재']
+    ];
+    const chartStart = Date.parse('2024-07-01T00:00:00Z');
+    const chartEnd = Date.parse(asOf + 'T00:00:00Z');
+    const position = (date) => 1 + (Date.parse(date + 'T00:00:00Z') - chartStart) / (chartEnd - chartStart) * 98;
+    // 소개 탭 '플레이 경험' 박스의 작은 타임라인 (플레이 경험 탭과 같은 데이터)
+    (() => {
+      const mini = document.getElementById('mini-timeline');
+      if (!mini) return;
+      const rows = [...new Set(experiences.map(item => item[0] + '|' + item[1]))];
+      rows.forEach(key => {
+        const [game, server] = key.split('|');
+        const row = document.createElement('div'); row.className = 'mini-row';
+        const name = document.createElement('b'); name.textContent = game; name.title = `${game} (${server} 서버)`;
+        const track = document.createElement('div'); track.className = 'mini-track';
+        experiences.filter(item => item[0] === game && item[1] === server).forEach(([, , start, end, , role]) => {
+          const bar = document.createElement('i');
+          bar.style.left = position(start) + '%';
+          bar.style.width = (position(end || asOf) - position(start)) + '%';
+          bar.style.background = role === 'line' ? '#e3ad58' : '#68c3a1';
+          track.append(bar);
+        });
+        row.append(name, track); mini.append(row);
+      });
+      const axisRow = document.createElement('div'); axisRow.className = 'mini-axis';
+      axisRow.innerHTML = '<span>2024.07</span><span class="now">현재</span>';
+      mini.append(axisRow);
+    })();
+    const formatDate = (date) => date.replaceAll('-', '.');
+    const chart = document.getElementById('play-chart');
+    // 오른쪽 끝 = 오늘(현재). 눈금은 이번 달에서 3개월씩 거꾸로 세어 찍는다.
+    const ticks = [];
+    const [nowYear, nowMonth] = asOf.split('-').map(Number);
+    for (let back = 3; ; back += 3) {
+      const total = nowYear * 12 + (nowMonth - 1) - back;
+      const year = Math.floor(total / 12), month = total % 12 + 1;
+      const date = `${year}-${String(month).padStart(2, '0')}-01`;
+      if (position(date) < 0) break;
+      ticks.unshift({ date, year, month });
+    }
+    ticks.push({ date: asOf, now: true });
+    function makeTrack(axis = false) {
+      const track = document.createElement('div');
+      track.className = 'track';
+      ticks.forEach(({date, year, month, now}, index) => {
+        const line = document.createElement('span');
+        line.className = 'gridline'; line.style.left = position(date) + '%'; track.append(line);
+        if (axis) {
+          const label = document.createElement('span'); label.className = 'axis-label';
+          const left = position(date);
+          label.style.left = left + '%';
+          label.textContent = now ? '현재' : `${year}.${String(month).padStart(2, '0')}`; track.append(label);
+          if (now) { label.classList.add('axis-now'); label.title = formatDate(asOf); }
+          const dot = document.createElement('span'); dot.className = 'axis-dot'; dot.style.left = left + '%'; track.append(dot);
+        }
+      });
+      return track;
+    }
+    const axis = document.createElement('div'); axis.className = 'chart-row axis';
+    const axisTitle = document.createElement('div'); axisTitle.className = 'row-label'; axisTitle.textContent = '게임 / 서버';
+    axis.append(axisTitle, makeTrack(true)); chart.append(axis);
+    [...new Set(experiences.map(item => JSON.stringify([item[0], item[1]])))].forEach(key => {
+      const [game, rowServer] = JSON.parse(key);
+      const entries = experiences.filter(item => item[0] === game && item[1] === rowServer);
+      const row = document.createElement('div'); row.className = 'chart-row' + (entries.some(item => !item[3]) ? ' current' : '');
+      const label = document.createElement('div'); label.className = 'row-label';
+      const title = document.createElement('strong'); title.textContent = rowServer ? `${game} (${rowServer} 서버)` : game;
+      label.append(title);
+      const track = makeTrack();
+      entries.forEach(([, server, start, end, activity, role, lane, period], entryIndex) => {
+      const bar = document.createElement('button');
+      bar.type = 'button'; bar.className = 'play-bar' + (end ? '' : ' live');
+      const previousEntry = entries[entryIndex - 1];
+      const nextEntry = entries[entryIndex + 1];
+      const joinsPrevious = previousEntry && previousEntry[3] === start;
+      const joinsNext = nextEntry && end && nextEntry[2] === end;
+      if (joinsPrevious) bar.classList.add('connected-left');
+      if (joinsNext) bar.classList.add('connected-right');
+      bar.style.left = position(start) + '%';
+      bar.style.width = (position(end || asOf) - position(start)) + '%';
+      bar.style.setProperty('--bar', role === 'line' ? '#e3ad58' : '#68c3a1');
+      bar.style.top = '21px';
+      bar.textContent = role === 'line' ? '라인' : '중립';
+      bar.title = `${game}${server ? ' · ' + server : ''}\n${period}\n${activity}`;
+      bar.setAttribute('aria-label', bar.title);
+      bar.addEventListener('click', () => {
+        const selection = document.getElementById('play-selection'); selection.replaceChildren(); document.getElementById('play-dialog').showModal();
+        const displayServer = game === '로드나인' && server === '로웨인' ? '로웨인10'
+          : game === '로드나인' && server === '가르바나' && (start === '2025-10-04' || start === '2025-11-01') ? '가르바나6'
+          : game === '로드나인' && server === '가르바나' && start === '2026-04-28' ? '가르바나9' : server;
+        const heading = document.createElement('strong'); heading.textContent = `${game}${displayServer ? ' (' + displayServer + ')' : ''} | ${period}`;
+        const description = document.createElement('p'); description.textContent = activity + (end || game === '제우스' ? '' : ' · 플레이 중');
+        selection.append(heading, description);
+        if (game === '제우스') {
+          const gallery = document.createElement('div'); gallery.className = 'zeus-gallery';
+          const screenshot = document.createElement('img');
+          screenshot.src = 'assets/zeus-athena2-character.png';
+          screenshot.alt = '제우스 아테나 서버 캐릭터 사진';
+          screenshot.className = 'zeus-character';
+          const chat = document.createElement('img'); chat.className = 'zeus-chat';
+          chat.src = 'assets/zeus-leader-chat.png';
+          chat.alt = '채팅 내용이 모자이크 처리된 제우스 리더 길드 카카오톡방';
+          const characterFigure = document.createElement('figure'); characterFigure.className = 'zeus-character';
+          const characterCaption = document.createElement('figcaption'); characterCaption.textContent = '인게임 캐릭 이미지';
+          characterFigure.append(screenshot, characterCaption);
+          const chatFigure = document.createElement('figure'); chatFigure.className = 'zeus-chat';
+          const chatCaption = document.createElement('figcaption'); chatCaption.textContent = '라인 카톡 이미지';
+          chatFigure.append(chat, chatCaption);
+          gallery.append(characterFigure, chatFigure); selection.append(gallery);
+        }
+        if (game === '로드나인' && server === '가르바나' && start === '2025-10-04') {
+          const screenshot = document.createElement('img');
+          screenshot.src = 'assets/garbana6-trade.png';
+          screenshot.alt = '로드나인 가르바나6 서버 거래 내역';
+          const story = document.createElement('div'); story.className = 'activity-story trade-story';
+          screenshot.style.cssText = 'display:block;width:100%;max-width:700px;height:auto;border-radius:10px';
+          const text = document.createElement('p');
+          text.textContent = '전설 아바타를 뽑기로 직접 획득하기는 어렵다고 판단해 거래 사이트에서 전설 아바타를 구매한 뒤 게임을 시작했습니다. 구매 과정에서 판매자와 인연이 닿아 ‘저승사자’ 길드에 합류했습니다. 리니지라이크 경험이 많은 길드원들과 친해지며 함께 게임을 즐겼습니다.';
+          const figure = document.createElement('figure');
+          const caption = document.createElement('figcaption'); caption.textContent = '바로템 사이트 거래';
+          figure.append(screenshot, caption);
+          story.append(figure, text); selection.append(story);
+        }
+        if (game === '이클립스') {
+          const eclipseDescription = document.createElement('p');
+          eclipseDescription.textContent = '리니지 라이크 게임마다 다른 성장 방식과 시스템을 직접 경험함으로써 같은 장르 안에서 서로 다른 재미를 만드는 요소를 살펴보고 있습니다.';
+          eclipseDescription.style.cssText = 'margin:16px 0 22px;max-width:760px;line-height:1.9';
+
+          const screenshot = document.createElement('img');
+          screenshot.src = 'assets/eclipse-character.png';
+          screenshot.alt = '이클립스 헤스카리온 서버 캐릭터 활동 사진';
+          screenshot.style.cssText = 'display:block;width:100%;max-width:345px;height:auto;border-radius:10px';
+          const figure = document.createElement('figure'); figure.className = 'character-figure';
+          const caption = document.createElement('figcaption'); caption.textContent = '인게임 캐릭 이미지';
+          figure.append(screenshot, caption);
+          const story = document.createElement('div'); story.className = 'activity-story parallel-game-story';
+          story.append(figure, eclipseDescription); selection.append(story);
+        }
+        if (game === '솔: 인챈트') {
+          const solDescription = document.createElement('p');
+          solDescription.textContent = '리니지 라이크 게임마다 다른 성장 방식과 시스템을 직접 경험함으로써 같은 장르 안에서 서로 다른 재미를 만드는 요소를 살펴보고 있습니다.';
+          solDescription.style.cssText = 'margin:16px 0 22px;max-width:760px;line-height:1.9';
+
+          const screenshot = document.createElement('img');
+          screenshot.src = 'assets/sol-enchant-character.png';
+          screenshot.alt = '솔: 인챈트 린델 서버 캐릭터 활동 사진';
+          screenshot.style.cssText = 'display:block;width:100%;height:auto;border-radius:10px';
+          const figure = document.createElement('figure'); figure.className = 'character-figure';
+          figure.style.maxWidth = '387px';
+          const caption = document.createElement('figcaption'); caption.textContent = '인게임 캐릭터';
+          figure.append(screenshot, caption);
+          const story = document.createElement('div'); story.className = 'activity-story parallel-game-story';
+          story.append(figure, solDescription); selection.append(story);
+        }
+        if (game === '로드나인' && server === '가르바나' && role === 'line') {
+          const story = document.createElement('div'); story.className = 'activity-story';
+          const screenshot = document.createElement('img');
+          screenshot.src = 'assets/garbana-joker-guild-hq.png';
+          screenshot.alt = '로드나인 가르바나 조커 길드 활동 사진';
+          const text = document.createElement('p');
+          text.textContent = '밤도깨비 길드원들과 함께 오라짱님이 창설한 ‘조커’ 길드에 참여해 기존 라인이었던 ‘밤도깨비’ 길드를 상대로 반왕 활동을 했습니다. 약 한 달 만에 반왕에 성공했고, 이후 라인 길드로 활동했습니다.';
+          const figure = document.createElement('figure');
+          const caption = document.createElement('figcaption'); caption.textContent = "'조커'길드";
+          figure.append(screenshot, caption);
+          story.append(figure, text); selection.append(story);
+        }
+        if (game === '뱀피르') {
+          const story = document.createElement('div'); story.className = 'activity-story vampir-story';
+          const screenshot = document.createElement('img');
+          screenshot.src = 'assets/vampir-myth-clan.png';
+          screenshot.alt = '뱀피르 신화 길드와 스트리머 알트 연합 활동 사진';
+          const text = document.createElement('p');
+          text.append('다미르 서버에서 ');
+          const nickname = document.createElement('span');
+          nickname.textContent = "'하눌'";
+          nickname.style.cssText = 'color:#ffdf5d;font-weight:700';
+          text.append(nickname, ' 캐릭터로 3개월 동안 라인 생활을 하였습니다.');
+          const figure = document.createElement('figure');
+          const caption = document.createElement('figcaption'); caption.textContent = "'신화'길드 보스 쟁";
+          figure.append(screenshot, caption);
+          story.append(figure, text); selection.append(story);
+        }
+        if (game === '오딘') {
+          const story = document.createElement('div'); story.className = 'activity-story odin-story';
+          const screenshot = document.createElement('img');
+          screenshot.src = 'assets/odin-dasimo-character.png';
+          screenshot.alt = '오딘 다시 모여 길드 캐릭터 사진';
+          const text = document.createElement('p');
+          text.append('로드나인을 통해 리니지라이크 장르의 재미를 알게 된 후, 대표작으로 알려진 ‘오딘’의 신규 서버 오픈 소식을 접했습니다. 어떤 게임인지 궁금해 시작했고, ');
+          const nickname = document.createElement('span');
+          nickname.textContent = "'돈먹은'";
+          nickname.style.cssText = 'color:#ffdf5d;font-weight:700';
+          text.append(nickname, ' 캐릭으로 2달 동안 중립 플레이 하였습니다.');
+          const figure = document.createElement('figure');
+          const caption = document.createElement('figcaption'); caption.textContent = '인게임 캐릭 이미지';
+          figure.append(screenshot, caption);
+          story.append(figure, text); selection.append(story);
+        }
+        if (game === '로드나인' && server === '로웨인' && role === 'line') {
+          const story = document.createElement('div'); story.className = 'activity-story';
+          const screenshot = document.createElement('img'); screenshot.src = 'assets/rowein-line-hq.png';
+          screenshot.alt = '로드나인 로웨인 10 서버에서 다로시 캐릭터로 참여한 라인 활동';
+          const text = document.createElement('p');
+          text.append('로웨인 10 서버에서 ');
+          const characterName = document.createElement('span');
+          characterName.textContent = "'다로시'";
+          characterName.style.cssText = 'color:#ffdf5d;font-weight:700';
+          text.append(characterName, ' 캐릭터로 리니지라이크 장르에 처음 입문했으며, 6개월 동안 라인 생활을 했습니다.');
+          const figure = document.createElement('figure');
+          const caption = document.createElement('figcaption'); caption.textContent = '리더 길드 보스 활동';
+          figure.append(screenshot, caption);
+          story.append(figure, text); selection.append(story);
+        }
+        if (game === '로드나인' && server === '로웨인' && role === 'neutral') {
+          const gallery = document.createElement('div'); gallery.className = 'activity-gallery';
+          [
+            ['assets/rowein-chosik-activity.png', '초식 길드 활동 사진', 'activity-photo'],
+            ['assets/rowein-chosik-ranking.png', '길드 분배 엑셀 사진', 'ranking-photo']
+          ].forEach(([src, caption, className]) => {
+            const figure = document.createElement('figure'); figure.className = className;
+            const link = document.createElement('a'); link.href = src; link.target = '_blank'; link.rel = 'noopener';
+            const img = document.createElement('img'); img.src = src; img.alt = caption;
+            const figcaption = document.createElement('figcaption'); figcaption.textContent = caption;
+            link.append(img); figure.append(link, figcaption); gallery.append(figure);
+          });
+          const detail = document.createElement('div'); detail.className = 'guild-detail';
+          const story = document.createElement('div'); story.className = 'guild-story';
+          [
+            '라인 활동을 이어가며 삶이 피폐해진다는 느낌을 받아, 닉네임을 ‘돈먹은’으로 변경하고 중립 ‘초식’ 길드에 합류했습니다.',
+            '입단 약 2개월 후 기존 길드 마스터가 게임을 그만두면서 운영을 이어받았습니다. 이후 4개월 동안 길드 마스터로 활동하며, 엑셀을 활용해 길드 보상 분배를 관리했습니다.'
+          ].forEach(content => {
+            const paragraph = document.createElement('p');
+            const nickname = '‘돈먹은’';
+            if (content.includes(nickname)) {
+              const [before, after] = content.split(nickname);
+              const highlight = document.createElement('span');
+              highlight.textContent = nickname;
+              highlight.style.cssText = 'color:#000;font-weight:700';
+              paragraph.append(before, highlight, after);
+            } else {
+              paragraph.textContent = content;
+            }
+            story.append(paragraph);
+          });
+          detail.append(gallery, story); selection.append(detail);
+        }
+      });
+      track.append(bar);
+      });
+      row.append(label, track); chart.append(row);
+    });
+    const playDialog = document.getElementById('play-dialog');
+    playDialog.querySelector('.play-dialog-close').addEventListener('click', () => playDialog.close());
+    playDialog.addEventListener('close', () => { playDialog.scrollTop = 0; });
+    const sysCards = document.querySelectorAll('.sys-card');
+    const sysPanels = document.querySelectorAll('.sys-panel');
+    sysCards.forEach((card) => card.addEventListener('click', () => {
+      const target = card.dataset.sys;
+      sysCards.forEach((item) => {
+        const on = item === card;
+        item.classList.toggle('is-active', on);
+        item.setAttribute('aria-selected', on ? 'true' : 'false');
+        item.querySelector('.open-link').textContent = on ? '보는 중' : (item.dataset.sys === 'vault' ? '다시 보기' : '자세히 보기');
+      });
+      sysPanels.forEach((panel) => { panel.hidden = panel.dataset.sys !== target; });
+    }));
+    const menuButtons = document.querySelectorAll('[data-page]');
+    const views = document.querySelectorAll('[data-view]');
+    menuButtons.forEach((button) => button.addEventListener('click', () => {
+      const target = button.dataset.page;
+      views.forEach((view) => { view.hidden = view.dataset.view !== target; });
+      menuButtons.forEach((item) => item.classList.toggle('active', item === button));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }));
+  </script>
+</body>
+</html>
