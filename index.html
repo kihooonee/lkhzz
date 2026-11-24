@@ -15,6 +15,8 @@
     .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.16em; font-size:12px; font-weight:700; }
     h1 { font-size:clamp(32px,6vw,54px); line-height:1.15; margin:12px 0; }
     .intro { color:var(--muted); max-width:650px; margin:0 0 42px; }
+    .intro.intro-one { max-width:none; }
+    @media (min-width:900px) { .intro.intro-one { white-space:nowrap; } }
     .note { display:inline-block; border:1px solid #52617d; border-radius:99px; padding:4px 12px; color:#d8e2f1; font-size:12px; margin-bottom:16px; }
     .timeline { position:relative; padding-left:30px; }
     .timeline::before { content:""; position:absolute; left:7px; top:8px; bottom:12px; width:2px; background:linear-gradient(var(--accent),var(--line)); }
@@ -222,6 +224,7 @@
     .passion-kicker { font-size:14px; color:#686c64; margin-bottom:24px; }
     .passion-copy h1 { margin:0; font-size:clamp(42px,4.8vw,68px); line-height:1.22; letter-spacing:-.065em; font-weight:900; color:#111418; }
     .passion-copy h1 em { font-style:normal; color:#0e8fb0; }
+    .passion-copy h1 .h1-key { margin-left:.22em; }
     .passion-copy h1 > span { font-size:.76em; }
     .passion-copy > p { margin-top:30px; font-size:18px; line-height:1.85; color:#5b6470; }
     .passion-copy > p strong { color:#111418; }
@@ -240,13 +243,14 @@
     .passion-portrait { position:absolute; right:0; bottom:0; width:29%; background:#e7e7df; border:7px solid #fff; box-shadow:0 8px 22px #25271c22; transform:rotate(4deg); }
     .passion-portrait img { display:block; width:100%; height:170px; object-fit:cover; object-position:top; }
     .visual-caption { position:absolute; left:16px; bottom:0; font-size:10px; letter-spacing:.15em; font-weight:700; color:#878b7c; }
-    .passion-info { display:grid; grid-template-columns:1.1fr 1fr 1fr; border-top:1px solid #e3e8ee; border-bottom:1px solid #e3e8ee; margin:0 0 54px; padding:30px 0; }
+    .passion-info { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid #e3e8ee; border-bottom:1px solid #e3e8ee; margin:0 0 54px; padding:30px 0; }
     .passion-info > section { padding:0 25px; border-left:1px solid #e3e8ee; min-width:0; }
     .passion-info > section:first-child { border-left:0; padding-left:0; }
     .passion-info > section:last-child { padding-right:0; }
     .passion-info h2 { font-size:10px; letter-spacing:.1em; color:#838976; margin:0 0 20px; }
     .passion-info h3 { font-size:16px; line-height:1.6; color:#111418; margin:0 0 10px; }
-    .passion-info p { font-size:13px; line-height:1.9; color:#73796d; }
+    .passion-info p { font-size:13px; line-height:1.9; color:#73796d; word-break:keep-all; text-wrap:pretty; }
+    .passion-info h3 { word-break:keep-all; }
     .passion-info .profile-details div { grid-template-columns:58px minmax(0,1fr); padding:5px 0; border:0; }
     .passion-info .profile-details dd,.passion-info .profile-details dt { font-size:12px; }
     .passion-info .profile-details a { color:inherit; text-decoration:none; }
@@ -961,16 +965,6 @@
     [data-view="aigame"] .aig-box .aig-problems > div { text-align:center; }
     [data-view="aigame"] .aig-box p.aig-quote { text-align:center; border-left:1px solid #2bc4e640 !important; border-radius:12px; }
     /* 활동 탭: 소개 탭과 같은 톤앤매너 (모든 칸 어둡게) */
-    [data-view="activities"] .channel-activity { background:#111418 !important; border:1px solid #ffffff1a !important; box-shadow:0 18px 40px #00000059 !important; color:#c5ccd4; position:relative; overflow:hidden; }
-    [data-view="activities"] .channel-activity::after { content:""; position:absolute; left:-140px; bottom:-160px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,#2bc4e62e 0%,#2bc4e600 70%); pointer-events:none; }
-    [data-view="activities"] .channel-activity > * { position:relative; z-index:1; }
-    [data-view="activities"] .channel-activity .eyebrow { color:#5fd6f0 !important; letter-spacing:.12em; }
-    [data-view="activities"] .channel-activity h2 { color:#fff !important; }
-    [data-view="activities"] .channel-activity h2 em { font-style:normal; background:linear-gradient(transparent 70%, #2bc4e6aa 70%, #2bc4e6aa 92%, transparent 92%); }
-    [data-view="activities"] .channel-activity :is(p,li,span,small,figcaption,dd,dt) { color:#aeb7c1 !important; }
-    [data-view="activities"] .channel-activity :is(strong,b) { color:#fff !important; }
-    [data-view="activities"] .channel-activity figure a, [data-view="activities"] .channel-activity figure > img { border:1px solid #ffffff24 !important; border-radius:14px; background:transparent !important; box-shadow:0 14px 34px #00000055; overflow:hidden; }
-    [data-view="activities"] .channel-activity figcaption { color:#9aa4ae !important; }
     /* 사용하는 도구 */
     .tool-belt { margin:0 0 24px; padding:clamp(24px,3.5vw,36px) clamp(24px,4vw,44px); border:1px solid #ffffff1a; border-radius:24px; background:#111418; box-shadow:0 18px 40px #00000059; }
     .tool-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 24px; margin-bottom:22px; }
@@ -1010,6 +1004,114 @@
     [data-view="aigame"] .aig-top-clips .aig-clip figcaption span { color:#aeb7c1; }
     [data-view="aigame"] .aig-top-clips .aig-full a { color:#5fd6f0; }
     .doc-game-link .guild-jump-go { margin-left:auto; }
+    .aig-flow-note { margin:14px 0 0; padding:12px 16px; border-radius:12px; background:#ffffff08; border:1px solid #ffffff14; color:#aeb7c1; font-size:12.5px; line-height:1.8; word-break:keep-all; }
+    .aig-flow-note b { margin-right:6px; color:#5fd6f0; font-size:12px; }
+    .aig-flow-note i { margin:0 8px; font-style:normal; color:#ffffff40; }
+    .build-go-row { display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-top:24px; }
+    .build-go-row .build-go { margin-top:0; }
+    .build-go-q { color:#fff; font-size:14px; font-weight:700; text-decoration:underline; text-decoration-color:#2bc4e6; text-decoration-thickness:2px; text-underline-offset:5px; }
+    .build-visual figcaption b { display:block; margin-bottom:2px; color:#fff; font-size:13px; }
+    /* 11-24: 소개 맨 아래 '그 밖의 활동' 카드 3개 */
+    .more-activities { margin-top:24px; padding:clamp(24px,3.4vw,40px); border:1px solid #ffffff1a; border-radius:24px; background:#111418; box-shadow:0 18px 40px #00000059; }
+    .more-activities .eyebrow { color:#5fd6f0 !important; letter-spacing:.12em; }
+    .more-activities h2 { margin:10px 0 22px; color:#fff; font-size:clamp(20px,2.2vw,26px); letter-spacing:-.04em; }
+    .act-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .act-card { margin:0; overflow:hidden; border:1px solid #ffffff14; border-radius:16px; background:#161b21; }
+    .act-card a { display:block; }
+    .act-card img { display:block; width:100%; aspect-ratio:16 / 10; object-fit:contain; background:#0d1014; transition:transform .3s ease; }
+    .act-card a:hover img { transform:scale(1.03); }
+    .act-card figcaption { display:flex; flex-direction:column; gap:6px; padding:14px 16px 16px; }
+    .act-card figcaption span { color:#5fd6f0; font-size:10.5px; font-weight:800; letter-spacing:.08em; }
+    .act-card figcaption b { color:#fff; font-size:15px; }
+    .act-card figcaption p { margin:0; color:#aeb7c1; font-size:12.5px; line-height:1.7; word-break:keep-all; }
+    @media (max-width:860px) { .act-cards { grid-template-columns:1fr; } }
+    /* 11-24: 플레이 경험 탭 게임 카드 */
+    .game-cards { display:grid; grid-template-columns:repeat(auto-fill,160px); gap:12px; margin:22px 0 8px; }
+    .gcard { position:relative; margin:0; border-radius:14px; overflow:hidden; background:#14181d; border:1px solid #ffffff14; box-shadow:0 14px 30px #00000055; transition:transform .2s ease, box-shadow .2s ease; }
+    .gcard:hover { transform:translateY(-4px); box-shadow:0 20px 36px #00000077; }
+    .gcard img { display:block; width:100%; aspect-ratio:1 / 1; object-fit:cover; }
+    .gc-info { position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px; padding:9px 11px 11px; background:#14181d; }
+    .gc-info b { color:#fff; font-size:12.5px; letter-spacing:-.01em; word-break:keep-all; }
+    .gc-genre { color:#8f99a4; font-size:10.5px; font-weight:700; }
+    .gc-time { display:flex; align-items:center; gap:4px; margin-top:4px; white-space:nowrap; letter-spacing:-.02em; color:#c5ccd4; font-size:10.5px; font-weight:700; }
+    .gc-time i { flex:0 0 auto; display:inline-grid; place-items:center; width:13px; height:13px; border-radius:50%; background:#c5ccd4; color:#14181d; font-size:7px; font-style:normal; padding-left:1px; }
+    @media (max-width:520px) { .game-cards { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    /* 11-24 후니 요청: 플레이 경험 타임라인 디자인 다듬기 (모양만, 내용·동작은 그대로) */
+    [data-view="games"] .chart-controls { margin:18px 0 20px; }
+    [data-view="games"] .legend { gap:8px; }
+    [data-view="games"] .legend span { display:inline-flex; align-items:center; padding:6px 14px 6px 12px; border:1px solid #ffffff1f; border-radius:999px; background:#ffffff08; font-size:12.5px; font-weight:700; }
+    [data-view="games"] .legend i { width:9px; height:9px; border-radius:50%; margin-right:8px; box-shadow:0 0 0 3px #ffffff10; }
+    [data-view="games"] .chart-scroll { background:linear-gradient(180deg,#161c23 0%,#101419 100%); border-radius:22px; }
+    [data-view="games"] .chart-row:not(.axis) { border-top:1px solid #ffffff0a; }
+    [data-view="games"] .chart-row:not(.axis):nth-child(even) .track { background:#ffffff05; }
+    [data-view="games"] .row-label { align-items:flex-start; text-align:left; padding:0 22px; background:#13181e; }
+    [data-view="games"] .chart-row.current .row-label { background:#13181e; }
+    [data-view="games"] .chart-row:hover .row-label { background:#17222a; }
+    [data-view="games"] .chart-row:hover .track { background:#2bc4e608; }
+    [data-view="games"] .row-label strong { font-size:13.5px; letter-spacing:-.01em; }
+    [data-view="games"] .axis { background:transparent; border-bottom:1px solid #ffffff14; }
+    [data-view="games"] .axis .row-label { align-items:flex-start; color:#8f99a4; font-size:12px; font-weight:700; letter-spacing:.08em; background:transparent; }
+    [data-view="games"] .axis-label { font-size:11px; color:#8f99a4; }
+    [data-view="games"] .axis-dot { width:6px; height:6px; box-shadow:none; background:#ffffff40; }
+    [data-view="games"] .axis-label.axis-now + .axis-dot { background:#2bc4e6; box-shadow:0 0 0 4px #2bc4e633; }
+    [data-view="games"] .gridline { border-left:1px dashed #ffffff0d; }
+    [data-view="games"] .gridline-now { border-left:1px solid #2bc4e655; box-shadow:0 0 12px #2bc4e633; }
+    [data-view="games"] .play-bar { height:28px; border:0; border-radius:999px; color:#10181f; font-size:11.5px; font-weight:800; letter-spacing:.02em;
+      background:linear-gradient(180deg, color-mix(in srgb, var(--bar) 78%, #fff) 0%, var(--bar) 100%);
+      box-shadow:0 6px 16px color-mix(in srgb, var(--bar) 30%, transparent), inset 0 1px 0 #ffffff66; transition:transform .15s ease, box-shadow .15s ease, filter .15s ease; }
+    [data-view="games"] .play-bar:hover { transform:translateY(-2px); filter:brightness(1.06); box-shadow:0 10px 22px color-mix(in srgb, var(--bar) 45%, transparent), inset 0 1px 0 #ffffff66; }
+    [data-view="games"] .play-bar.connected-left { border-top-left-radius:0; border-bottom-left-radius:0; }
+    [data-view="games"] .play-bar.connected-right { border-top-right-radius:0; border-bottom-right-radius:0; box-shadow:inset -1px 0 0 #10181f55, inset 0 1px 0 #ffffff66; }
+    [data-view="games"] .play-bar.live { border-top-right-radius:0; border-bottom-right-radius:0; }
+    [data-view="games"] .play-bar.live::after { content:""; position:absolute; right:8px; top:50%; width:6px; height:6px; margin-top:-3px; border-radius:50%; background:#fff; animation:playLive 1.8s ease-out infinite; }
+    @keyframes playLive { 0% { box-shadow:0 0 0 0 #ffffffaa; } 100% { box-shadow:0 0 0 8px #ffffff00; } }
+    /* 11-24 후니 요청: 타임라인 크기 조금 줄이기 */
+    [data-view="games"] .chart-row { grid-template-columns:185px 1fr; min-height:56px; }
+    [data-view="games"] .track { min-height:56px; }
+    [data-view="games"] .row-label { padding:0 18px; }
+    [data-view="games"] .row-label strong { font-size:12.5px; }
+    [data-view="games"] .axis, [data-view="games"] .axis .track { min-height:50px; }
+    [data-view="games"] .axis-label { top:34px; font-size:10.5px; }
+    [data-view="games"] .axis-dot { top:31px; }
+    [data-view="games"] .axis .gridline { top:34px; }
+    [data-view="games"] .play-bar { top:16px !important; height:24px; font-size:10.5px; }
+    [data-view="games"] .chart-help { font-size:13.5px; padding:5px 14px; }
+    [data-view="games"] .legend span { padding:5px 12px 5px 10px; font-size:11.5px; }
+    /* 11-24 후니 요청: 시스템 버튼 3개를 왼쪽 목차 위에 세로로, 목차와 함께 스크롤을 따라옴 (넓은 화면만, 스크립트가 버튼 묶음을 목차 안으로 옮김) */
+    @media(min-width:1100px) {
+      .aig-toc nav { top:max(16px, calc(50vh - 330px)); }
+      .aig-toc nav > .sys-pills { display:grid; grid-template-columns:1fr; gap:8px; width:150px; margin:0 0 18px 0; }
+      .aig-toc nav > .sys-pills .sys-pill { min-height:56px; margin:0; padding:0 14px; font-size:13.5px; font-weight:700; color:#fff; border:2px solid #ffffff26; border-radius:14px; }
+      .aig-toc nav > .sys-pills .sys-pill.is-active { border-color:#2bc4e6; }
+      /* 11-24 후니 요청: 왼쪽 시스템 버튼을 조금 더 크게, 대표 사진이 잘 보이게 (글자는 아래, 사진은 위) */
+      .aig-toc nav { top:max(16px, calc(50vh - 390px)); }
+      .aig-toc nav > .sys-pills { width:170px; gap:10px; }
+      .aig-toc nav > .sys-pills .sys-pill { min-height:100px; align-items:flex-end; gap:6px; padding:0 10px 10px; font-size:13px; line-height:1.35; text-align:left; white-space:nowrap; letter-spacing:-.02em; opacity:.85; background-repeat:no-repeat; }
+      /* 11-24 후니 요청: 고른 버튼이 잘 보이게 (안 고른 건 흐리고 어둡게, 고른 건 굵은 테두리 + 빛 + 번호 칩) */
+      .aig-toc nav > .sys-pills .sys-pill { opacity:.55; filter:grayscale(.7) brightness(.8); transition:opacity .2s, filter .2s, box-shadow .2s; }
+      .aig-toc nav > .sys-pills .sys-pill:hover { opacity:.85; filter:none; }
+      .aig-toc nav > .sys-pills .sys-pill.is-active { opacity:1; filter:none; border-color:#2bc4e6; box-shadow:0 0 0 2px #2bc4e6, 0 0 22px #2bc4e680; }
+      .aig-toc nav > .sys-pills .sys-pill.is-active .sys-num { padding:1px 6px; border-radius:6px; background:#2bc4e6; color:#0b1418; }
+      .aig-toc nav > .sys-pills .sys-pill[data-sys="deadbelow"] { background-image:linear-gradient(0deg,rgba(11,16,32,.92) 0%,rgba(11,16,32,.35) 50%,rgba(11,16,32,0) 100%),url("assets/deadbelow-title.jpg"); background-size:100% 100%,400px auto; background-position:0 0,56% 62%; }
+      .aig-toc nav > .sys-pills .sys-pill[data-sys="vault"] { background-image:linear-gradient(0deg,rgba(11,16,32,.92) 0%,rgba(11,16,32,.35) 50%,rgba(11,16,32,0) 100%),url("assets/vault-card.jpg"); background-size:100% 100%,auto 100%; background-position:0 0,100% 50%; }
+      .aig-toc nav > .sys-pills .sys-pill[data-sys="boss"] { background-image:linear-gradient(0deg,rgba(11,16,32,.92) 0%,rgba(11,16,32,.35) 50%,rgba(11,16,32,0) 100%),url("assets/boss-clip-emerge-poster.jpg"); background-size:100% 100%,520px auto; background-position:0 0,51% 28%; }
+      /* 세로 줄은 목차 항목(플레이 화면)부터 */
+      .aig-toc nav { border-left:0; gap:0; }
+      .aig-toc button[data-toc] { margin-left:0; padding-top:8px; padding-bottom:8px; border-left:2px solid #ffffff1f; }
+      .aig-toc button[data-toc].on { border-left-color:#2bc4e6; }
+    }
+    /* 11-24: 소개 '직접 만드는 게임' 칸에 DeadBelow · 보스 전투 영상 추가 */
+    .build-more { grid-column:1 / -1; position:relative; z-index:1; display:grid; gap:22px; margin-top:6px; padding-top:24px; border-top:1px solid #ffffff1a; }
+    .build-row-head { display:flex; align-items:baseline; gap:12px; margin-bottom:12px; }
+    .build-row-head b { color:#fff; font-size:17px; }
+    .build-row-head span { color:#fff; font-size:12px; }
+    .build-clips { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .build-clips figure { margin:0; }
+    .build-clips video { display:block; width:100%; aspect-ratio:16 / 9; object-fit:cover; border-radius:12px; background:#0b1418; box-shadow:0 10px 26px #00000055; }
+    .build-clips figcaption { margin-top:8px; color:#9aa4ae; font-size:12px; line-height:1.5; word-break:keep-all; }
+    .build-clips figcaption b { display:block; color:#fff; font-size:13px; }
+    @media (max-width:860px) { .build-clips { grid-template-columns:1fr 1fr; } .build-row-head { flex-direction:column; gap:2px; } }
+    @media (max-width:520px) { .build-clips { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -1019,7 +1121,6 @@
       <button type="button" data-page="aigame">AI 게임 제작</button>
       <button type="button" data-page="projects">기획서</button>
       <button type="button" data-page="games">플레이 경험</button>
-      <button type="button" data-page="activities">활동</button>
     </nav>
   </header>
   <main>
@@ -1027,16 +1128,13 @@
       <div class="passion-masthead"><span>PORTFOLIO</span></div>
       <div class="passion-hero">
         <div class="passion-copy">
-          <div class="passion-kicker">가장 좋아하는 장르를 가장 깊이 들여다봅니다.</div>
-          <h1>리니지 라이크에<br><em>미친 <strong class="h1-key">AI 게임 메이커</strong></em><br><span>이기훈입니다.</span></h1>
-          <p>라인과 중립을 오가며<br>직접 부딪혀 쌓은 플레이 경험을<br><strong>게임 제작으로 연결합니다.</strong></p>
-          <div class="passion-actions"><button type="button" data-jump="aigame">AI로 만든 게임 보기 <span>↗</span></button><button type="button" data-jump="projects">기획서 보기 <span>↗</span></button><button type="button" data-jump="games">플레이 경험 보기 <span>↗</span></button><button type="button" data-jump="activities">활동 보기 <span>↗</span></button></div>
+          <h1>직무의 경계를 넘어<br><em>끝까지 만드는<strong class="h1-key">AI 게임 메이커</strong></em><br><span>이기훈입니다.</span></h1>
+          <p>AI와 함께 기획부터<br><strong>직접 플레이할 수 있는 게임까지 만듭니다.</strong></p>
         </div>
         <div class="passion-visual" aria-label="직접 플레이한 게임 기록과 프로필 사진">
-          <div class="game-print print-back"><img src="assets/rowein-line-hq.png" alt="로드나인 라인 플레이 기록"><span>직접 부딪히며 쌓은 경험</span></div>
-          <div class="game-print print-front"><img src="assets/game-clip-poster.jpg" alt="AI와 함께 직접 만든 리니지 라이크 게임의 화염룡 전투 화면"><span>AI로 직접 만든 게임</span></div>
+          <div class="game-print print-back"><img src="assets/rowein-line-hq.png" alt="로드나인 라인 플레이 기록"><span>직접 부딪히며 쌓은 플레이 경험</span></div>
+          <div class="game-print print-front"><img src="assets/deadbelow-clip-title-poster.jpg" style="object-position:left center" alt="AI와 함께 직접 만든 좀비 생존 게임 DeadBelow의 시작 화면: 해질녘 옥상 모닥불과 남산타워"><span>AI와 함께 게임 제작</span></div>
           <div class="passion-portrait"><img src="assets/profile-photo.png" alt="게임 기획자 이기훈 프로필 사진"></div>
-          <div class="visual-caption">PLAY DEEPLY.<br>DESIGN FROM EXPERIENCE.</div>
         </div>
       </div>
       <div class="passion-info">
@@ -1046,8 +1144,8 @@
           <div><dt>Phone</dt><dd>010-4166-6136</dd></div>
           <div class="email-row"><dt>Email</dt><dd><a href="mailto:dlrlgns0807@gmail.com">dlrlgns0807@gmail.com</a></dd></div>
         </dl></section>
-        <section><h2>PLAY / 장르를 좋아하는 방식</h2><h3>라인과 중립, 양쪽에서 플레이했습니다.</h3><p>리니지 라이크 장르를 플레이하며 라인과 중립 양쪽의 경험을 쌓아왔습니다. 길드의 위치에 따라 달라지는 경쟁과 협력을 직접 경험했습니다.</p></section>
-        <section><h2>DESIGN / 경험을 게임 제작으로</h2><h3>플레이에서 출발해 시스템으로 구체화합니다.</h3><p>플레이에서 느낀 문제를 기획서로 정리하고,<br>AI와 함께 실제 게임으로 만들어 확인합니다.</p><div class="design-topics"><span>현상금 시스템</span><span>길드 분배 시스템</span><span>AI로 직접 구현한 린라 게임</span></div></section>
+        <section><h2>PLAY / 플레이 경험</h2><h3>직접 겪은 시간은 AI가 대신해 주지 않습니다.</h3><p>리니지 라이크에서 라인 · 반왕 · 중립을 2년 넘게 직접 겪었고, 그 밖에도 MMORPG · AOS · FPS 등 여러 장르를 깊이 즐겼습니다. 무엇이 불편하고 무엇이 재미있는지는 그 시간에서 나오고 AI에게 무엇을 만들게 할지 정하는 기준이 됩니다.</p></section>
+        <section><h2>MAKE / AI와 만드는 방식</h2><h3>AI에게 맡길 일과 제가 판단할 일을 나눕니다.</h3><p>일을 작은 단계로 쪼개고 단계마다 완료 기준을 먼저 적습니다.<br>테스트와 직접 플레이로 확인한 것만 완료로 봅니다.</p></section>
       </div>
       <section class="tool-belt" aria-labelledby="tools-title">
         <div class="tool-head">
@@ -1068,13 +1166,28 @@
         <div class="build-copy">
           <div class="eyebrow">AI GAME MAKING / 직접 만드는 게임</div>
           <h2 id="build-title">기획서에서 멈추지 않고,<br><em>직접 플레이할 수 있는 게임</em>으로 만듭니다.</h2>
-          <p><strong>언리얼 엔진 5에서 Claude와 바이브 코딩</strong>으로 리니지 라이크 게임을 직접 만들고 있습니다. 제가 쓴 '공동 금고' 기획서를 4일 만에 실제로 동작하는 시스템으로 구현했고, 무엇을 만들지와 결과 확인은 제가 맡았습니다.</p>
-          <button type="button" class="build-go" data-jump="aigame">AI로 만든 게임 보기 <span>↗</span></button>
+          <p><strong>언리얼 엔진 5에서 Claude와 바이브 코딩</strong>으로 장르가 다른 게임 두 개를 직접 만들었습니다. 리니지 라이크 게임에는 '공동 금고' 시스템을 4일 만에 구현하고 보스 전투를 3일에 걸쳐 더했으며, 서울 좀비 옥상 생존 게임 DeadBelow는 구현기획서 5개를 5일 만에 모두 구현했습니다. 무엇을 만들지와 결과 확인은 제가 맡았습니다.</p>
+          <!-- 11-24 후니 요청: 버튼 옆에 질문, 누르면 DeadBelow '문제 해결 역량' 칸으로 -->
+          <div class="build-go-row"><span class="build-go-q">AI 역량을 확인하고 싶다면?</span><button type="button" class="build-go" data-jump="aigame" data-jump-sys="deadbelow">AI로 만든 게임 보기 <span>↗</span></button></div>
         </div>
         <figure class="build-visual">
+          <div class="build-row-head"><b>공동 금고</b><span>리니지 라이크 · 길드 분배</span></div>
           <video src="assets/game-clip.mp4" poster="assets/game-clip-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="직접 만든 게임의 화염룡 전투 장면"></video>
-          <figcaption>AI와 함께 직접 만든 게임 · 화염룡 이그니스 전투</figcaption>
+          <figcaption><b>보스를 통해 전리품 획득</b>공동 금고 시스템 구현</figcaption>
         </figure>
+        <!-- 11-24: "소개에 AI를 더" 피드백 → AI 게임 제작 탭의 DeadBelow · 보스 전투 영상 -->
+        <div class="build-more">
+          <div class="build-row"><div class="build-row-head"><b>DeadBelow</b><span>서울 좀비 옥상 생존</span></div><div class="build-clips">
+            <figure><video src="assets/deadbelow-clip-build.mp4" poster="assets/deadbelow-clip-build-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="바닥 깔고 벽 세우기 — 옥상에 타일을 깔아 집 짓기"></video><figcaption>옥상에 타일을 깔아 집 짓기</figcaption></figure>
+            <figure><video src="assets/deadbelow-clip-zombie.mp4" poster="assets/deadbelow-clip-zombie-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="밤거리의 좀비 — 소리를 듣고 몰려드는 좀비와 싸우기"></video><figcaption>소리를 듣고 몰려드는 좀비와 싸우기</figcaption></figure>
+            <figure><video src="assets/deadbelow-clip-idcard.mp4" poster="assets/deadbelow-clip-idcard-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="좀비가 남긴 신분증 — 신분증 · 노트로 그 사람의 이야기 읽기"></video><figcaption>신분증 · 노트로 그 사람의 이야기 읽기</figcaption></figure>
+          </div></div>
+          <div class="build-row"><div class="build-row-head"><b>보스 전투</b><span>바닥 범위를 보고 피하는 전투</span></div><div class="build-clips">
+            <figure><video src="assets/boss-clip-emerge.mp4" poster="assets/boss-clip-emerge-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="보스 등장 — 다가가면 동굴 벽 굴에서 튀어나옴"></video><figcaption>다가가면 동굴 벽 굴에서 튀어나옴</figcaption></figure>
+            <figure><video src="assets/boss-clip-rockfall.mp4" poster="assets/boss-clip-rockfall-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="범위 보고 피하기 — 붉은 원이 차오른 자리에 바위 낙하"></video><figcaption>붉은 원이 차오른 자리에 바위 낙하</figcaption></figure>
+            <figure><video src="assets/boss-clip-flight.mp4" poster="assets/boss-clip-flight-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="2단계 비행 — 체력이 절반 아래면 굴을 나와 날아다님"></video><figcaption>체력이 절반 아래면 굴을 나와 날아다님</figcaption></figure>
+          </div></div>
+        </div>
       </section>
       <section class="experience-highlight" aria-labelledby="guild-experience-title">
         <div class="play-head">
@@ -1144,6 +1257,16 @@
         </div>
         <figure class="exec-visual"><a><img src="assets/channel-analytics-redacted.png" alt="채널 분석 화면: 지난 365일 조회수 38,915,793회, 구독자 +7.1천, 2026년 3~5월에 조회수가 몰린 그래프" loading="lazy"></a><figcaption>채널 분석 화면 · 예상 수익은 가림</figcaption></figure>
       </section>
+      <!-- 11-24 후니 요청: 활동 탭을 없애고 소개 맨 아래에 정리 (AI 채널은 바로 위 칸에 이미 있어 뺌) -->
+      <section class="more-activities" aria-labelledby="more-activities-title">
+        <div class="eyebrow">ACTIVITIES / 그 밖의 활동</div>
+        <h2 id="more-activities-title">게임 밖에서도, 기획을 맡아 끝까지 했습니다.</h2>
+        <div class="act-cards">
+          <figure class="act-card"><a href="assets/campus-app-project.png" target="_blank" rel="noopener" aria-label="교내 앱 프로젝트 기획 자료 크게 보기"><img src="assets/campus-app-project.png" alt="교내 앱 제작 프로젝트 기획 자료와 앱 화면: 셔틀버스 시간표 및 노선 지도 등" loading="lazy"></a><figcaption><span>CAMPUS APP · 교내 앱 제작</span><b>학생 편의를 위한 앱 기능 기획</b><p>교내 앱 제작 프로젝트에서 학생들의 편의를 위한 기능 기획을 맡았습니다.</p></figcaption></figure>
+          <figure class="act-card"><a href="assets/capstone-prevention-campaign.png" target="_blank" rel="noopener" aria-label="캡스톤 디자인 캠페인 기획 자료 크게 보기"><img src="assets/capstone-prevention-campaign.png" alt="자살 예방 캠페인 캡스톤 디자인 회의록과 캠페인 화면 구성 자료" loading="lazy"></a><figcaption><span>CAPSTONE DESIGN · 자살 예방 캠페인</span><b>캠페인 기획부터 발표까지</b><p>캠페인의 메시지와 구성을 기획하고, 최종 발표까지 마무리했습니다.</p></figcaption></figure>
+          <figure class="act-card"><a href="assets/animalmate-volunteering.png" target="_blank" rel="noopener" aria-label="애니멀메이트 유기견 봉사 활동 사진 크게 보기"><img src="assets/animalmate-volunteering.png" alt="보호소의 유기견들과 야외에서 강아지를 돌보는 봉사 활동 사진" loading="lazy"></a><figcaption><span>VOLUNTEERING · 애니멀메이트</span><b>유기견을 돌보는 정기 봉사</b><p>연합 동아리 애니멀메이트에서 보호소를 정기적으로 찾아 케이지 청소 · 먹이 · 산책을 도왔습니다.</p></figcaption></figure>
+        </div>
+      </section>
     </section>
     <section data-view="aigame" hidden>
       <aside class="aig-toc" aria-label="이 탭의 목차">
@@ -1156,7 +1279,7 @@
           <button type="button" data-toc="[data-toc-key='what']">결과물</button>
           <button type="button" data-toc="[data-toc-key='level']">레벨 디자인</button>
           <button type="button" data-toc="[data-toc-key='hard']">가장 어려웠던 것</button>
-          <button type="button" data-toc="[data-toc-key='skills']">문제 해결 역량</button>
+          <button type="button" data-toc="[data-toc-key='skills']">AI 문제 해결 역량</button>
           <button type="button" data-toc="[data-toc-key='split']">맡긴 일과 판단한 일</button>
           <button type="button" data-toc="[data-toc-key='cases']">검증과 문제 해결</button>
         </nav>
@@ -1236,8 +1359,34 @@
         </ol>
       </section>
 
+      <!-- 11-24 후니 요청: DeadBelow 칸과 같은 모양의 '가장 어려웠던 것'. 내용은 린라_포트폴리오 공동금고/작업일지 · 결정 · 문제해결_사례, 03_작업일지 11-07~08 기록만, 그림은 공동금고/과정_스크린샷(11-07_233005_24, 11-08_002531_27, 11-08_003742_30)을 16:9로 맞춤 -->
+      <section class="aig-box" aria-labelledby="aig-hard" data-toc-key="hard">
+        <div class="eyebrow">HARDEST PART / 가장 어려웠던 것</div>
+        <h2 id="aig-hard">가장 오래 붙잡은 건<br><em>원본 목업과 같은 화면</em>이었습니다.</h2>
+        <p>기능이 기획서대로 동작하는지는 로그와 플레이로 확인할 수 있었지만, "목업과 같은 화면인가"는 직접 눈으로 비교할 수밖에 없었습니다. 그래서 11월 7일부터 이틀 동안 <b>원본 기획서 PDF의 그림을 기준으로</b> 창을 하나씩 열어 보며 맞췄습니다.</p>
+
+        <div class="db-hard">
+          <h3><span>01</span>금고 창 — AI가 만든 화면을 원본 목업에 맞추기</h3>
+          <p class="db-hard-problem"><b>문제</b>AI는 기획서의 문장을 보고 화면을 만들었습니다. 기능은 다 동작했지만 처리 창이 팝업으로 뜨고, 창에 장식과 빈 공간이 남고, 색감과 아이콘이 창마다 달라 원본 목업과 어긋났습니다.</p>
+          <ol class="aig-steps">
+            <li><b>구조부터</b> — 전리품 처리 창을 AI는 팝업으로 만들었지만, 목업에서는 보관함 오른쪽 패널이었습니다. 금고 창도 목업처럼 팝업에서 전체 화면으로 바꾸고 「공동 금고 정보」 탭을 더했습니다. 금고 생성은 목업대로 팝업으로 두었습니다.</li>
+            <li><b>창마다 열어 보며</b> — 직접 열어 보고 어긋난 곳을 캡처해 짚었습니다. 장식 제거, 아이콘 뒤 배경 상자 제거, 표 색감 통일, 팝업의 빈 공간 제거, 닫기(X) 아이콘 통일, 처리 패널의 글자 겹침. 11월 8일 하루에만 AI와 주고받은 화면 캡처가 45장입니다.</li>
+            <li><b>고치다 생긴 문제</b> — 아이템 칸 디자인을 바꾼 뒤 보관함 아이템을 눌러도 처리 창이 열리지 않았습니다. 로그에 '아이템 아이콘 클릭'이 한 번도 찍히지 않은 것을 보고, 칸 안의 그림을 모두 '클릭 안 받음'으로 바꾼 것이 원인임을 찾아 바닥 그림만 다시 클릭을 받게 했습니다.</li>
+            <li><b>같은 어긋남을 막는 규칙</b> — 원인은 AI가 기획서 문장만 보고 판단해 목업 확인이 부족했던 것이었습니다. 그래서 AI가 매번 읽는 작업 규칙(CLAUDE.md)에 "UI는 원본 PDF의 A, B, C 컴포넌트를 하나씩 대응시킨다"를 넣었습니다.</li>
+          </ol>
+          <div class="db-hard-shots">
+            <figure><img src="assets/vault-hard-ui-1.png" alt="원본 기획서 PDF의 공동 금고 관리 화면 목업, 구성 요소에 A와 B 표시가 붙어 있음" loading="lazy"><figcaption><b>기준</b>원본 기획서의 목업 (A · B 컴포넌트)</figcaption></figure>
+            <span class="db-arrow" aria-hidden="true">→</span>
+            <figure><img src="assets/vault-hard-ui-2.png" alt="표 오른쪽과 아래에 빈 공간이 크게 남은 공동 금고 목록 팝업" loading="lazy"><figcaption><b>처음</b>빈 공간이 남은 공동 금고 목록 팝업</figcaption></figure>
+            <span class="db-arrow" aria-hidden="true">→</span>
+            <figure><img src="assets/vault-hard-ui-3.png" alt="표 크기에 맞춰 빈 공간 없이 정리된 공동 금고 목록 창" loading="lazy"><figcaption><b>지금</b>표에 맞춰 빈 공간을 없앤 창</figcaption></figure>
+          </div>
+          <p class="aig-quote"><span class="q-label">배운 점</span>기능이 동작해도 화면은 틀릴 수 있습니다. UI는 <b>문장이 아니라 그림을 기준으로</b> 확인하고, 그 기준을 AI가 매번 읽는 규칙에 넣어야 같은 어긋남이 반복되지 않습니다.</p>
+        </div>
+      </section>
+
       <section class="aig-box tint" aria-labelledby="aig-skills" data-toc-key="skills">
-        <div class="eyebrow">PROBLEM SOLVING / 문제 해결 역량</div>
+        <div class="eyebrow">AI PROBLEM SOLVING / AI 문제 해결 역량</div>
         <h2 id="aig-skills">구조화 능력 · 학습 실행력 · AI 리더십을<br>과정으로 보여 드립니다.</h2>
         <div class="aig-skills">
           <div class="aig-skill"><div class="eyebrow">구조화 능력</div><h3>문제를 먼저 정의하고,<br>실행 단위로 나눴습니다.</h3><ul><li>플레이 경험과 인터뷰를 문제 네 가지로 정의한 뒤 기획 의도를 정함</li><li>기획서를 구현 순서 9단계로 나누고, 단계마다 "화면에서 무엇이 보이면 완료인지"를 먼저 정함</li><li>게임이 커질 것에 대비해 금고 안에 섞여 있던 재화 · 우편 · 길드 · 화면 틀을 공용으로 분리</li></ul></div>
@@ -1245,11 +1394,14 @@
           <div class="aig-skill"><div class="eyebrow">AI 리더십</div><h3>역할을 나누고 워크플로를 설계해,<br>AI를 동료처럼 이끌었습니다.</h3><ul><li>AI가 일할 수 있는 환경: Claude와 언리얼 에디터를 MCP로 연결</li><li>AI가 매번 읽는 작업 규칙(CLAUDE.md): 재화 중복 지급 금지, 결과 먼저 확정, 모호하면 멈추고 질문</li><li>밤새 대규모 정리를 맡길 때 완료 기준을 먼저 정함: "자동 테스트를 모두 통과한 단계만 저장"</li></ul></div>
         </div>
         <div class="aig-flow" aria-label="AI와 사람의 역할로 설계한 워크플로">
-          <div><b>피닝 (ChatGPT)</b><small>기획 문서 작성</small></div><span>→</span>
-          <div><b>레오 (Claude)</b><small>AI가 바로 만들 수 있는 구현 기획서로<br>정리 · 규칙 검토</small></div><span>→</span>
-          <div><b>훈숭이 (Claude)</b><small>언리얼 에디터를 직접 다루며<br>구현 · 테스트 · 보고</small></div><span>→</span>
-          <div class="me"><b>나</b><small>직접 플레이해서 확인 · 수정 지시 · 결정</small></div>
+          <!-- 11-24 후니 요청: 세 게임 모두 자기소개서에 쓴 작업 흐름으로 통일 -->
+          <div><b>기획 초안 (ChatGPT)</b><small>브레인스토밍하며<br>기획 초안 작성</small></div><span>→</span>
+          <div><b>검토 · 구체화 (Claude)</b><small>초안을 검토하고<br>단계별 구현기획서로</small></div><span>→</span>
+          <div><b>구현 (Claude Code)</b><small>Unreal MCP로 에디터를 직접 다루며<br>단계별 구현 · 오류 수정</small></div><span>→</span>
+          <div><b>QA (Codex)</b><small>단계마다 검사,<br>통과한 단계만 다음으로</small></div><span>→</span>
+          <div class="me"><b>나</b><small>직접 플레이해 확인 ·<br>완료 판정 · 규칙 추가</small></div>
         </div>
+        <p class="aig-flow-note"><b>규칙 파일</b> AI가 매번 읽는 규칙을 역할별로 두고, 문제가 생기면 같은 실수가 반복되지 않게 규칙을 더함 <i>·</i> <b>에셋</b> ChatGPT · Tripo로 3D 모델 → Claude Code와 연결한 Blender에서 다듬기, 사운드는 ElevenLabs</p>
         <!-- TODO(11-24 제출 전 확인): Tripo 신전을 실제로 언리얼에 배치했는지 확인. 아직이면 아래 문구를 원래 "3D 에셋 제작에는 Tripo AI를 더할 예정입니다."로 되돌리기 -->
         <div class="aig-tripo">
           <figure><img src="assets/tripo-temple.png" alt="Tripo AI로 만든 신전 3D 모델" loading="lazy"><figcaption>Tripo AI로 만든 신전 모델</figcaption></figure>
@@ -1290,12 +1442,12 @@
       <!-- 11-23 후니 요청: 플레이 녹화(9분 51초)에서 장면 6개를 짧은 반복 영상으로. 건축은 보관함 들른 부분을 빼고 1.5배속, 밤 좀비는 원본이 어두워 조금 밝게 -->
       <div class="aig-top-clips aig-box" data-toc-key="clips" style="margin:28px 0">
         <div class="aig-clips" style="margin-top:0">
-          <p class="aig-full"><a href="https://www.youtube.com/watch?v=v1oNKOhLADU" target="_blank" rel="noopener">전체 플레이 영상 보기 ↗</a></p>
+          <p class="aig-full"><a href="https://www.youtube.com/watch?v=v1oNKOhLADU" target="_blank" rel="noopener">전체 시연 영상 보기 (6분 2초) ↗</a></p>
           <figure class="aig-clip aig-full"><video src="assets/deadbelow-clip-title.mp4" poster="assets/deadbelow-clip-title-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="해질녘 옥상 모닥불 장면 위에 DeadBelow 시작 메뉴가 있고, 시작하기를 눌러 옥상으로 넘어가는 영상"></video><figcaption><b>시작 화면</b><span>해질녘 옥상 장면 위의 [시작하기] [이어하기] — 시작하면 1일차 옥상으로</span></figcaption></figure>
           <figure class="aig-clip"><video src="assets/deadbelow-clip-ladder.mp4" poster="assets/deadbelow-clip-ladder-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="작업대에서 사다리를 만들고 옥상 가장자리에 놓는 영상"></video><figcaption><b>사다리 만들어 내려가기</b><span>작업대에서 나무 장작으로 사다리를 만들어 옥상 끝에 세움</span></figcaption></figure>
           <figure class="aig-clip"><video src="assets/deadbelow-clip-build.mp4" poster="assets/deadbelow-clip-build-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="옥상에 나무 바닥판을 한 장씩 깔고 벽과 문을 세우는 영상"></video><figcaption><b>판을 깔아 집 짓기</b><span>건축 메뉴(B)로 바닥판을 한 장씩 깔고 벽 · 문을 세움 (1.5배속)</span></figcaption></figure>
           <figure class="aig-clip"><video src="assets/deadbelow-clip-sunset.mp4" poster="assets/deadbelow-clip-sunset-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="노을 진 옥상에서 남산타워를 바라보며 쉬는 영상"></video><figcaption><b>노을 속 옥상</b><span>모닥불 앞에 앉으면 카메라가 내려와 남산타워 쪽 노을을 보여 줌</span></figcaption></figure>
-          <figure class="aig-clip"><video src="assets/deadbelow-clip-zombie.mp4" poster="assets/deadbelow-clip-zombie-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="밤거리에서 몰려오는 좀비들과 도끼로 싸우는 영상"></video><figcaption><b>밤, 거리의 좀비</b><span>소리를 듣고 몰려드는 좀비와 싸우기 (원본이 어두워 조금 밝게)</span></figcaption></figure>
+          <figure class="aig-clip"><video src="assets/deadbelow-clip-zombie.mp4" poster="assets/deadbelow-clip-zombie-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="밤거리에서 몰려오는 좀비들과 도끼로 싸우는 영상"></video><figcaption><b>밤거리의 좀비</b><span>소리를 듣고 몰려드는 좀비와 싸우기 (원본이 어두워 조금 밝게)</span></figcaption></figure>
           <figure class="aig-clip aig-full"><video src="assets/deadbelow-clip-idcard.mp4" poster="assets/deadbelow-clip-idcard-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="가방에서 좀비가 남긴 주민등록증과 노트를 열어 보는 영상"></video><figcaption><b>좀비가 남긴 신분증</b><span>좀비 몸에서 나온 주민등록증 · 노트로 그 사람의 이야기를 읽음</span></figcaption></figure>
         </div>
       </div>
@@ -1303,15 +1455,15 @@
         <div>
           <div class="eyebrow">GAME 01 · DeadBelow</div>
           <h1 class="aig-title">기획한 시스템을<br><em>하나의 게임 안에서 전부</em><br>동작하게 만들고 있습니다.</h1>
-          <p>좀비 아포칼립스가 터진 서울, 아파트 옥상에서 버티며 아래(Dead Below)로 내려가 살아갈 물건을 구해 오는 <strong>쿼터뷰 생존 게임</strong>입니다. 공동 금고가 이미 있는 장르 위에 시스템 하나를 더한 작업이었다면, DeadBelow는 <strong>장르와 세계관, 핵심 재미부터 직접 정하고</strong> 여러 시스템이 서로 맞물리는 한 게임을 만드는 두 번째 도전입니다. 이번에도 구현은 AI에게 맡기고, <strong>무엇을 만들지와 그 이유는 제가 정했습니다.</strong></p>
+          <p>좀비 아포칼립스가 터진 서울, 아파트 옥상에서 버티며 아래(Dead Below)로 내려가 살아갈 물건을 구해 오는 <strong>쿼터뷰 생존 게임</strong>입니다. <strong>장르와 세계관, 핵심 재미부터 직접 정하고</strong> 여러 시스템이 서로 맞물리는 한 게임을 만드는 두 번째 도전입니다. 이번에도 구현은 AI에게 맡기고, <strong>무엇을 만들지와 그 이유는 제가 정했습니다.</strong> 앞으로도 꾸준히 개발해 <strong>정식 출시할 예정</strong>입니다.</p>
           <dl class="aig-meta" aria-label="프로젝트 정보">
             <div><dt>만든 것</dt><dd>쿼터뷰 좀비 생존 · 옥상 꾸미기 + 파밍</dd></div>
             <div><dt>기간</dt><dd>2026.11.19 ~ 진행 중</dd></div>
-            <div><dt>도구</dt><dd>Unreal Engine 5 (C++) · Claude · ChatGPT · Tripo · Blender · Mixamo · MetaHuman</dd></div>
+            <div><dt>도구</dt><dd style="white-space:nowrap; font-size:12px; letter-spacing:-.02em">Unreal Engine 5 (C++) · Claude · ChatGPT · Tripo · Blender · Mixamo · MetaHuman</dd></div>
           </dl>
         </div>
         <div class="aig-stats" aria-label="결과물 요약">
-          <div class="aig-stat"><strong>3일 · 5개</strong><span>구현기획서 5개를 단계로 나눠<br>3일 만에 모두 구현</span></div>
+          <div class="aig-stat"><strong>5일 · 5개</strong><span>구현기획서 5개를 단계로 나눠<br>5일 만에 모두 구현</span></div>
           <div class="aig-stat"><strong>91개</strong><span>AI의 작업을 검증하는 자동 테스트</span></div>
           <div class="aig-stat"><strong>260여 줄</strong><span>시스템별 결정사항에 남긴<br>제 결정과 그 이유</span></div>
           <div class="aig-stat"><strong>52건</strong><span>원인을 찾아 고친<br>문제 해결 기록</span></div>
@@ -1446,19 +1598,22 @@
       </section>
 
       <section class="aig-box tint" aria-labelledby="db-skills" data-toc-key="skills">
-        <div class="eyebrow">PROBLEM SOLVING / 문제 해결 역량</div>
+        <div class="eyebrow">AI PROBLEM SOLVING / AI 문제 해결 역량</div>
         <h2 id="db-skills">구조화 능력 · 학습 실행력 · AI 리더십을<br>과정으로 보여 드립니다.</h2>
         <div class="aig-skills">
           <div class="aig-skill"><div class="eyebrow">구조화 능력</div><h3>게임을 시스템으로 나누고,<br>기획서를 단계로 나눴습니다.</h3><ul><li>만들기 전에 "게임 전체 것인가, 이 시스템 것인가"를 먼저 물어 7개 시스템으로 나누고, 시스템끼리는 이벤트로만 잇게 함</li><li>구현기획서마다 0~N단계와 단계별 완료 기준을 정함</li><li>대화가 길어지면 섞이는 제안을 막으려고, 구현 전에 <b>확정본</b>(확정된 것만 + 버린 안)을 따로 씀</li><li>시간 수치를 "몇 분째에 무엇을 보는지" 타임라인으로 바꿔 검증</li></ul></div>
-          <div class="aig-skill"><div class="eyebrow">학습 실행력</div><h3>처음 쓰는 도구를 익혀<br>바로 게임에 넣었습니다.</h3><ul><li>UE 5 C++ · 자동 테스트 · Blender · Mixamo 동작 리타깃 · MetaHuman · Fab 사운드를 작업하며 익힘</li><li>3일 만에 구현기획서 5개를 모두 구현하고, 그 뒤로도 건축 · 시작 화면을 더함</li><li>코드로 다듬던 도끼 동작이 자연스러워지지 않자 멈추고, 사람이 만든 동작(Mixamo → 무기 동작 팩)으로 방법을 바꿈</li></ul></div>
+          <div class="aig-skill"><div class="eyebrow">학습 실행력</div><h3>처음 쓰는 도구를 익혀<br>바로 게임에 넣었습니다.</h3><ul><li>UE 5 C++ · 자동 테스트 · Blender · Mixamo 동작 리타깃 · MetaHuman · Fab 사운드를 작업하며 익힘</li><li>5일 만에 구현기획서 5개를 모두 구현하고, 그 뒤로도 건축 · 시작 화면을 더함</li><li>코드로 다듬던 도끼 동작이 자연스러워지지 않자 멈추고, 사람이 만든 동작(Mixamo → 무기 동작 팩)으로 방법을 바꿈</li></ul></div>
           <div class="aig-skill"><div class="eyebrow">AI 리더십</div><h3>AI가 일할 환경을 만들고,<br>역할과 규칙을 정했습니다.</h3><ul><li>Claude를 언리얼 에디터 · Blender와 MCP로 연결해 AI가 에디터를 직접 다루게 함</li><li>규칙 파일에 "하면 안 되는 것 → 대신 이렇게"를 표로 적고, 매 메시지마다 핵심 규칙이 다시 들어가게 함</li><li>주제별로 대화를 나누고 파일(Handoff)로 이어 가며, 에디터 하나를 여러 대화가 순서대로 쓰게 '사용 중' 표시를 둠</li></ul></div>
         </div>
         <div class="aig-flow" aria-label="AI와 사람의 역할로 설계한 워크플로">
-          <div><b>기획 대화 (Claude)</b><small>큰 방향 · 확정본 · 구현기획서,<br>결정할 것을 질문 목록과 추천안으로</small></div><span>→</span>
-          <div><b>외부 검토 (ChatGPT · 새 대화)</b><small>"고치지 말고 검토만".<br>결정사항을 같이 넘겨 빈칸 찾기</small></div><span>→</span>
-          <div><b>구현 대화 (Claude Code)</b><small>시스템별로 나눠 언리얼 에디터를 직접 다루며<br>구현 · 테스트 · 기록</small></div><span>→</span>
-          <div class="me"><b>나</b><small>답 고르기 · 직접 플레이해 확인 · 수정 지시 · 완료 판정</small></div>
+          <!-- 11-24 후니 요청: 세 게임 모두 자기소개서에 쓴 작업 흐름으로 통일 -->
+          <div><b>기획 초안 (ChatGPT)</b><small>브레인스토밍하며<br>기획 초안 작성</small></div><span>→</span>
+          <div><b>검토 · 구체화 (Claude)</b><small>초안을 검토하고<br>단계별 구현기획서로</small></div><span>→</span>
+          <div><b>구현 (Claude Code)</b><small>Unreal MCP로 에디터를 직접 다루며<br>단계별 구현 · 오류 수정</small></div><span>→</span>
+          <div><b>QA (Codex)</b><small>단계마다 검사,<br>통과한 단계만 다음으로</small></div><span>→</span>
+          <div class="me"><b>나</b><small>직접 플레이해 확인 ·<br>완료 판정 · 규칙 추가</small></div>
         </div>
+        <p class="aig-flow-note"><b>규칙 파일</b> AI가 매번 읽는 규칙을 역할별로 두고, 문제가 생기면 같은 실수가 반복되지 않게 규칙을 더함 <i>·</i> <b>에셋</b> ChatGPT · Tripo로 3D 모델 → Claude Code와 연결한 Blender에서 다듬기, 사운드는 ElevenLabs</p>
       </section>
 
       <section class="aig-box" aria-labelledby="db-split" data-toc-key="split">
@@ -1508,7 +1663,7 @@
           <p>화산 지하 동굴의 보스 "심연의 감시자"입니다. 벽의 굴에서 튀어나온 뱀용이 공격하기 전에 바닥에 범위를 보여 주고, 체력이 절반 아래로 내려가면 굴을 빠져나와 날아다닙니다. 공동 금고가 기획서를 그대로 구현한 작업이었다면, 보스 전투는 <strong>기획서 없이 직접 플레이하며 판단을 쌓아 간 프로토타입</strong>입니다. 구현은 AI에게 맡기고, <strong>무엇이 어색한지와 어떻게 바꿀지는 제가 플레이하며 정했습니다.</strong></p>
           <dl class="aig-meta" aria-label="프로젝트 정보">
             <div><dt>만든 것</dt><dd>화산 보스 1종 · 2페이즈 (굴 → 비행)</dd></div>
-            <div><dt>기간</dt><dd>2026.11.13 ~ 진행 중 (기획서는 아직 없음)</dd></div>
+            <div><dt>기간</dt><dd>2026.11.13 ~ 11.18 중 3일 작업 (기획서는 아직 없음)</dd></div>
             <div><dt>도구</dt><dd>Unreal Engine 5 (C++) · Claude · ChatGPT · Tripo · Blender</dd></div>
           </dl>
         </div>
@@ -1597,7 +1752,7 @@
       </section>
 
       <section class="aig-box" aria-labelledby="boss-skills" data-toc-key="skills">
-        <div class="eyebrow">PROBLEM SOLVING / 문제 해결 역량</div>
+        <div class="eyebrow">AI PROBLEM SOLVING / AI 문제 해결 역량</div>
         <h2 id="boss-skills">구조화 능력 · 학습 실행력 · AI 리더십을<br>과정으로 보여 드립니다.</h2>
         <div class="aig-skills">
           <div class="aig-skill"><div class="eyebrow">구조화 능력</div><h3>전투를 규칙 하나와<br>한 줄의 목적으로 묶었습니다.</h3><ul><li>모든 공격을 "보여 준 범위 = 맞는 범위" 한 규칙으로 통일</li><li>패턴이 늘어 흐려지자 주 목적 한 줄을 정하고, 그 기준으로 패턴을 거름</li><li>"안 보인다"를 '없다'와 '있는데 안 보인다'로 나눠 원인을 좁힘</li><li>이 보스만의 기능은 전용 코드로 분리하고, 다른 보스와 같이 쓰는 코드에는 연결 고리만 남김</li></ul></div>
@@ -1605,11 +1760,14 @@
           <div class="aig-skill"><div class="eyebrow">AI 리더십</div><h3>AI에게 답보다<br>판단할 재료를 먼저 받았습니다.</h3><ul><li>방향을 바꾸기 전에 "잃는 것"과 대안을 표로 받고 그중에서 고름</li><li>어려운 요청은 "되는 범위"와 걸림돌부터 나눠 듣고, 되돌릴 지점을 저장한 뒤 시작</li><li>주제별로 대화를 나누고 파일(Handoff)로 이어 가며, 에디터 하나를 여러 대화가 순서대로 쓰게 '사용 중' 표시를 둠</li></ul></div>
         </div>
         <div class="aig-flow" aria-label="AI와 사람의 역할로 설계한 워크플로">
-          <div><b>그림 (ChatGPT)</b><small>보스의 모습을 말로 요청해<br>네 방향 그림으로</small></div><span>→</span>
-          <div><b>모델 (Tripo)</b><small>그림을 3D 모델로</small></div><span>→</span>
-          <div><b>구현 대화 (Claude Code)</b><small>Blender · 언리얼 에디터를 직접 다루며<br>뼈대 · 동작 · 코드 · 소리 · 기록</small></div><span>→</span>
-          <div class="me"><b>나</b><small>직접 플레이 · 어색한 곳 짚기 · 방향 결정 · 수치 조절</small></div>
+          <!-- 11-24 후니 요청: 세 게임 모두 자기소개서에 쓴 작업 흐름으로 통일 -->
+          <div><b>기획 초안 (ChatGPT)</b><small>브레인스토밍하며<br>기획 초안 작성</small></div><span>→</span>
+          <div><b>검토 · 구체화 (Claude)</b><small>초안을 검토하고<br>단계별 구현기획서로</small></div><span>→</span>
+          <div><b>구현 (Claude Code)</b><small>Unreal MCP로 에디터를 직접 다루며<br>단계별 구현 · 오류 수정</small></div><span>→</span>
+          <div><b>QA (Codex)</b><small>단계마다 검사,<br>통과한 단계만 다음으로</small></div><span>→</span>
+          <div class="me"><b>나</b><small>직접 플레이해 확인 ·<br>완료 판정 · 규칙 추가</small></div>
         </div>
+        <p class="aig-flow-note"><b>규칙 파일</b> AI가 매번 읽는 규칙을 역할별로 두고, 문제가 생기면 같은 실수가 반복되지 않게 규칙을 더함 <i>·</i> <b>에셋</b> ChatGPT · Tripo로 3D 모델 → Claude Code와 연결한 Blender에서 다듬기, 사운드는 ElevenLabs</p>
       </section>
 
       <section class="aig-box tint" aria-labelledby="boss-split" data-toc-key="split">
@@ -1646,7 +1804,16 @@
     </section>
     <section data-view="games" hidden>
     <div class="eyebrow">Game Experience</div>
-    <h1 class="play-timeline-title">리니지 라이크 플레이 경험 타임라인</h1>
+    <h1 class="play-timeline-title">리니지 라이크 플레이 경험</h1>
+    <!-- 11-24 후니 요청: 플레이한 리니지 라이크 게임 카드 (플레이 시간은 알려 주는 게임만) -->
+    <div class="game-cards">
+      <figure class="gcard"><img src="assets/gameicon-lordnine.jpg" alt="로드나인 게임 아이콘" loading="lazy"><figcaption class="gc-info"><b>로드나인</b><span class="gc-genre">MMORPG</span><span class="gc-time"><i aria-hidden="true">▶</i>13,007시간</span></figcaption></figure>
+      <figure class="gcard"><img src="assets/gameicon-odin.jpg" alt="오딘: 발할라 라이징 게임 아이콘" loading="lazy"><figcaption class="gc-info"><b>오딘</b><span class="gc-genre">MMORPG</span></figcaption></figure>
+      <figure class="gcard"><img src="assets/gameicon-vampir.jpg" alt="뱀피르 게임 아이콘" loading="lazy"><figcaption class="gc-info"><b>뱀피르</b><span class="gc-genre">MMORPG</span></figcaption></figure>
+      <figure class="gcard"><img src="assets/gameicon-sol.jpg" alt="솔: 인챈트 게임 아이콘" loading="lazy"><figcaption class="gc-info"><b>솔: 인챈트</b><span class="gc-genre">MMORPG</span></figcaption></figure>
+      <figure class="gcard"><img src="assets/gameicon-zeus.jpg" alt="제우스: 오만의 신 게임 아이콘" loading="lazy"><figcaption class="gc-info"><b>제우스</b><span class="gc-genre">MMORPG</span></figcaption></figure>
+      <figure class="gcard"><img src="assets/gameicon-eclipse.jpg" alt="이클립스: 더 어웨이크닝 게임 아이콘" loading="lazy"><figcaption class="gc-info"><b>이클립스: 더 어웨이크닝</b><span class="gc-genre">MMORPG</span></figcaption></figure>
+    </div>
     <div class="chart-controls">
       <div class="legend"><span><i style="background:#55b494"></i>중립</span><span><i style="background:#d99a3c"></i>라인</span></div>
       <p class="chart-help">막대를 누르면 자세한 활동을 볼 수 있습니다.</p>
@@ -1658,44 +1825,22 @@
     </dialog>
       <section class="other-games" aria-labelledby="other-games-title">
         <div class="eyebrow">OTHER GAMES</div>
-        <h2 id="other-games-title">리니지라이크 외 플레이한 게임들</h2>
-        <div class="other-games-grid">
+        <h2 id="other-games-title">리니지 라이크 외 꾸준히 하는 게임</h2>
+        <!-- 11-24 후니 요청: 비어 있던 칸을 자주 하는 게임 카드로 채움 (위 리니지 라이크 카드와 같은 모양) -->
+        <div class="game-cards">
+          <figure class="gcard"><img src="assets/gameicon-starcraft.jpg" alt="스타크래프트: 리마스터 대표 이미지" loading="lazy"><figcaption class="gc-info"><b>스타크래프트</b><span class="gc-genre">RTS</span></figcaption></figure>
+          <figure class="gcard"><img src="assets/gameicon-lol.jpg" alt="리그 오브 레전드 로고" loading="lazy"><figcaption class="gc-info"><b>리그 오브 레전드</b><span class="gc-genre">AOS</span></figcaption></figure>
+          <figure class="gcard"><img src="assets/gameicon-dokkaebi.jpg" alt="도깨비의 세계 대표 이미지" loading="lazy"><figcaption class="gc-info"><b>도깨비의 세계</b><span class="gc-genre">MMORPG</span></figcaption></figure>
+          <figure class="gcard"><img src="assets/gameicon-mapleland.jpg" alt="메이플 주황버섯 그림" loading="lazy"><figcaption class="gc-info"><b>메이플랜드</b><span class="gc-genre">MMORPG</span></figcaption></figure>
+          <figure class="gcard"><img src="assets/gameicon-sudden.jpg" alt="서든어택 로고" loading="lazy"><figcaption class="gc-info"><b>서든어택</b><span class="gc-genre">FPS</span></figcaption></figure>
+          <figure class="gcard"><img src="assets/gameicon-pubg.jpg" alt="배틀그라운드 대표 이미지" loading="lazy"><figcaption class="gc-info"><b>배틀그라운드</b><span class="gc-genre">배틀로얄 · FPS</span></figcaption></figure>
         </div>
       </section>
     </section>
-    <section data-view="activities" hidden>
-      <div class="eyebrow">ACTIVITIES</div>
-      <h1>활동</h1>
-      <div class="channel-activity">
-        <div class="eyebrow">AI CONTENT / 일본인 대상 채널 운영</div>
-        <h2>주 6편의 영상으로,<br>3개월 만에 약 3,900만 조회수</h2>
-        <p>개인 채널을 개설해 일본인 시청자를 대상으로 AI를 활용하여 영상들을 직접 기획하여 주 6편 제작했습니다. 채널 운영 3개월 만에 누적 조회수 약 3,900만 회를 달성했습니다.</p>
-
-        <figure><a href="assets/channel-analytics-redacted.png" target="_blank" rel="noopener" aria-label="수익을 가린 채널 분석 이미지 크게 보기"><img src="assets/channel-analytics-redacted.png" alt="채널 분석 화면: 조회수 약 3,891만 회, 시청 시간 20.8만 시간, 구독자 증가 7.1천 명. 수익 금액은 모자이크 처리됨." loading="lazy"></a><figcaption>채널 분석 기록 · 예상 수익 비공개</figcaption></figure>
-      </div>
-      <div class="channel-activity volunteer-activity">
-        <div class="eyebrow">VOLUNTEERING / 애니멀메이트 연합 동아리</div>
-        <h2>유기견을 돌보는<br>정기 봉사 활동</h2>
-        <p>유기견 봉사 연합 동아리 애니멀메이트에서 정기적으로 보호소를 방문했습니다. 배변으로 더러워진 케이지를 청소하고, 먹이를 주고 산책을 돕는 등 유기견을 돌보는 활동에 참여했습니다.</p>
-        <figure><a href="assets/animalmate-volunteering.png" target="_blank" rel="noopener" aria-label="애니멀메이트 유기견 봉사 활동 사진 크게 보기"><img src="assets/animalmate-volunteering.png" alt="보호소의 유기견들과 야외에서 강아지를 돌보는 봉사 활동 사진" loading="lazy"></a><figcaption>애니멀메이트 · 유기견 보호소 봉사 활동</figcaption></figure>
-      </div>
-          <div class="channel-activity campus-activity">
-        <div class="eyebrow">CAMPUS APP / 교내 앱 제작 프로젝트</div>
-        <h2>학생들의 편의를 위한<br>앱 기능 기획 및 실현</h2>
-        <p>교내 앱 제작 프로젝트에 참여해 학생들의 편의를 위한 기능 기획을 담당했습니다.</p>
-        <figure><a href="assets/campus-app-project.png" target="_blank" rel="noopener" aria-label="교내 앱 프로젝트 기획 자료와 화면 크게 보기"><img src="assets/campus-app-project.png" alt="교내 앱 제작 프로젝트 기획 자료와 앱 화면: 셔틀버스 시간표 및 노선 지도 등" loading="lazy"></a><figcaption>교내 앱 제작 프로젝트 · 기획 자료 및 앱 화면</figcaption></figure>
-      </div>
-      <div class="channel-activity capstone-activity">
-        <div class="eyebrow">CAPSTONE DESIGN / 자살 예방 캠페인</div>
-        <h2>자살 예방 캠페인,<br>기획부터 발표까지</h2>
-        <p>캡스톤 디자인 프로젝트에서 자살 예방 캠페인의 기획을 담당했습니다. 캠페인의 메시지와 구성을 기획하고, 최종 발표까지 마무리했습니다.</p>
-        <figure><a href="assets/capstone-prevention-campaign.png" target="_blank" rel="noopener" aria-label="캡스톤 디자인 캠페인 기획 자료 크게 보기"><img src="assets/capstone-prevention-campaign.png" alt="자살 예방 캠페인 캡스톤 디자인 회의록과 캠페인 화면 구성 자료" loading="lazy"></a><figcaption>캡스톤 디자인 · 회의록 및 캠페인 기획 자료</figcaption></figure>
-      </div>
-</section>
     <section data-view="projects" hidden>
       <div class="eyebrow">Planning Docs</div>
       <h1>기획서</h1>
-      <p class="intro">직접 작성한 창작 시스템 기획서와 시스템 분석서입니다. 기획서 카드를 누르면 PDF가 새 탭에서 열립니다.</p>
+      <p class="intro intro-one">직접 작성한 창작 시스템 기획서와 시스템 분석서입니다. 기획서 카드를 누르면 PDF가 새 탭에서 열립니다.</p>
       <div class="portfolio-grid">
 <a class="work-card bounty-card" href="pdfs/01_창작_리니지라이크_시스템_현상금.pdf" target="_blank" rel="noopener">
           <div class="doc-type">System Design · Original</div>
@@ -1747,6 +1892,9 @@
       button.addEventListener('click', () => {
         document.querySelector('[data-page="' + button.dataset.jump + '"]').click();
         window.scrollTo({top:0, behavior:'smooth'});
+        // 11-24: 특정 칸으로 바로 가는 버튼 (시스템 칸을 먼저 고르고 그 칸으로)
+        if (button.dataset.jumpSys) { const pill = document.querySelector('.sys-pill[data-sys="' + button.dataset.jumpSys + '"]'); if (pill && !pill.classList.contains('is-active')) pill.click(); }
+        if (button.dataset.jumpTo) setTimeout(() => { const t = document.querySelector(button.dataset.jumpTo); if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 24, behavior: 'auto' }); }, 60);
       });
     });
     document.querySelectorAll('[data-goto]').forEach(link => {
@@ -1813,7 +1961,7 @@
       track.className = 'track';
       ticks.forEach(({date, year, month, now}, index) => {
         const line = document.createElement('span');
-        line.className = 'gridline'; line.style.left = position(date) + '%'; track.append(line);
+        line.className = 'gridline' + (now ? ' gridline-now' : ''); line.style.left = position(date) + '%'; track.append(line);
         if (axis) {
           const label = document.createElement('span'); label.className = 'axis-label';
           const left = position(date);
@@ -2031,19 +2179,28 @@
         item.setAttribute('aria-selected', on ? 'true' : 'false');
       });
       sysPanels.forEach((panel) => { panel.hidden = panel.dataset.sys !== target; });
+      window.scrollTo({ top: 0, behavior: 'auto' });   // 11-24 후니 요청: 시스템을 바꾸면 그 칸의 맨 위부터
     }));
     // 왼쪽 목차: 누르면 그 칸으로 이동, 읽는 칸 표시. 공동 금고 칸을 볼 때만 보임 (11-18)
     const aigView = document.querySelector('[data-view="aigame"]');
     // 11-23: 공동 금고 · DeadBelow 두 칸 모두 목차 사용 (지금 보이는 칸 기준)
     const tocPanels = [...document.querySelectorAll('.sys-panel[data-has-toc]')];
-    const tocButtons = [...document.querySelectorAll('.aig-toc button')];
+    // 11-24: 넓은 화면에서는 시스템 버튼 묶음을 왼쪽 목차 안(맨 위)으로 옮겨 함께 따라오게, 좁으면 원래 자리로
+    const pillsBox = document.querySelector('.sys-pills');
+    const pillsHome = pillsBox.parentElement, pillsNext = pillsBox.nextElementSibling;
+    const tocNav = document.querySelector('.aig-toc nav');
+    const wideMq = window.matchMedia('(min-width:1100px)');
+    const placePills = () => { if (wideMq.matches) tocNav.prepend(pillsBox); else pillsHome.insertBefore(pillsBox, pillsNext); };
+    wideMq.addEventListener('change', placePills);
+    placePills();
+    const tocButtons = [...document.querySelectorAll('.aig-toc button[data-toc]')];
     tocButtons.forEach((b) => { b.dataset.baseLabel = b.textContent; });
     const activeTocPanel = () => tocPanels.find((p) => !p.hidden);
     const syncToc = () => {
       const panel = activeTocPanel();
       aigView.classList.toggle('has-toc', !!panel);
       if (!panel) return;
-      const isDb = panel.dataset.sys === 'deadbelow' || panel.dataset.sys === 'boss';   // 보스 전투도 같은 목차 글자(플레이 화면 · 기획 의도)를 씀 (11-23)
+      const isDb = true;   // 11-24: 공동 금고도 같은 목차 글자(플레이 화면 · 기획 의도)로 통일   // 보스 전투도 같은 목차 글자(플레이 화면 · 기획 의도)를 씀 (11-23)
       tocButtons.forEach((b) => { b.textContent = (isDb && b.dataset.dbLabel) || b.dataset.baseLabel; b.hidden = !panel.querySelector(b.dataset.toc); });
       if (aigView.hidden) return;
       let current = 0;
