@@ -1061,6 +1061,7 @@
       box-shadow:0 6px 16px color-mix(in srgb, var(--bar) 30%, transparent), inset 0 1px 0 #ffffff66; transition:transform .15s ease, box-shadow .15s ease, filter .15s ease; }
     [data-view="games"] .play-bar:hover { transform:translateY(-2px); filter:brightness(1.06); box-shadow:0 10px 22px color-mix(in srgb, var(--bar) 45%, transparent), inset 0 1px 0 #ffffff66; }
     [data-view="games"] .play-bar.connected-left { border-top-left-radius:0; border-bottom-left-radius:0; }
+    [data-view="games"] .play-bar { pointer-events:none; cursor:default; }
     [data-view="games"] .play-bar.connected-right { border-top-right-radius:0; border-bottom-right-radius:0; box-shadow:inset -1px 0 0 #10181f55, inset 0 1px 0 #ffffff66; }
     [data-view="games"] .play-bar.live { border-top-right-radius:0; border-bottom-right-radius:0; }
     [data-view="games"] .play-bar.live::after { content:""; position:absolute; right:8px; top:50%; width:6px; height:6px; margin-top:-3px; border-radius:50%; background:#fff; animation:playLive 1.8s ease-out infinite; }
@@ -1815,7 +1816,6 @@
     </div>
     <div class="chart-controls">
       <div class="legend"><span><i style="background:#55b494"></i>중립</span><span><i style="background:#d99a3c"></i>라인</span></div>
-      <p class="chart-help">막대를 누르면 자세한 활동을 볼 수 있습니다.</p>
     </div>
     <div class="chart-scroll" role="region" aria-label="가로로 스크롤할 수 있는 게임 플레이 기간 차트" tabindex="0"><div class="chart" id="play-chart"></div></div>
     <dialog id="play-dialog" class="play-dialog" aria-label="플레이 경험 상세">
@@ -1985,7 +1985,7 @@
       const track = makeTrack();
       entries.forEach(([, server, start, end, activity, role, lane, period], entryIndex) => {
       const bar = document.createElement('button');
-      bar.type = 'button'; bar.className = 'play-bar' + (end ? '' : ' live');
+      bar.type = 'button'; bar.tabIndex = -1; bar.className = 'play-bar' + (end ? '' : ' live');
       const previousEntry = entries[entryIndex - 1];
       const nextEntry = entries[entryIndex + 1];
       const joinsPrevious = previousEntry && previousEntry[3] === start;
